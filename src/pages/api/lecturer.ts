@@ -45,5 +45,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(405).json({ message: 'Method not allowed' })
   }
 
-  await prisma.disconnect()
+  await prisma.$disconnect()
 }
