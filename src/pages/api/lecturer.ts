@@ -10,8 +10,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // Get all lecturers
       const lecturers = await prisma.lecturer.findMany({
         include: {
-          course: true,
-          review: true
+          courses: true,
+          reviews: true
         }
       })
       res.json(lecturers)
