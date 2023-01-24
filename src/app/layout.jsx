@@ -14,11 +14,11 @@ export default function RootLayout({ children }) {
       <head />
 
 
-      <body className='flex flex-col justify-between items-center overflow-x-hidden min-h-screen'>
+      <body className='flex flex-col justify-between items-center overflow-x-hidden min-h-screen bg-base-200'>
         <Modal />
 
         <Navbar />
-        <main className='flex-1  w-full bg-base-200 h-full'>
+        <main className='flex-1 w-full h-full'>
           {children}
         </main>
         <Footer />

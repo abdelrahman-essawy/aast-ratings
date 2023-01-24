@@ -4,7 +4,7 @@ import MobileNavbar from './MobileNavbar' /*webpackChunkName: "MobileNavbar"*/
 // eslint-disable-next-line react/display-name
 const Navbar = () => {
     return (
-        <div className="bg-base-200 w-full h-16 shadow-2xl z-10">
+        <div className="bg-base-200 w-full h-16 border-b border-gray-500">
             <div className='hidden sm:block'>
                 <DesktopNavbar />
             </div>

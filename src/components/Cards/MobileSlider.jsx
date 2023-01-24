@@ -8,7 +8,7 @@ import "swiper/css/effect-cards";
 import { EffectCards, Autoplay } from "swiper";
 import { CardTemplete } from './CardTemplete';
 
-export const MobileSlider = ({lecturers}) => {
+export const MobileSlider = ({ lecturers }) => {
     return (
         <Swiper
             effect={"cards"}
@@ -22,11 +22,14 @@ export const MobileSlider = ({lecturers}) => {
             rewind={true}
         >
             {
-                lecturers.map(({ name, desc, icon, country, courses }, index) =>
+                lecturers
+                    .sort((a, b) => b.ratings - a.ratings)
+                    .slice(0, 3)
+                    .map(({ name, desc, icon, country, courses, ratings, reviews }, index) =>
 
                     <SwiperSlide
-                         key={index}>
-                        <CardTemplete name={name} desc={desc} icon={icon} country={country} courses={courses} />
+                        key={index}>
+                        <CardTemplete name={name} desc={desc} icon={icon} ratings={ratings} reviews={reviews} country={country} courses={courses} />
                     </SwiperSlide>
                 )
             }

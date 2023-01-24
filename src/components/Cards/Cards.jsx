@@ -6,25 +6,28 @@ import { MobileSlider } from './MobileSlider'
 export const Cards = () => {
     const lecturers = [
         {
-            name: 'Dr. Mohamed Elsayed',
+            name: 'Eng. Salma Yasser',
             courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
             icon: '',
             country: 'Egypt',
-            reviews: 4
+            ratings: 4,
+            reviews: 100
         },
         {
-            name: 'Dr. Mohamed Elsayed',
+            name: 'Dr. Karim Elsayed',
             courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
             icon: '',
             country: 'Egypt',
-            reviews: 3
+            ratings: 3,
+            reviews: 140
         },
         {
-            name: 'Dr. Mohamed Elsayed',
+            name: 'Eng. Ahmed Elsayed',
             courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
             icon: '',
             country: 'Egypt',
-            reviews: 2
+            ratings: 2,
+            reviews: 120
         },
 
     ]
@@ -32,7 +35,7 @@ export const Cards = () => {
     return (
         <>
             <div className='hidden sm:block'>
-                <DesktopSlider lecturers={lecturers}  />
+                <DesktopSlider lecturers={lecturers} />
             </div>
             <div className='sm:hidden flex justify-center items-center w-full'>
                 <MobileSlider lecturers={lecturers} />
