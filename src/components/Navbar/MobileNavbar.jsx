@@ -3,7 +3,6 @@ import React, { memo } from 'react'
 
 // eslint-disable-next-line react/display-name
 const MobileNavbar = memo(() => {
-    console.log('MobileNavbar')
     return (
         <div className="navbar">
             <div className="navbar-start">

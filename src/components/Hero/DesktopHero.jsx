@@ -1,6 +1,6 @@
 import { AASTLogo } from '@/SVG/AASTLogo'
 import React from 'react'
-import { Card } from './Card'
+import { Cards } from '../Cards/Cards'
 import { CurrentStats } from './CurrentStats'
 
 export const DesktopHero = () => {
@@ -10,9 +10,6 @@ export const DesktopHero = () => {
 
                 <div className="max-w-md">
                     <div className='hidden sm:block'>
-                        <AASTLogo width='300' height='300' />
-                    </div>
-                    <div className='block sm:hidden'>
                         <AASTLogo width='200' height='200' />
                     </div>
                     <div>
@@ -22,10 +19,6 @@ export const DesktopHero = () => {
                     </div>
                 </div>
                 <CurrentStats />
-            </div>
-            <div className='w-full m-auto p-4'>
-
-                <Card />
             </div>
         </>
 

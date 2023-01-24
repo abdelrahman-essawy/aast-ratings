@@ -1,6 +1,6 @@
 import { AASTLogo } from '@/SVG/AASTLogo'
 import React from 'react'
-import { Card } from './Card'
+import { Card } from '../Cards/CardTemplete'
 import { CurrentStats } from './CurrentStats'
 
 export const MobileHero = () => {

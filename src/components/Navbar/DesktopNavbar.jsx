@@ -3,10 +3,9 @@ import React, { memo } from 'react'
 
 // eslint-disable-next-line react/display-name
 const DesktopNavbar = memo(() => {
-    console.log('DesktopNavbar')
     return (
         <>
-            <div className='navbar max-w-screen-2xl m-auto flex justify-between items-center'>
+            <div className='navbar max-w-screen-xl m-auto flex justify-between items-center'>
                 <Link href={'/'} className="btn btn-ghost normal-case text-xl">AAST - Ratings</Link>
                 <div className="form-control">
                     <div className="input-group">
