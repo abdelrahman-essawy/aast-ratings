@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
 
-export const CardTemplete = ({ name, courses, icon, country }) => {
+export const CardTemplete = ({ name, courses, icon, country, className }) => {
     console.log(courses)
     return (
-        <div className="card m-auto w-60 h-fit bg-base-100 border border-gray-700 shadow-xl">
+        <div className={`card m-auto w-60 h-fit bg-base-100 border border-gray-700 shadow-xl ${className}`}>
             <figure className='w-full bg-base-300 h-fit p-12'>
                 {
                     icon ? <Image fill src={icon} alt="Shoes" /> : <div className='text-4xl'>Image</div>
