@@ -1,4 +1,4 @@
-import { AASTLogo } from '@/SVG/AASTLogo'
+import { AASTLogo } from '../../SVG/AASTLogo'
 import Link from 'next/link'
 import React from 'react'
 import { Card } from '../Cards/CardTemplete'

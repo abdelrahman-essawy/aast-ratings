@@ -1,9 +1,9 @@
-import { AASTLogo } from '@/SVG/AASTLogo'
-import { Button } from '@/utilities/StyledComponents/Button'
 import Link from 'next/link'
 import React from 'react'
 import { Cards } from '../Cards/Cards'
 import { CurrentStats } from './CurrentStats'
+import { Button } from '../../utilities/StyledComponents/Button'
+import { AASTLogo } from '../../SVG/AASTLogo'
 
 export const DesktopHero = () => {
     return (

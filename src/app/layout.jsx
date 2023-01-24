@@ -1,7 +1,7 @@
 import './globals.css'
-import { Modal } from '@/components/Modal/Modal'
-import { Footer } from '@/components/Footer/page'
-import Navbar from '@/components/Navbar/page'
+import { Modal } from '../components/Modal/Modal'
+import Navbar from '../components/Navbar/page'
+import { Footer } from '../components/Footer/page'
 
 export default function RootLayout({ children }) {
 
