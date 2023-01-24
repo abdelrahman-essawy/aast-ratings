@@ -1,6 +1,6 @@
 import React from 'react'
-import DesktopNavbar from './DesktopNavbar'
-import MobileNavbar from './MobileNavbar'
+import DesktopNavbar from './DesktopNavbar' /*webpackChunkName: "DesktopNavbar"*/
+import MobileNavbar from './MobileNavbar' /*webpackChunkName: "MobileNavbar"*/
 // eslint-disable-next-line react/display-name
 const Navbar = () => {
     return (
