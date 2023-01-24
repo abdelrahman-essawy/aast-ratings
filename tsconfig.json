@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/pages/api/lecturer.ts"  ],
   "exclude": [
     "node_modules"
   ]
