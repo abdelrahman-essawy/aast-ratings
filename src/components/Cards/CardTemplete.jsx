@@ -34,13 +34,13 @@ export const CardTemplete = ({ name, courses, icon, country, className, ratings,
                                 return (
                                     index + 1 <= ratings ?
                                         index + 1 === ratings ?
-                                            <input type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-red-500`} key={index} checked/>
+                                            <div type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-red-500`} key={index} readOnly />
                                             :
-                                            <input type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-red-500`} key={index} />
-                                        
+                                            <div type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-red-500`} key={index} readOnly />
 
-                                            :
-                                            <input type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-slate-500`} key={index} />
+
+                                        :
+                                        <div type="radio" name="rating-3" className={`mask mask-heart w-4 h-4 bg-slate-500`} key={index} readOnly />
                                 )
                             }
                             )
@@ -53,7 +53,7 @@ export const CardTemplete = ({ name, courses, icon, country, className, ratings,
 
                 <button className="btn gap-2 bg-base-300 sm:hover:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300">
                     Review
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"  viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                 </button>
             </div>
         </div>

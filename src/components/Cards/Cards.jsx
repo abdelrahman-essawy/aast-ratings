@@ -10,6 +10,8 @@ export const Cards = () => {
             courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
             icon: '',
             country: 'Egypt',
+            city: 'Cairo',
+            campus: 'Cairo',
             ratings: 4,
             reviews: 100
         },

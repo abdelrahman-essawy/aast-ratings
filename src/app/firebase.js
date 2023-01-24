@@ -1,0 +1,18 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBkKcEGuQsR72oA5yVSAZo3wUU_gD1WAqk",
+    authDomain: "aast-ratings.firebaseapp.com",
+    databaseURL: "https://aast-ratings.firebaseio.com",
+    projectId: "aast-ratings",
+    storageBucket: "aast-ratings.appspot.com",
+    messagingSenderId: "204685850276",
+    appId: "1:204685850276:web:ca8f4f07d7a528255c1831"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const database = getFirestore(app);
+
+export default database;
