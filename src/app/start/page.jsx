@@ -1,9 +1,9 @@
-import { Cards } from '../components/Cards/Cards'
-import Search from '../components/Search/page'
-import Section from '../utilities/StyledComponents/Section'
 import React from 'react'
 import database from '../firebase'
 import { collection, getDocs } from "firebase/firestore";
+import { Cards } from '../../components/Cards/Cards';
+import Search from '../../components/Search/page';
+import Section from '../../utilities/StyledComponents/Section';
 
 const page = () => {
 
