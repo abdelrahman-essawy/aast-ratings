@@ -8,7 +8,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'GET':
       // Get all lecturers
-      const lecturers = await prisma.lecturer.findMany()
+      const lecturers = await prisma.lecturer.findMany({
+        include: {
+          course: true,
+          review: true
+        }
+      })
       res.json(lecturers)
       break
 
