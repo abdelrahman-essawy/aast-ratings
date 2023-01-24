@@ -12,23 +12,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       break
     case 'POST':
       // Create a new lecturer
-      const { name, rating } = req.body
+      const { name, campus } = req.body
       const newLecturer = await prisma.lecturer.create({
         data: {
           name,
-          rating,
+          campus
         },
       })
       res.json(newLecturer)
       break
     case 'PUT':
       // Update an existing lecturer
-      const { id, name: updatedName, rating: updatedRating } = req.body
+      const { id, name: updatedName, rating: updatedRating, campus: updateCampus , amountOfReviews: updateAmountOfReviews } = req.body
       const updatedLecturer = await prisma.lecturer.update({
         where: { id },
         data: {
           name: updatedName,
           rating: updatedRating,
+          campus: updateCampus,
+          amountOfReviews: updateAmountOfReviews
         },
       })
       res.json(updatedLecturer)
