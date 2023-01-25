@@ -1,4 +1,6 @@
 import { AASTLogo } from '@/SVG/AASTLogo'
+import { Button } from '@/utilities/StyledComponents/Button'
+import Link from 'next/link'
 import React from 'react'
 import { Cards } from '../Cards/Cards'
 import { CurrentStats } from './CurrentStats'
@@ -15,7 +17,7 @@ export const DesktopHero = () => {
                     <div>
                         <h1 className="mb-5 text-3xl font-bold text-gray-200 ">Rate Your Lecturer</h1>
                         <p className="mb-5">Rate your lectures, improve your education. Join now!</p>
-                        <label className="btn btn-primary" htmlFor="my-modal-6">Get Started</label>
+                        <Button />
                     </div>
                 </div>
                 <CurrentStats />

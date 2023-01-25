@@ -22,7 +22,7 @@ const MobileNavbar = memo(() => {
                 </div>
             </div>
             <div className="navbar-center">
-                <a className="btn btn-ghost normal-case text-xl">AAST - Ratings</a>
+                <Link href={'/'} className="btn btn-ghost normal-case text-xl">AAST - Ratings</Link>
             </div>
             <div className="navbar-end">
                 <button className="btn btn-ghost btn-circle">
