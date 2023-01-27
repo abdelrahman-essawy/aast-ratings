@@ -8,7 +8,7 @@ export default function Head() {
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="language" content="English" />
       <meta name="author" content="Abdelrahman Essawy" />
-      <link itemprop="image" href="/preview.png" />
+      {/* <link itemprop="image" href="/preview.png" /> */}
     </>
   )
 }
