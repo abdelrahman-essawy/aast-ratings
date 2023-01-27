@@ -15,7 +15,7 @@ const page = () => {
                     <div className='w-full'>
                         <Search />
                     </div>
-                    <div>
+                    <div className='w-full'>
                         <Cards />
                     </div>
                 </div>
