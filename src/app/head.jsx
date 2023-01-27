@@ -3,7 +3,6 @@ export default function Head() {
     <>
       <title>AAST - Ratings</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <link rel="icon" href="/preview.png" />
       <meta property="og:image:secure_url" content="/preview.png" />
       <meta property="og:image" content="/preview.png" />
       <meta name="title" content="AAST - Ratings" />
