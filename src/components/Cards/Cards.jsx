@@ -39,7 +39,7 @@ export const Cards = () => {
             <div className='hidden sm:block'>
                 <DesktopSlider lecturers={lecturers} />
             </div>
-            <div className='sm:hidden flex justify-center items-center w-full'>
+            <div className='sm:hidden flex justify-center items-center'>
                 <MobileSlider lecturers={lecturers} />
             </div>
 

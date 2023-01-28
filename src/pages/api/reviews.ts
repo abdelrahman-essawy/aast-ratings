@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 const prisma = new PrismaClient()
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const reviewsApi=async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
         case 'GET':
             // Get all reviews
@@ -53,3 +53,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     await prisma.$disconnect()
 }
+export default reviewsApi

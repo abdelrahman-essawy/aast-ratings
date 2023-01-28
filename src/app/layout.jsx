@@ -1,7 +1,7 @@
 import './globals.css'
-import { Modal } from '../components/Modal/Modal'
 import Navbar from '../components/Navbar/page'
 import { Footer } from '../components/Footer/page'
+import RulesModal from '../components/Modal/rulesModal'
 
 export default function RootLayout({ children }) {
 
@@ -15,8 +15,7 @@ export default function RootLayout({ children }) {
 
 
       <body className='flex flex-col justify-between items-center overflow-x-hidden min-h-screen bg-base-200'>
-        <Modal />
-
+        <RulesModal />
         <Navbar />
         <main className='flex-1 w-full h-full'>
           {children}

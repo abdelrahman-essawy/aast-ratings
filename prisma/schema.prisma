@@ -14,41 +14,52 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Lecturer {
-  id              String   @id @default(uuid())
-  name            String
-  rating          Int?
-  amountOfReviews Int?
-  campus          String?
-  reviews         Review[]
-  courses         Course[]
+model Campus {
+  id          String    @id @unique @default(cuid())
+  name        String    @unique
+  hasColleges College[]
+  hasReviews  Review[]
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model College {
+  id           String     @id @unique @default(cuid())
+  name         String     @unique
+  inCampuses   Campus[]
+  hasLecturers Lecturer[]
+  hasCourses   Course[]
+  hasReviews   Review[]
+}
+
+model Lecturer {
+  id                   String    @id @unique @default(cuid())
+  name                 String
+  workInColleges       College[]
+  teachCourses         Course[]
+  personalSideRating   Int?
+  recommendationRating Int?
+  scientificSideRating Int?
+  hasReview               Review[]
 }
 
 model Course {
-  id         String   @id @default(uuid())
-  name       String
-  courseCode String?
-  ownerId     String
-  owner      Lecturer @relation(fields: [ownerId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([ownerId, name])
+  id                  String     @id @unique @default(cuid())
+  name                String     @unique
+  courseCode          String?    @unique
+  taughtByLecturers   Lecturer[]
+  availableInColleges College[]
+  hasReview              Review[]
 }
 
 model Review {
-  id      String   @id @default(uuid())
-  rating  Int
-  comment String?
-  ownerId String
-  owner   Lecturer @relation(fields: [ownerId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([ownerId])
+  id               String    @id @unique @default(cuid())
+  rating           Float
+  comment          String?
+  campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
+  collegesReviews  College?  @relation(fields: [collegeId], references: [id])
+  lecturersReviews Lecturer? @relation(fields: [lecturerId], references: [id])
+  coursesReviews   Course?   @relation(fields: [courseId], references: [id])
+  campusId         String?
+  collegeId        String?
+  lecturerId       String?
+  courseId         String?
 }

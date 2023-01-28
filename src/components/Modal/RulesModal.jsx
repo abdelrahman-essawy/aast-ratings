@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Modal = () => {
+const RulesModal = () => {
     const rules = [
         'Use a constructive and non-confrontational tone.',
         `Be respectful of the teacher's time and effort, and acknowledge any positive aspects of their teaching.`,
@@ -26,3 +26,5 @@ export const Modal = () => {
         </>
     )
 }
+
+export default RulesModal
