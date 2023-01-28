@@ -12,12 +12,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
             try {
                 const campuses = await prisma.campus.findMany({
                     include: {
-                        _count: {
-                            select: {
-                                hasColleges: true,
-                                hasReviews: true,
-                            }
-                        },
+
                         hasColleges: {
                             select: { name: true }
                         },
