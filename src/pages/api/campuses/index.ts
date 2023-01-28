@@ -11,15 +11,10 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
             // Get all campuses
             try {
                 const campuses = await prisma.campus.findMany({
-                    include: {
+                    where: {
+                        id: "cldf8d35q002yeq48z8cwvueo"
+                    },
 
-                        hasColleges: {
-                            select: { name: true }
-                        },
-                        hasReviews: {
-                            select: { rating: true, campusesReviews: true, }
-                        }
-                    }
                 })
                 res.status(200).json(campuses)
             }
