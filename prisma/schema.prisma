@@ -23,7 +23,7 @@ model Campus {
 
 model College {
   id           String     @id @unique @default(cuid())
-  name         String     @unique
+  name         String
   inCampuses   Campus[]
   hasLecturers Lecturer[]
   hasCourses   Course[]
@@ -38,7 +38,7 @@ model Lecturer {
   personalSideRating   Int?
   recommendationRating Int?
   scientificSideRating Int?
-  hasReview               Review[]
+  hasReview            Review[]
 }
 
 model Course {
@@ -47,7 +47,7 @@ model Course {
   courseCode          String?    @unique
   taughtByLecturers   Lecturer[]
   availableInColleges College[]
-  hasReview              Review[]
+  hasReview           Review[]
 }
 
 model Review {
