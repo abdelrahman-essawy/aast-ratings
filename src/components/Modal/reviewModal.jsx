@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const reviewModal = () => {
+const ReviewModal = () => {
     return (
 
         <div classname="modal" id="my-modal-2">
@@ -15,3 +15,4 @@ export const reviewModal = () => {
 
     )
 }
+export default ReviewModal
