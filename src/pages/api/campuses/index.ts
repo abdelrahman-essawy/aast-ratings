@@ -10,7 +10,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
             // Get all campuses
             try {
-                const campuses = await prisma.campus.findMany({
+                const campuses = await prisma.campus.findFirst({
                     where: {
                         id: "cldf8d35q002yeq48z8cwvueo"
                     },
