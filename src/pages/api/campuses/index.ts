@@ -24,7 +24,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(200).json(campuses)
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(501).json({ message: error })
             }
 
         case 'POST':
@@ -71,7 +71,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(200).json(newCampus)
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(502).json({ message: error })
             }
             break
 
@@ -91,7 +91,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(200).json(updatedCampus)
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(503).json({ message: error })
             }
 
 
@@ -111,7 +111,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(504).json({ message: error })
             }
             break
 
