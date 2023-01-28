@@ -27,9 +27,9 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(501).json({ message: error })
             }
 
+            break
+
         case 'POST':
-
-
 
             // Create a new campus
             try {
@@ -94,7 +94,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(503).json({ message: error })
             }
 
-
+            break
         case 'DELETE':
             try {
                 const { root, id } = req.body
