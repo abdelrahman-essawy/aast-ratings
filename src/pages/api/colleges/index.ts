@@ -10,13 +10,13 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
             // Get all colleges
             try {
-                const colleges = await prisma.college.findMany({
-                    include: {
-                        inCampuses: true,
-                        hasCourses: true,
-                        hasLecturers: true,
-                        hasReviews: true,
-                    }
+                const colleges = await prisma.campus.findMany({
+                    // include: {
+                    //     inCampuses: true,
+                    //     hasCourses: true,
+                    //     hasLecturers: true,
+                    //     hasReviews: true,
+                    // }
                 })
                 res.status(200).json(colleges)
             }
