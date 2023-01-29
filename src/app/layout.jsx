@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
         {/* <RulesModal /> */}
         <Navbar />
         <main className='flex-1 w-full h-full'>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<div className='h-[calc(100vh_-_117px)]'>
+            <Loading />
+          </div>}>
             {children}
           </Suspense>
         </main>
