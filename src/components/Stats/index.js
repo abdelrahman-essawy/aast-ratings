@@ -1,4 +1,3 @@
-import { env } from 'eslint-config-next'
 import React, { use } from 'react'
 
 
