@@ -1,11 +1,18 @@
 import React, { use } from 'react'
 
 
-const getStats = async () => await fetch(`https://aast-ratings.vercel.app/api/getStats`, { next: { revalidate: 10 } }).then(res => res.json())
+const getStats = async () => await fetch('http://localhost:3000/api/getStats', { next: { revalidate: 10 } }).then(res => res.json())
 
 
 export const CurrentStats = () => {
-    const stats = use(getStats())
+    const stats =
+    {
+        "Campuses": 10,
+        "Colleges": 43,
+        "Lecturers": 0,
+        "Reviews": 0
+    }
+
     console.log(Object.keys(stats))
     return (
 
