@@ -1,5 +1,5 @@
 import React from 'react'
-import { LiveStats } from '../Stats/liveStats'
+import { Stats } from '../Stats'
 import { DesktopHero } from './DesktopHero'
 import { MobileHero } from './MobileHero'
 
@@ -16,9 +16,9 @@ export const Hero = () => {
                 <div className='block sm:hidden'>
                     <MobileHero />
                 </div>
-                <LiveStats />
+                <Stats />
             </div>
-            
+
         </div>
 
 
