@@ -1,8 +1,8 @@
 import { AASTLogo } from '../../SVG/AASTLogo'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Card } from '../Cards/CardTemplete'
-import { CurrentStats } from './CurrentStats'
+import { CurrentStats } from '../Stats'
 
 export const MobileHero = () => {
     return (
@@ -22,7 +22,9 @@ export const MobileHero = () => {
                     </div>
                 </div>
                 <Link href={'/start'} className="btn btn-primary" htmlFor="my-modal-6">Get Started</Link>
-                <CurrentStats />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CurrentStats />
+                </Suspense>
             </div>
             {/* <div className='w-full m-auto p-4'>
 

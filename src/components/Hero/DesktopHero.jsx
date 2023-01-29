@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Cards } from '../Cards/Cards'
-import { CurrentStats } from './CurrentStats'
 import { Button } from '../../utilities/StyledComponents/Button'
 import { AASTLogo } from '../../SVG/AASTLogo'
+import { CurrentStats } from '../Stats'
 
-export const DesktopHero = ({ amount }) => {
+export const DesktopHero = () => {
     return (
         <>
             <div className="hero-content text-center text-neutral-content flex flex-col justify-between items-center h-full">
@@ -20,7 +20,9 @@ export const DesktopHero = ({ amount }) => {
                         <Button />
                     </div>
                 </div>
-                <CurrentStats amount={amount} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CurrentStats />
+                </Suspense>
             </div>
         </>
 

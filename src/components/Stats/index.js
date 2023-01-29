@@ -1,19 +1,18 @@
+import { env } from 'eslint-config-next'
 import React, { use } from 'react'
 
-const getStats = async () => await fetch('http://localhost:3000/api/getStats', { next: { revalidate: 10 } }).then(res => res.json())
+
+const getStats = async () => await fetch(`https://aast-ratings.vercel.app/api/getStats`, { next: { revalidate: 10 } }).then(res => res.json())
 
 
 export const CurrentStats = () => {
-
     const stats = use(getStats())
-
     console.log(Object.keys(stats))
-
-    // const { campuses, collegs, lecturers, courses } = amout
     return (
 
 
         <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full">
+
             {
                 [...Object.keys(stats)].map((key, index) => {
                     return (

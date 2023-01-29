@@ -1,6 +1,8 @@
 import './globals.css'
 import Navbar from '../components/Navbar/page'
 import { Footer } from '../components/Footer/page'
+import { Suspense } from 'react'
+import Loading from './loading'
 // import RulesModal from '../components/Modal/RulesModal'
 
 export default function RootLayout({ children }) {
@@ -18,7 +20,9 @@ export default function RootLayout({ children }) {
         {/* <RulesModal /> */}
         <Navbar />
         <main className='flex-1 w-full h-full'>
-          {children}
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
         </main>
         <Footer />
       </body>
