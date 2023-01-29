@@ -5,7 +5,7 @@ import { CurrentStats } from './CurrentStats'
 import { Button } from '../../utilities/StyledComponents/Button'
 import { AASTLogo } from '../../SVG/AASTLogo'
 
-export const DesktopHero = () => {
+export const DesktopHero = ({ amount }) => {
     return (
         <>
             <div className="hero-content text-center text-neutral-content flex flex-col justify-between items-center h-full">
@@ -20,7 +20,7 @@ export const DesktopHero = () => {
                         <Button />
                     </div>
                 </div>
-                <CurrentStats />
+                <CurrentStats amount={amount} />
             </div>
         </>
 

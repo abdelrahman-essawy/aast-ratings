@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Section = ({ children }) => {
+const Section = ({ children, className }) => {
     return (
-        <section className='max-w-screen-xl p-2 m-auto  overflow-x-hidden'>
+        <section className={`max-w-screen-xl p-2 m-auto overflow-x-hidden ${className}`}>
             {children}
         </section>
     )

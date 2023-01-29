@@ -15,15 +15,19 @@ datasource db {
 }
 
 model Campus {
-  id          String    @id @unique @default(cuid())
-  name        String    @unique
+  id     String @id @unique @default(cuid())
+  name   String @unique
+  rating Float  @default(0)
+
   hasColleges College[]
   hasReviews  Review[]
 }
 
 model College {
-  id           String     @id @unique @default(cuid())
-  name         String
+  id     String @id @unique @default(cuid())
+  name   String
+  rating Float  @default(0)
+
   inCampuses   Campus[]
   hasLecturers Lecturer[]
   hasCourses   Course[]
@@ -31,29 +35,39 @@ model College {
 }
 
 model Lecturer {
-  id                   String    @id @unique @default(cuid())
+  id                   String @id @unique @default(cuid())
   name                 String
-  workInColleges       College[]
-  teachCourses         Course[]
-  personalSideRating   Int?
-  recommendationRating Int?
-  scientificSideRating Int?
-  hasReview            Review[]
+  rating               Float  @default(0)
+  personalSideRating   Int    @default(0)
+  scientificSideRating Int    @default(0)
+  recommendationRating Int    @default(0)
+
+  workInColleges College[]
+  teachCourses   Course[]
+  hasReview      Review[]
+
+  @@index([name], name: "name")
 }
 
 model Course {
-  id                  String     @id @unique @default(cuid())
-  name                String     @unique
-  courseCode          String?    @unique
+  id         String  @id @unique @default(cuid())
+  name       String  @unique
+  courseCode String? @unique
+  rating     Float   @default(0)
+
   taughtByLecturers   Lecturer[]
   availableInColleges College[]
   hasReview           Review[]
 }
 
 model Review {
-  id               String    @id @unique @default(cuid())
-  rating           Float
-  comment          String?
+  id                   String  @id @unique @default(cuid())
+  rating               Float   @default(0)
+  personalSideRating   Int?    @default(0)
+  scientificSideRating Int?    @default(0)
+  recommendationRating Int?    @default(0)
+  comment              String?
+
   campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
   collegesReviews  College?  @relation(fields: [collegeId], references: [id])
   lecturersReviews Lecturer? @relation(fields: [lecturerId], references: [id])

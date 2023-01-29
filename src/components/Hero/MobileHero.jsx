@@ -9,7 +9,7 @@ export const MobileHero = () => {
         <>
             <div className="hero-content text-center text-neutral-content flex flex-col justify-between items-center h-full">
 
-                <div className="max-w-md">
+                <div className="max-w-md ">
                     <div className='hidden sm:block'>
                         <AASTLogo width='300' height='300' />
                     </div>
@@ -18,10 +18,10 @@ export const MobileHero = () => {
                     </div>
                     <div>
                         <h1 className="mb-5 text-3xl font-bold text-gray-200 ">Rate Your Lecturer</h1>
-                        <p className="mb-5">Rate your lectures, improve your education. Join now!</p>
-                        <Link href={'/start'} className="btn btn-primary" htmlFor="my-modal-6">Get Started</Link>
+                        <p className="mb-5">Anonymously rate your campus, college, course or lecturer. Join now!</p>
                     </div>
                 </div>
+                <Link href={'/start'} className="btn btn-primary" htmlFor="my-modal-6">Get Started</Link>
                 <CurrentStats />
             </div>
             {/* <div className='w-full m-auto p-4'>

@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Hero/>
       <div className='w-full m-auto p-4'>
 
         <Cards />
