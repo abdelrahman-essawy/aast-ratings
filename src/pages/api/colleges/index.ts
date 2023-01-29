@@ -117,11 +117,14 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'DELETE':
             try {
-                const { root } = req.body
+                const { root, id } = req.body
                 if (root === 'toor') {
                     await prisma.college.deleteMany()
                     res.json({ message: 'All colleges deleted' })
                 }
+                await prisma.college.delete({ where: { id } })
+                res.status(200).json({ message: 'College deleted' })
+
             }
             catch (error) {
                 res.status(500).json({ message: error })
