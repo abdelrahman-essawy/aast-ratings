@@ -11,7 +11,13 @@ const useCampusesApiDelete = () => {
     const [errorFromAxios, setErrorFromAxios] = useState(null)
 
     const send = async (method: string, body: any) =>
-        await axios.delete(BASE_URL, body.arg).catch((err) => {
+        await axios.delete(BASE_URL, {
+            headers: {
+                Authorization: 'sad'
+            },
+            data: body.arg
+            
+        }).catch((err) => {
             setErrorFromAxios(err)
         })
 
