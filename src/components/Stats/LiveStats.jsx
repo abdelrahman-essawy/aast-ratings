@@ -7,15 +7,13 @@ const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/ge
 
 export const LiveStats = () => {
     const stats = use(getStats())
-    console.log(stats)
     return (
-        <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full">
 
-            {
-                stats.clientVersion ? <SkeletonStats /> :
+        stats.message ? <SkeletonStats /> :
+            <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full">
+                {
                     [...Object.keys(stats)].map((key, index) => {
                         const value = stats[key]
-
                         return <div key={index} className="stat self-center p-2 gap-1">
                             <div className="stat-title">
                                 {key}
@@ -25,10 +23,10 @@ export const LiveStats = () => {
                             </div>
                         </div>
                     })
-            }
+                }
 
 
-        </div>
+            </div>
     )
 }
 
