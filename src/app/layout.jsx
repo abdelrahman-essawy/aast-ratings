@@ -24,7 +24,10 @@ export default function RootLayout({ children }) {
             {children}
           </Suspense>
         </main>
-        <Footer />
+        <footer className='w-full'>
+
+          <Footer />
+        </footer>
       </body>
     </html>
 

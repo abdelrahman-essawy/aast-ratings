@@ -9,8 +9,7 @@ export default function Home() {
   return (
     <>
       <Hero/>
-      <div className='w-full m-auto p-4'>
-
+      <div className='w-full m-auto py-auto'>
         <Cards />
       </div>
       {/* <label htmlFor="my-modal-6" className="btn">open modal</label> */}

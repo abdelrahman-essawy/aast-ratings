@@ -35,7 +35,9 @@ export const Cards = () => {
     ]
 
     return (
-        <>
+        <div className='h-fit py-12 pt-8'>
+            <h2 className='text-2xl font-bold text-center mb-8 sm:mb-14'>Top Rated Lecturers</h2>
+
             <div className='hidden sm:block'>
                 <DesktopSlider lecturers={lecturers} />
             </div>
@@ -43,7 +45,7 @@ export const Cards = () => {
                 <MobileSlider lecturers={lecturers} />
             </div>
 
-        </>
+        </div>
 
 
 
