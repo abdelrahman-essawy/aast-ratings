@@ -14,11 +14,11 @@ export const LiveStats = () => {
                 {
                     [...Object.keys(stats)].map((key, index) => {
                         const value = stats[key]
-                        return <div key={index} className="stat self-center p-2 gap-1">
+                        return <div key={index} className="stat self-center p-2 gap-1 text-sm">
                             <div className="stat-title">
                                 {key}
                             </div>
-                            <div className={`stat-value text-2xl ${index > 1 && "text-primary"}`}>
+                            <div className={`stat-value text-xl md:text-2xl ${index > 1 && "text-primary"}`}>
                                 {value}
                             </div>
                         </div>
