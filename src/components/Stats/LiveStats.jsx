@@ -10,7 +10,7 @@ export const LiveStats = () => {
         <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full">
 
             {
-                [...Object.keys(stats)]?.map((key, index) => {
+                [...Object.keys(stats)].map((key, index) => {
                     return (
                         <div key={index} className="stat self-center p-2 gap-1">
                             <div className="stat-title">
