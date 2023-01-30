@@ -8,7 +8,7 @@ import Loading from './loading'
 export default function RootLayout({ children }) {
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
