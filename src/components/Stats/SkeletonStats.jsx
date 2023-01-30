@@ -1,14 +1,7 @@
 import React, { Suspense, use } from 'react'
 import Spinner from '../../utilities/Spinner'
 
-
-
-
 export const SkeletonStats = () => {
-
-
-
-
     return (
         <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full items-center">
             {
