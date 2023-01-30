@@ -19,13 +19,14 @@ export default function RootLayout({ children }) {
       <body className='flex flex-col justify-between items-center overflow-x-hidden min-h-screen bg-base-200'>
         {/* <RulesModal /> */}
         <Navbar />
+
         <main className='flex-1 w-full h-full'>
           <Suspense fallback={<Loading />}>
             {children}
           </Suspense>
         </main>
+        
         <footer className='w-full'>
-
           <Footer />
         </footer>
       </body>
