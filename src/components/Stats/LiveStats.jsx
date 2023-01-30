@@ -1,4 +1,5 @@
 import React, { use } from 'react'
+import { SkeletonStats } from './skeletonStats'
 
 
 const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/getStats', { next: { revalidate: 1 } }).then(res => res.json())
@@ -11,16 +12,17 @@ export const LiveStats = () => {
 
             {
                 [...Object.keys(stats)].map((key, index) => {
-                    return (
+                    const value = stats[key]
+                    console.log(key)
+                    return key === 'message' ? <SkeletonStats /> : //Eror in Fetching
                         <div key={index} className="stat self-center p-2 gap-1">
                             <div className="stat-title">
                                 {key}
                             </div>
                             <div className={`stat-value text-2xl ${index > 1 && "text-primary"}`}>
-                                {stats[key]}
+                                {value}
                             </div>
                         </div>
-                    )
                 })
             }
 
