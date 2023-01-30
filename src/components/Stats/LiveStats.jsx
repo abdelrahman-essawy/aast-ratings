@@ -2,20 +2,21 @@ import React, { use } from 'react'
 import { SkeletonStats } from './SkeletonStats'
 
 
-const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/getStats', { next: { revalidate: 1 } }).then(res => res.json())
+const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/getStats', { next: { revalidate: 5 } }).then(res => res.json())
 
 
 export const LiveStats = () => {
     const stats = use(getStats())
+    console.log(stats)
     return (
         <div className="stats shadow border border-gray-700 grid grid-cols-4 w-full">
 
             {
-                [...Object.keys(stats)].map((key, index) => {
-                    const value = stats[key]
-                    console.log(key)
-                    return key === 'message' ? <SkeletonStats /> : //Error in Fetching
-                        <div key={index} className="stat self-center p-2 gap-1">
+                stats.clientVersion ? <SkeletonStats /> :
+                    [...Object.keys(stats)].map((key, index) => {
+                        const value = stats[key]
+
+                        return <div key={index} className="stat self-center p-2 gap-1">
                             <div className="stat-title">
                                 {key}
                             </div>
@@ -23,10 +24,26 @@ export const LiveStats = () => {
                                 {value}
                             </div>
                         </div>
-                })
+                    })
             }
 
-            {/* <div className="stat place-items-center p-2">
+
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className="stat place-items-center p-2">
                 <div className="stat-title">Lecturers</div>
                 <div className="stat-value text-2xl">31K</div>
             </div>
@@ -44,6 +61,3 @@ export const LiveStats = () => {
                 <div className="stat-title">Reviews</div>
                 <div className="stat-value text-primary text-2xl">4,200</div>
             </div> */}
-        </div>
-    )
-}
