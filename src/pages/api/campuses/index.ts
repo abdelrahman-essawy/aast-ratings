@@ -19,6 +19,9 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                         hasReviews: {
                             select: { rating: true, campusesReviews: true, }
                         }
+                    },
+                    orderBy: {
+                        name: 'asc'
                     }
                 })
                 res.status(200).json(campuses)
