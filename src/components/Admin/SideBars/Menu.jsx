@@ -4,20 +4,25 @@ import AddIcon from '../../../SVG/AddIcon'
 import Spinner from '../../../utilities/Spinner'
 import MenuItem from './MenuItem'
 import useSWRMutation from 'swr/mutation'
+import axios from 'axios'
+import useCampusesApi from '../../../hooks/API_Hooks/campuses'
+import useCampusesApiDelete from '../../../hooks/API_Hooks/campusesDelete'
+import { motion } from 'framer-motion'
+// async function sendRequest(url, { arg }) {
+
+//     axios.post(url, arg)
+//         .then(function (response) {
+//             console.log(response);
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
 
 
-async function sendRequest(url, { arg }) {
-    return fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(arg)
-    })
-}
-
-
-const Menu = ({ data }) => {
+const Menu = ({ dataFromParent }) => {
+    const [trigger, isMutating, errorFromAxios] = useCampusesApi()
     const [addNewItem, setAddNewItem] = useState(false)
-
-    const { trigger, isMutating } = useSWRMutation('/api/campuses', sendRequest)
 
 
     const handleAddNewItem = () => {
@@ -25,7 +30,10 @@ const Menu = ({ data }) => {
     }
 
     const handleSubmit = (value) => {
-        trigger({ "name": value })
+        trigger({ name: value })
+        setAddNewItem(!addNewItem)
+
+
     }
 
 
@@ -36,10 +44,17 @@ const Menu = ({ data }) => {
                     All Campuses
                 </Link>
 
-                <div className="flex-1 w-56 px-2 pt-2 space-y-1">
-                    {data ? (
-                        data?.map((campus) => (
-                            <MenuItem key={campus.id} campus={campus} />
+                <motion.div
+                    className="flex-1 w-56 px-2 pt-2 space-y-1">
+                    {dataFromParent ? (
+                        dataFromParent?.map((campus) => (
+                            <motion.div
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.2 }}
+                                key={campus.id} >
+                                <MenuItem campus={campus} />
+                            </motion.div>
                         ))
                     ) : (
                         <Spinner />
@@ -51,16 +66,18 @@ const Menu = ({ data }) => {
                                 onSubmit={() => console.log('submit')}
                                 className='p-3 rounded-lg bg-base-300 '
                                 onClick={() => console.log('edit')}>
-                                <input type="text" className='bg-base-300 focus:outline-none w-full' />
+                                <input
+                                    autoFocus
+                                    type="text" className='bg-base-300 focus:outline-none w-full' />
                             </div>
                         )
 
                     }
                     {
-                        isMutating ? 'Creating...' : 'Create User'
+                        isMutating && <div className='w-fit h-fit m-auto'><Spinner /></div> || errorFromAxios && 'Error'
 
                     }
-                </div>
+                </motion.div>
 
                 <div
                     onClick={() => handleAddNewItem()}

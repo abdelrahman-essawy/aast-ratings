@@ -3,11 +3,11 @@ import Loading from '../../../app/loading'
 import Menu from './Menu'
 import SkeletonMenu from './SkeletonMenu'
 
-const SideBars = ({ data }) => {
+const SideBars = ({ dataFromParent }) => {
     return (
 
-        data ?
-            <Menu data={data} />
+        dataFromParent ?
+            <Menu dataFromParent={dataFromParent} />
 
             :
             <SkeletonMenu />

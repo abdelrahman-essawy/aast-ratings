@@ -18,7 +18,7 @@ export function Sidebar({ searchParams }) {
         <section className={'px-2 flex h-[calc(100vh_-_117px)]'}>
 
             <div className="overflow-auto border-r border-zinc-700 h-full">
-                <SideBars data={data} />
+                <SideBars dataFromParent={data} />
             </div>
             <div className="flex-1 bg-base-300">
                 <DataSection />
