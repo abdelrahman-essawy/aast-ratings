@@ -20,6 +20,7 @@ export function Sidebar({ searchParams }) {
             <div className="overflow-auto border-r border-zinc-700 h-full">
                 <SideBars dataFromParent={data} />
             </div>
+            
             <div className="flex-1 bg-base-300">
                 <DataSection />
             </div>

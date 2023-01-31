@@ -5,11 +5,17 @@ const SkeletonMenu = ({ rows = 10 }) => {
 
     const createRandomWidth = () => Math.floor(Math.random() * 100) + 60
     return (
-        <section className={'w-fit h-full'} >
-            <div className="flex flex-col h-full">
+        <section className={'w-56  h-full'} >
+            <div className="flex flex-col h-full overflow-x-hidden">
                 <a href="/" className="block px-2 py-3 text-xs font-medium text-zinc-400 hover:text-zinc-200">
                     All Campuses
                 </a>
+                <div className='px-2 h-fit'>
+
+                    <input type="text" placeholder="Search..." className="input input-bordered input-md w-full max-w-xs" />
+                </div>
+
+
 
                 <div className="flex-1 w-56 px-2 pt-2 space-y-5 overflow-x-hidden">
                     {
