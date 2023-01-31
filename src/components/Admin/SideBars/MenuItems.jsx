@@ -19,19 +19,13 @@ const MenuItems = ({ dataFromParent, searchArray, addNewItem, isMutating, errorF
                 {dataFromParent ? (
                     searchArray(dataFromParent, searchKeyword)
                         .map((item, index) => (
-                            <>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 5 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    key={item.id} >
-                                    <MenuItem item={item} index={index} />
-                                </motion.div>
-                                
-                                {/* <div className='h-[1px] bg-gray-700 opacity-75 px-4 m-1'></div> */}
-                            </>
-
-
+                            <motion.div
+                                initial={{ opacity: 0, }}
+                                animate={{ opacity: 1,  }}
+                                transition={{ duration: 0.2 }}
+                                key={item.id} >
+                                <MenuItem item={item} index={index} />
+                            </motion.div>
                         ))
                 ) : (
                     <Spinner />

@@ -14,13 +14,15 @@ const SkeletonMenu = ({ rows = 10 }) => {
 
                     <input type="text" placeholder="Search..." className="input input-bordered input-md w-full max-w-xs" />
                 </div>
+                <div className='divider'></div>
 
 
 
-                <div className="flex-1 w-56 px-2 pt-2 space-y-5 overflow-x-hidden">
+                <div className="flex-1 w-56 px-2 pt-2 space-y-2 overflow-x-hidden">
                     {
-                        [...Array(rows)].map((campus, index) => (
-                            <div key={index} className='p-3'>
+                        [...Array(rows)].map((_, index) => (
+                            <div
+                                key={index} className={`p-4 rounded-lg ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
                                 <div style={{ width: createRandomWidth() }} className={`h-2 bg-gray-600 rounded-full animate-pulse mt-1`} />
                             </div>
                         ))

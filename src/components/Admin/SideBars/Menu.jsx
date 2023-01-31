@@ -17,12 +17,8 @@ const Menu = ({ dataFromParent }) => {
     const [trigger, isMutating, errorFromAxios] = useCampusesApi()
     const [addNewItem, setAddNewItem] = useState(false)
 
-
-
-    const handleAddNewItem = () => {
-        setAddNewItem(!addNewItem)
-    }
-
+    const handleAddNewItem = () =>  setAddNewItem(!addNewItem)
+    
     const handleSubmit = (value) => {
         trigger({ name: value })
         setAddNewItem(!addNewItem)
@@ -56,7 +52,7 @@ const Menu = ({ dataFromParent }) => {
                 />
 
                 <BottomAddButton handleAddNewItem={handleAddNewItem} />
-                
+
             </div>
         </section>
     )
