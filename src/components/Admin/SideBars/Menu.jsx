@@ -39,13 +39,13 @@ const Menu = ({ dataFromParent }) => {
 
     return (
         <section className={' w-fit h-full'} >
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full overflow-x-hidden">
                 <Link href="/" className="block px-2 py-3 text-xs font-medium text-zinc-400 hover:text-zinc-200">
                     All Campuses
                 </Link>
 
                 <motion.div
-                    className="flex-1 w-56 px-2 pt-2 space-y-1">
+                    className="flex-1 w-56 px-2 pt-2 space-y-1 overflow-x-hidden">
                     {dataFromParent ? (
                         dataFromParent?.map((campus) => (
                             <motion.div
@@ -81,7 +81,7 @@ const Menu = ({ dataFromParent }) => {
 
                 <div
                     onClick={() => handleAddNewItem()}
-                    className='flex justify-center items-center hover:bg-base-100 p-3 active:bg-base-300 transition duration-300 cursor-pointer bg-base-300 shadow border-t border-gray-600'>
+                    className='flex sticky justify-center items-center hover:bg-base-100 p-3 active:bg-base-300 transition duration-300 cursor-pointer bg-base-300 shadow border-t border-gray-600'>
                     <AddIcon className='fill-gray-900 w-7 h-7 cursor-pointer p-1 transition duration-200 ease-in-out' />
                 </div>
             </div>
