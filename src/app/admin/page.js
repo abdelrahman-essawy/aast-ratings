@@ -1,24 +1,20 @@
 import React, { use } from 'react'
 import { Sidebar } from '../../components/Admin'
+import DataSection from '../../components/Admin/DataSection'
 import Section from '../../utilities/StyledComponents/Section'
 
 
-const fetchCampuses = async () => {
-    try {
-        return (
-            await fetch('https://aast-ratings.vercel.app/api/campuses', { next: { revalidate: 10 } })
-        ).json()
-    } catch (e) {
-        return console.log(e)
-    }
-
-}
 
 const page = () => {
 
-    const campuses = use(fetchCampuses())
     return (
-        <Sidebar />
+
+        <div className='flex'>
+            <Sidebar />
+            <div className="flex-1 bg-base-300">
+                <DataSection />
+            </div>
+        </div>
 
     )
 }

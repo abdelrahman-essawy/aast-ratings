@@ -12,20 +12,26 @@ const MenuItems = ({ dataFromParent, searchArray, addNewItem, isMutating, errorF
                     onChange={(e) => setSearchKeyword(e.target.value)}
                     type="text" placeholder="Search..." className="input input-bordered input-md w-full max-w-xs" />
             </div>
-
+            <div className='divider'></div>
 
             <motion.div
                 className="flex-1 px-2 pt-2 space-y-1 overflow-x-hidden">
                 {dataFromParent ? (
                     searchArray(dataFromParent, searchKeyword)
-                        .map((item) => (
-                            <motion.div
-                                initial={{ opacity: 0, y: 5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2 }}
-                                key={item.id} >
-                                <MenuItem item={item} />
-                            </motion.div>
+                        .map((item, index) => (
+                            <>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    key={item.id} >
+                                    <MenuItem item={item} index={index} />
+                                </motion.div>
+                                
+                                {/* <div className='h-[1px] bg-gray-700 opacity-75 px-4 m-1'></div> */}
+                            </>
+
+
                         ))
                 ) : (
                     <Spinner />
