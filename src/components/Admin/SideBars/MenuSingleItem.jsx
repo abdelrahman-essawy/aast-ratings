@@ -9,28 +9,33 @@ const MenuItem = memo(({ item, index }) => {
     const [trigger, isMutating, errorFromAxios] = useCampusesApiDelete()
     const handleDelete = (value) => {
         trigger({ id: value })
-
+    }
+    const handleUpdate = (id, data) => {
+        console.log(id, data)
     }
     return (
-        isMutating ? (<div className='w-fit h-fit m-auto mt-2'><Spinner /></div> || errorFromAxios && 'Error')
+        isMutating ? (<div className='w-fit h-fit m-auto mt-4'><Spinner /></div> || errorFromAxios && 'Error')
 
             :
 
             <div>
-                <div className={`flex justify-between items-center hover:bg-base-100 p-3 rounded-lg active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
 
-                    <div contentEditable='false'
-                        className='truncate'>
-                        {item.name}
-                    </div>
+                <div className={`flex justify-between items-center hover:bg-base-100 p-2 rounded-lg active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
+
+                    <input
+                        onKeyDown={(e) => e.key === 'Enter' && handleUpdate(item.id, e.target.value)}
+                        defaultValue={item.name}
+                        className='truncate bg-inherit p-1' />
+
                     <div className='flex just'>
-                        <EditIcon className='fill-gray-900 w-6 h-6 cursor-pointer hover:scale-125 p-1 transition duration-200 ease-in-out' />
-                        <div
-                            onClick={() => handleDelete(item.id)}>
-
-                            <DeleteIcon className='fill-gray-900 w-6 h-6 cursor-pointer hover:scale-125 p-1 transition duration-200 ease-in-out' />
+                        <div onClick={() => handleUpdate(item.id)}>
+                            <EditIcon className='fill-gray-900 w-6 h-6 cursor-pointer hover:scale-125 p-1 transition duration-200 ease-in-out' />
                         </div>
 
+
+                        <div onClick={() => handleDelete(item.id)}>
+                            <DeleteIcon className='fill-gray-900 w-6 h-6 cursor-pointer hover:scale-125 p-1 transition duration-200 ease-in-out' />
+                        </div>
                     </div>
 
                 </div>

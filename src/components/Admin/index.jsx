@@ -21,8 +21,6 @@ export function Sidebar({ searchParams }) {
                 <SideBars dataFromParent={data} />
             </div>
 
-
-
         </section>
 
     );

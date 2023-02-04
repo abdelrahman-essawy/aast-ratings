@@ -46,7 +46,7 @@ const MenuItems = ({ dataFromParent, searchArray, addNewItem, isMutating, errorF
 
                 }
                 {
-                    isMutating && <div className='w-fit h-fit m-auto'><Spinner /></div> || errorFromAxios && 'Error'
+                    isMutating && <div className='w-fit h-fit mx-auto mt-4'><Spinner /></div> || errorFromAxios && 'Error'
 
                 }
             </motion.div>
