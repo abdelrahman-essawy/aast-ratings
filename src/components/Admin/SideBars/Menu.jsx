@@ -45,8 +45,8 @@ const Menu = ({ dataFromParent }) => {
                 <MenuItems
                     dataFromParent={dataFromParent}
                     searchArray={searchArray}
-                    addNewItem={addNewItem} i
-                    sMutating={isMutating}
+                    addNewItem={addNewItem}
+                    isMutating={isMutating}
                     errorFromAxios={errorFromAxios}
                     handleSubmit={handleSubmit}
                 />

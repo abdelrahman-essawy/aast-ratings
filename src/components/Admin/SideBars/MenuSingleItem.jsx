@@ -17,9 +17,9 @@ const MenuItem = memo(({ item, index }) => {
             :
 
             <div>
-            <div className={`flex justify-between items-center hover:bg-base-100 p-3 rounded-lg active:bg-base-100 transition duration-300 cursor-pointer ${index%2===0?'bg-base-200':'bg-base-300'}`}>
+                <div className={`flex justify-between items-center hover:bg-base-100 p-3 rounded-lg active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
 
-                    <div
+                    <div contentEditable='false'
                         className='truncate'>
                         {item.name}
                     </div>

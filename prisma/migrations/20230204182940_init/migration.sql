@@ -2,6 +2,7 @@
 CREATE TABLE "Campus" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Campus_pkey" PRIMARY KEY ("id")
 );
@@ -10,6 +11,7 @@ CREATE TABLE "Campus" (
 CREATE TABLE "College" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "College_pkey" PRIMARY KEY ("id")
 );
@@ -18,9 +20,10 @@ CREATE TABLE "College" (
 CREATE TABLE "Lecturer" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "personalSideRating" INTEGER,
-    "recommendationRating" INTEGER,
-    "scientificSideRating" INTEGER,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "personalSideRating" INTEGER NOT NULL DEFAULT 0,
+    "scientificSideRating" INTEGER NOT NULL DEFAULT 0,
+    "recommendationRating" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Lecturer_pkey" PRIMARY KEY ("id")
 );
@@ -30,6 +33,7 @@ CREATE TABLE "Course" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "courseCode" TEXT,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Course_pkey" PRIMARY KEY ("id")
 );
@@ -37,7 +41,10 @@ CREATE TABLE "Course" (
 -- CreateTable
 CREATE TABLE "Review" (
     "id" TEXT NOT NULL,
-    "rating" DOUBLE PRECISION NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "personalSideRating" INTEGER DEFAULT 0,
+    "scientificSideRating" INTEGER DEFAULT 0,
+    "recommendationRating" INTEGER DEFAULT 0,
     "comment" TEXT,
     "campusId" TEXT,
     "collegeId" TEXT,
@@ -82,6 +89,9 @@ CREATE UNIQUE INDEX "College_id_key" ON "College"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Lecturer_id_key" ON "Lecturer"("id");
+
+-- CreateIndex
+CREATE INDEX "name" ON "Lecturer"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Course_id_key" ON "Course"("id");
