@@ -17,8 +17,8 @@ const Menu = ({ dataFromParent }) => {
     const [trigger, isMutating, errorFromAxios] = useCampusesApi()
     const [addNewItem, setAddNewItem] = useState(false)
 
-    const handleAddNewItem = () =>  setAddNewItem(!addNewItem)
-    
+    const handleAddNewItem = () => setAddNewItem(!addNewItem)
+
     const handleSubmit = (value) => {
         trigger({ name: value })
         setAddNewItem(!addNewItem)
@@ -26,7 +26,7 @@ const Menu = ({ dataFromParent }) => {
     }
 
     const searchArray = (array, query) => {
-        return array.filter(item =>
+        return array[0] && array?.filter(item =>
             Object.values(item).some(value =>
                 value.toString().toLowerCase().includes(query.toLowerCase())
             )
@@ -37,7 +37,7 @@ const Menu = ({ dataFromParent }) => {
     return (
         <section className={'w-56 h-full'} >
             <div className="flex flex-col h-full overflow-x-hidden">
-                
+
                 <Link href="/" className="block px-2 py-3 text-xs font-medium text-zinc-400 hover:text-zinc-200">
                     All Campuses
                 </Link>

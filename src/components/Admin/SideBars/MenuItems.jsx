@@ -17,16 +17,17 @@ const MenuItems = ({ dataFromParent, searchArray, addNewItem, isMutating, errorF
             <motion.div
                 className="flex-1 px-2 pt-2 space-y-1 overflow-x-hidden">
                 {dataFromParent ? (
-                    searchArray(dataFromParent, searchKeyword)
-                        .map((item, index) => (
+                    searchArray(dataFromParent, searchKeyword) ?
+                        searchArray(dataFromParent, searchKeyword).map((item, index) => (
                             <motion.div
                                 initial={{ opacity: 0, }}
-                                animate={{ opacity: 1,  }}
+                                animate={{ opacity: 1, }}
                                 transition={{ duration: 0.2 }}
                                 key={item.id} >
                                 <MenuItem item={item} index={index} />
                             </motion.div>
-                        ))
+                        )) :
+                        'No results found'
                 ) : (
                     <Spinner />
                 )}
