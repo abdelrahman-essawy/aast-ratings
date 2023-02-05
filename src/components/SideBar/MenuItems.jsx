@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import MenuItem from './MenuSingleItem'
 import Spinner from '../../utilities/Spinner'
 
-const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem }) => {
+const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem, forEndPoint }) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     return (
         <>
@@ -12,10 +12,10 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
                     onChange={(e) => setSearchKeyword(e.target.value)}
                     type="text" placeholder="Search..." className="input input-bordered input-md w-full" />
             </div>
-            <div className='divider'></div>
+            <div className='divider mb-0'></div>
 
             <motion.div
-                className="flex-1 px-2 pt-2 space-y-1 overflow-x-hidden">
+                className="flex-1 overflow-x-hidden">
                 {data && (
                     searchArray(data, searchKeyword) ?
                         searchArray(data, searchKeyword).map((item, index) => (
@@ -36,7 +36,7 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
 
                             </motion.div>
                         )) :
-                        'No results found'
+                        `No ${forEndPoint} found!`
                 )
                 }
                 {

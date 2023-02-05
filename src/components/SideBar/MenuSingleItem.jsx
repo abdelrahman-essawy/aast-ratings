@@ -12,7 +12,7 @@ const MenuItem = memo(({ item, index, update, remove, error }) => {
     const ref = useRef()
 
     return (
-        <div className={`flex justify-between items-center hover:bg-base-100 p-2 rounded-lg active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
+        <div className={`flex justify-between items-center hover:bg-base-100 p-2 active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
 
             <input
                 ref={ref}

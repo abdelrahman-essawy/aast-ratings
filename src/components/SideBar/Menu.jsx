@@ -58,6 +58,7 @@ const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint }) =
                             handleSubmit={handleSubmit}
                             isLoading={isLoading}
                             setAddNewItem={setAddNewItem}
+                            forEndPoint={forEndPoint}
                         />
                         :
                         <SkeletonMenu />
