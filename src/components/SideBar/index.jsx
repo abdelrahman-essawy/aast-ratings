@@ -1,9 +1,7 @@
 "use client"
 import React, { Suspense, useEffect } from 'react'
-import Loading from '../../app/loading'
 import useApi from '../../hooks/useApi'
 import Menu from './Menu'
-import SkeletonMenu from './SkeletonMenu'
 
 const SideBar = ({ forEndpoint, fallback, width }) => {
     const { data, create, get, remove, update, isLoading, error } = useApi(forEndpoint)

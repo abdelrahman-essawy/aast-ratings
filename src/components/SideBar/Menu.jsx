@@ -1,17 +1,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-import AddIcon from '../../SVG/AddIcon'
-import Spinner from '../../utilities/Spinner'
-import MenuItem from './MenuSingleItem'
-import useSWRMutation from 'swr/mutation'
-import axios from 'axios'
-import useCampusesApi from '../../hooks/API_Hooks/campuses'
-import useCampusesApiDelete from '../../hooks/API_Hooks/campusesDelete'
-import { motion } from 'framer-motion'
-import Search from '../Search/page'
 import BottomAddButton from './BottomAddButton'
 import MenuItems from './MenuItems'
-import useApi from '../../hooks/API_Hooks/useApi2'
 import SkeletonMenu from './SkeletonMenu'
 
 

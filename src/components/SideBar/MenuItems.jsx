@@ -2,16 +2,14 @@ import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import MenuItem from './MenuSingleItem'
 import Spinner from '../../utilities/Spinner'
+import UpperSearchBar from './UpperSearchBar'
 
 const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem, forEndPoint }) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     return (
         <>
-            <div className='px-4 h-fit'>
-                <input
-                    onChange={(e) => setSearchKeyword(e.target.value)}
-                    type="text" placeholder="Search..." className="input input-bordered input-md w-full" />
-            </div>
+            <UpperSearchBar setSearchKeyword={setSearchKeyword} />
+
             <div className='divider mb-0'></div>
 
             <motion.div
@@ -25,16 +23,13 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
                                     animate={{ opacity: 1, }}
                                     transition={{ duration: 0.2 }}
                                     key={item.id} >
-
                                     <MenuItem
                                         key={item.id}
                                         item={item}
                                         index={index}
                                         update={update}
                                         remove={remove}
-                                        error={error}
-                                    />
-
+                                        error={error}/>
                                 </motion.div>
                             )) :
                         <motion.div
@@ -72,6 +67,7 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
             </motion.div>
         </>
     )
+
 }
 
 export default MenuItems
