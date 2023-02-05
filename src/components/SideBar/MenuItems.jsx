@@ -16,28 +16,42 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
 
             <motion.div
                 className="flex-1 overflow-x-hidden">
-                {data && (
-                    searchArray(data, searchKeyword) ?
-                        searchArray(data, searchKeyword).map((item, index) => (
-                            <motion.div
-                                initial={{ opacity: 0, }}
-                                animate={{ opacity: 1, }}
-                                transition={{ duration: 0.2 }}
-                                key={item.id} >
+                {data[0] ? (
+                    searchArray(data, searchKeyword)[0] ?
+                        searchArray(data, searchKeyword)
+                            .map((item, index) => (
+                                <motion.div
+                                    initial={{ opacity: 0, }}
+                                    animate={{ opacity: 1, }}
+                                    transition={{ duration: 0.2 }}
+                                    key={item.id} >
 
-                                <MenuItem
-                                    key={item.id}
-                                    item={item}
-                                    index={index}
-                                    update={update}
-                                    remove={remove}
-                                    error={error}
-                                />
+                                    <MenuItem
+                                        key={item.id}
+                                        item={item}
+                                        index={index}
+                                        update={update}
+                                        remove={remove}
+                                        error={error}
+                                    />
 
-                            </motion.div>
-                        )) :
-                        `No ${forEndPoint} found!`
-                )
+                                </motion.div>
+                            )) :
+                        <motion.div
+                            initial={{ opacity: 0, }}
+                            animate={{ opacity: 1, }}
+                            transition={{ duration: 0.1 }}
+                            className='flex flex-col items-center justify-center h-full'>
+                            <p className='text-lg font-bold'>Nothing matches.</p>
+                        </motion.div>
+                ) :
+                    <motion.div
+                        initial={{ opacity: 0, }}
+                        animate={{ opacity: 1, }}
+                        transition={{ duration: 0.1 }}
+                        className='flex flex-col items-center justify-center h-full'>
+                        <h1 className='text-lg font-bold'>No {forEndPoint} found.</h1>
+                    </motion.div>
                 }
                 {
                     addNewItem && (
