@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React from 'react'
 import UpperSearchBar from './UpperSearchBar'
 
 const SkeletonMenu = () => {

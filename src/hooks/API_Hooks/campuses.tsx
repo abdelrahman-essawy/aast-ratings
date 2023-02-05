@@ -17,7 +17,6 @@ const useCampusesApi = () => {
 
     const { trigger, isMutating } = useSWRMutation(BASE_URL, send, {
         onSuccess: (data, arg, config) => {
-            console.log('onSuccess', data, arg, config)
         }
     }
     )

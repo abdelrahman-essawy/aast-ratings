@@ -5,7 +5,7 @@ import MenuItems from './MenuItems'
 import SkeletonMenu from './SkeletonMenu'
 
 
-const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint }) => {
+const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint, paramsForUrl, searchParams }) => {
 
     const [addNewItem, setAddNewItem] = useState(false)
 
@@ -49,6 +49,8 @@ const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint }) =
                             isLoading={isLoading}
                             setAddNewItem={setAddNewItem}
                             forEndPoint={forEndPoint}
+                            paramsForUrl={paramsForUrl}
+                            searchParams={searchParams}
                         />
                         :
                         <SkeletonMenu />

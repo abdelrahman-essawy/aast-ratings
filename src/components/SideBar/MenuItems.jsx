@@ -4,7 +4,7 @@ import MenuItem from './MenuSingleItem'
 import Spinner from '../../utilities/Spinner'
 import UpperSearchBar from './UpperSearchBar'
 
-const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem, forEndPoint }) => {
+const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem, forEndPoint, paramsForUrl, searchParams }) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     return (
         <>
@@ -29,7 +29,10 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
                                         index={index}
                                         update={update}
                                         remove={remove}
-                                        error={error}/>
+                                        error={error}
+                                        paramsForUrl={paramsForUrl}
+                                        searchParams={searchParams}
+                                        />
                                 </motion.div>
                             )) :
                         <motion.div

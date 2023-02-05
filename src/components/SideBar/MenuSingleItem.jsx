@@ -1,38 +1,44 @@
-import React, { memo, useRef, useState } from 'react'
-import { trigger as triggerUpdate } from '../../hooks/API_Hooks/campusesDelete'
-import useApi from '../../hooks/API_Hooks/useApi2'
-import useCampusesApiUpdate from '../../hooks/API_Hooks/useApi2'
+import React, { memo, useEffect, useState } from 'react'
 import DeleteIcon from '../../SVG/DeleteIcon'
 import EditIcon from '../../SVG/EditIcon'
-import Spinner from '../../utilities/Spinner'
-import Router from 'next/router';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 
 // eslint-disable-next-line react/display-name
-const MenuItem = memo(({ item, index, update, remove, error }) => {
-    function handleClick(itemId) {
-        Router.push({
-            pathname: '/some-page',
-            query: { id: itemId },
-        });
-    }
+const MenuItem = memo(({ item, index, update, remove, error, paramsForUrl, searchParams }) => {
+
     const [isEditing, setIsEditing] = useState(false);
+
+    const [newUrl, setNewUrl] = useState()
+
+    useEffect(() => {
+        setNewUrl(`${searchParams}&${paramsForUrl}=${item.id}`)
+    }, []);
 
     return (
         <div className={`flex justify-between items-center hover:bg-base-100 p-2 active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
             {
                 isEditing ?
                     <input
+                        key={item.id}
                         autoFocus
                         id={item.id}
                         onKeyDown={(e) => e.key === 'Enter' && update(item.id, e.target.value) && setIsEditing((prev) => !prev)}
                         defaultValue={item.name}
                         className='truncate bg-inherit p-1' />
                     :
-                    <p
-                        onClick={() => handleClick(item.id)}
-                        className='truncate p-1'>{item.name}</p>
-
+                    paramsForUrl === 'campusId' ?
+                        <Link
+                            key={item.id}
+                            href={`/admin?${paramsForUrl}=${item.id}`}
+                            className='truncate p-1 w-full h-full'>{item.name}</Link>
+                        :
+                        <Link
+                            key={item.id}
+                            href={`/admin?${newUrl}`}
+                            className='truncate p-1 w-full h-full'>{item.name}</Link>
             }
+
 
 
             <div className='flex just'>

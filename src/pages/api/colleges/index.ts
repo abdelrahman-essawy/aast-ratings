@@ -5,24 +5,41 @@ const prisma = new PrismaClient()
 
 const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
+    const { campusId } = req.query
     switch (req.method) {
 
         case 'GET':
-            // Get all colleges
             try {
-                const colleges = await prisma.college.findMany({
-                    include: {
-                        inCampuses: true,
-                        hasCourses: true,
-                        hasLecturers: true,
-                        hasReviews: true,
-                    }
-                })
-                res.status(200).json(colleges)
+                const { campusId } = req.query
+                if (campusId) {
+                    const colleges = await prisma.college.findMany({
+                        where: {
+                            inCampuses: {
+                                some: {
+                                    id: campusId as string
+                                }
+                            }
+                        }, orderBy: {
+                            name: 'asc'
+                        },
+
+                        // include: {
+                        //     inCampuses: true,
+                        //     hasCourses: true,
+                        //     hasLecturers: true,
+                        //     hasReviews: true,
+                        // }
+
+                    })
+                    res.status(200).json(colleges)
+                } else {
+                    res.status(500).json({ message: 'Please select campus' })
+                }
             }
             catch (error) {
                 res.status(500).json({ message: error })
             }
+
             break
 
         case 'POST':
@@ -54,6 +71,7 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 },
             ]
 
+
             const { root, colleges } = req.body
             if (root === 'toor') {
                 const newCampus = await prisma.college.createMany({
@@ -63,17 +81,17 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
             }
 
 
-
             // Create a new college
             try {
-                const { name, campusId } = req.body
+                const { name } = req.body
+                const { campusId } = req.query
                 const newCollege = await prisma.college.create(
                     {
                         data: {
                             name,
                             inCampuses: {
                                 connect: {
-                                    id: campusId
+                                    id: campusId as string
                                 },
                             },
                         },
@@ -90,6 +108,7 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
             catch (error) {
                 res.status(500).json({ message: error })
             }
+
             break
 
 
