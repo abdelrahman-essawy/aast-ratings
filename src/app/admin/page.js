@@ -1,7 +1,6 @@
-import React, { use } from 'react'
-import { Sidebar } from '../../components/Admin'
-import DataSection from '../../components/Admin/DataSection'
-import Section from '../../utilities/StyledComponents/Section'
+import React from 'react'
+import DataSection from '../../components/DataSection'
+import SideBar from '../../components/SideBar'
 
 
 
@@ -10,7 +9,16 @@ const page = () => {
     return (
 
         <div className='flex'>
-            <Sidebar />
+
+            <div className='w-56'>
+                
+            <SideBar forEndpoint='campuses'/>
+            </div>
+            <div className='w-96'>
+
+            <SideBar forEndpoint='colleges' />
+            </div>
+
             <div className="flex-1 bg-base-300">
                 <DataSection />
             </div>

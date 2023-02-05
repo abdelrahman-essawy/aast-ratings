@@ -100,26 +100,26 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
             break
         case 'DELETE':
             try {
-                const { root, id } = req.body
+                const id = req.query.id;
+                const root = req.query.root;
+
                 if (root === 'toor') {
-                    await prisma.campus.deleteMany()
-                    res.json({ message: 'All campuses deleted' })
+                    await prisma.campus.deleteMany();
+                    res.json({ message: 'All campuses deleted' });
                 }
 
                 await prisma.campus.delete({
-                    where: { id }
-
-                })
-                res.status(200).json({ message: 'campus deleted' })
-
+                    where: { id: id as string },
+                });
+                res.status(200).json({ message: 'campus deleted' });
+            } catch (error) {
+                res.status(504).json({ message: error });
             }
-            catch (error) {
-                res.status(504).json({ message: error })
-            }
-            break
+            break;
 
         default:
-            res.status(405).json({ message: 'Method not allowed' })
+            res.status(405).json({ message: 'Method not allowed' });
+
     }
 }
 
