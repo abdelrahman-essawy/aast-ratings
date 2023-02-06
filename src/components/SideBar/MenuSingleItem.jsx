@@ -16,7 +16,7 @@ const MenuItem = memo(({ item, index, update, remove, error, paramsForUrl, searc
     }, []);
 
     return (
-        <div className={`flex justify-between items-center hover:bg-base-100 p-2 active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
+        <div className={`flex justify-between items-center hover:bg-base-100 active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
             {
                 isEditing ?
                     <input
@@ -31,12 +31,12 @@ const MenuItem = memo(({ item, index, update, remove, error, paramsForUrl, searc
                         <Link
                             key={item.id}
                             href={`/admin?${paramsForUrl}=${item.id}`}
-                            className='truncate p-1 w-full h-full'>{item.name}</Link>
+                            className='truncate p-3 w-full h-full'>{item.name}</Link>
                         :
                         <Link
                             key={item.id}
                             href={`/admin?${newUrl}`}
-                            className='truncate p-1 w-full h-full'>{item.name}</Link>
+                            className='truncate p-3 w-full h-full'>{item.name}</Link>
             }
 
 
