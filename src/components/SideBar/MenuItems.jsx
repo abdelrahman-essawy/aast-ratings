@@ -4,7 +4,7 @@ import MenuItem from './MenuSingleItem'
 import Spinner from '../../utilities/Spinner'
 import UpperSearchBar from './UpperSearchBar'
 
-const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLoading, error, setAddNewItem, forEndPoint, paramsForUrl, searchParams }) => {
+const MenuItems = ({ data, create, update, remove, searchArray, addNewElement, isLoading, error, setAddNewItem, forEndPoint, paramsForUrl, searchParams }) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     return (
         <>
@@ -17,15 +17,15 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
                 {data[0] ? (
                     searchArray(data, searchKeyword)[0] ?
                         searchArray(data, searchKeyword)
-                            .map((item, index) => (
+                            .map((element, index) => (
                                 <motion.div
                                     initial={{ opacity: 0, }}
                                     animate={{ opacity: 1, }}
                                     transition={{ duration: 0.2 }}
-                                    key={item.id} >
+                                    key={element.id} >
                                     <MenuItem
-                                        key={item.id}
-                                        item={item}
+                                        key={element.id}
+                                        element={element}
                                         index={index}
                                         update={update}
                                         remove={remove}
@@ -52,7 +52,7 @@ const MenuItems = ({ data, create, update, remove, searchArray, addNewItem, isLo
                     </motion.div>
                 }
                 {
-                    addNewItem && (
+                    addNewElement && (
                         <div onKeyDown={(e) => e.key === 'Enter' && create({ name: e.target.value }, setAddNewItem(false))}
                             className='p-3 rounded-lg bg-base-300'>
 

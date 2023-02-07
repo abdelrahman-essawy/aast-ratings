@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link'
 import React, { useState } from 'react'
 import BottomAddButton from './BottomAddButton'
@@ -7,13 +8,13 @@ import SkeletonMenu from './SkeletonMenu'
 
 const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint, paramsForUrl, searchParams }) => {
 
-    const [addNewItem, setAddNewItem] = useState(false)
+    const [addNewElement, setAddNewElement] = useState(false)
 
-    const handleAddNewItem = () => setAddNewItem(!addNewItem)
+    const handleaddNewElement = () => setAddNewElement(!addNewElement)
 
     const handleSubmit = (value) => {
         create({ name: value })
-        setAddNewItem(!addNewItem)
+        setAddNewElement(!addNewElement)
 
     }
 
@@ -40,14 +41,14 @@ const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint, par
                         <MenuItems
                             data={data}
                             searchArray={searchArray}
-                            addNewItem={addNewItem}
+                            addNewElement={addNewElement}
                             create={create}
                             update={update}
                             remove={remove}
                             error={error}
                             handleSubmit={handleSubmit}
                             isLoading={isLoading}
-                            setAddNewItem={setAddNewItem}
+                            setAddNewElement={setAddNewElement}
                             forEndPoint={forEndPoint}
                             paramsForUrl={paramsForUrl}
                             searchParams={searchParams}
@@ -57,7 +58,7 @@ const Menu = ({ data, create, update, remove, error, isLoading, forEndPoint, par
                 }
 
 
-                <BottomAddButton handleAddNewItem={handleAddNewItem} />
+                <BottomAddButton handleaddNewElement={handleaddNewElement} />
 
             </div>
         </section>
