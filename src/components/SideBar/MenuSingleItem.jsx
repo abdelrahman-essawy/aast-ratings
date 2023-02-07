@@ -7,13 +7,37 @@ import { usePathname } from 'next/navigation';
 // eslint-disable-next-line react/display-name
 const MenuItem = memo(({ item, index, update, remove, error, paramsForUrl, searchParams }) => {
 
+    const handleParamsForUrl = (paramsForUrl) => {
+        switch (paramsForUrl) {
+            case 'campussId':
+                return <Link
+                    key={item.id}
+                    href={`/admin?${paramsForUrl}=${item.id}`}
+                    className='truncate p-3 w-full h-full'>{item.name}</Link>
+                break
+            case 'collegseId':
+                return <Link
+                    key={item.id}
+                    href={`/admin?${newUrl}`}
+                    className='truncate p-3 w-full h-full'>{item.name}</Link>
+                break
+            default:
+                return <Link
+                    key={item.id}
+                    href={`/admin?${paramsForUrl}=${item.id}`}
+                    className='truncate p-3 w-full h-full'>{item.name}</Link>
+                break
+        }
+            
+    }
+
     const [isEditing, setIsEditing] = useState(false);
 
     const [newUrl, setNewUrl] = useState()
 
     useEffect(() => {
         setNewUrl(`${searchParams}&${paramsForUrl}=${item.id}`)
-    }, []);
+    }, [searchParams]);
 
     return (
         <div className={`flex justify-between items-center hover:bg-base-100 active:bg-base-100 transition duration-300 cursor-pointer ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`}>
@@ -27,16 +51,7 @@ const MenuItem = memo(({ item, index, update, remove, error, paramsForUrl, searc
                         defaultValue={item.name}
                         className='truncate bg-inherit p-1' />
                     :
-                    paramsForUrl === 'campusId' ?
-                        <Link
-                            key={item.id}
-                            href={`/admin?${paramsForUrl}=${item.id}`}
-                            className='truncate p-3 w-full h-full'>{item.name}</Link>
-                        :
-                        <Link
-                            key={item.id}
-                            href={`/admin?${newUrl}`}
-                            className='truncate p-3 w-full h-full'>{item.name}</Link>
+                    handleParamsForUrl(paramsForUrl)
             }
 
 

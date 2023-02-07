@@ -12,8 +12,17 @@ CREATE TABLE "College" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "campusId" TEXT NOT NULL,
 
     CONSTRAINT "College_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "CollegeCampus" (
+    "collegeId" TEXT NOT NULL,
+    "campusId" TEXT NOT NULL,
+
+    CONSTRAINT "CollegeCampus_pkey" PRIMARY KEY ("collegeId","campusId")
 );
 
 -- CreateTable
@@ -24,6 +33,8 @@ CREATE TABLE "Lecturer" (
     "personalSideRating" INTEGER NOT NULL DEFAULT 0,
     "scientificSideRating" INTEGER NOT NULL DEFAULT 0,
     "recommendationRating" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Lecturer_pkey" PRIMARY KEY ("id")
 );
@@ -46,18 +57,14 @@ CREATE TABLE "Review" (
     "scientificSideRating" INTEGER DEFAULT 0,
     "recommendationRating" INTEGER DEFAULT 0,
     "comment" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "campusId" TEXT,
     "collegeId" TEXT,
     "lecturerId" TEXT,
     "courseId" TEXT,
 
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "_CampusToCollege" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -88,6 +95,9 @@ CREATE UNIQUE INDEX "Campus_name_key" ON "Campus"("name");
 CREATE UNIQUE INDEX "College_id_key" ON "College"("id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "College_name_campusId_key" ON "College"("name", "campusId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Lecturer_id_key" ON "Lecturer"("id");
 
 -- CreateIndex
@@ -104,12 +114,6 @@ CREATE UNIQUE INDEX "Course_courseCode_key" ON "Course"("courseCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Review_id_key" ON "Review"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_CampusToCollege_AB_unique" ON "_CampusToCollege"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_CampusToCollege_B_index" ON "_CampusToCollege"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CollegeToLecturer_AB_unique" ON "_CollegeToLecturer"("A", "B");
@@ -130,6 +134,15 @@ CREATE UNIQUE INDEX "_CourseToLecturer_AB_unique" ON "_CourseToLecturer"("A", "B
 CREATE INDEX "_CourseToLecturer_B_index" ON "_CourseToLecturer"("B");
 
 -- AddForeignKey
+ALTER TABLE "College" ADD CONSTRAINT "College_campusId_fkey" FOREIGN KEY ("campusId") REFERENCES "Campus"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "CollegeCampus" ADD CONSTRAINT "CollegeCampus_collegeId_fkey" FOREIGN KEY ("collegeId") REFERENCES "College"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "CollegeCampus" ADD CONSTRAINT "CollegeCampus_campusId_fkey" FOREIGN KEY ("campusId") REFERENCES "Campus"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_campusId_fkey" FOREIGN KEY ("campusId") REFERENCES "Campus"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -140,12 +153,6 @@ ALTER TABLE "Review" ADD CONSTRAINT "Review_lecturerId_fkey" FOREIGN KEY ("lectu
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "Course"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_CampusToCollege" ADD CONSTRAINT "_CampusToCollege_A_fkey" FOREIGN KEY ("A") REFERENCES "Campus"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_CampusToCollege" ADD CONSTRAINT "_CampusToCollege_B_fkey" FOREIGN KEY ("B") REFERENCES "College"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CollegeToLecturer" ADD CONSTRAINT "_CollegeToLecturer_A_fkey" FOREIGN KEY ("A") REFERENCES "College"("id") ON DELETE CASCADE ON UPDATE CASCADE;

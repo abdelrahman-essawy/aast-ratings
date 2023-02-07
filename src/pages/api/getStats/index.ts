@@ -16,14 +16,7 @@ const getStatusAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 let amountOfCourses = 0
                 let amountOfReviews = 0
 
-                await prisma.campus.findMany({
-                    include: {
-                        _count: {
-
-                        }
-                    }
-
-                })
+                await prisma.campus.findMany({ include: { _count: {} } })
                     .then((campuses) => {
                         campuses.forEach((campus) => {
                             amountOfCampuses += 1
@@ -32,21 +25,24 @@ const getStatusAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         })
                     })
 
-                const asd = await prisma.college.findMany(
-                    {
-                        include: {
-                            _count: {
-                                select: { hasCourses: true, hasLecturers: true, hasReviews: true }
-                            },
-
-                        }
-                    }
-                )
+                await prisma.college.findMany({ include: { _count: {}, } })
                     .then((colleges) => {
                         colleges.forEach((college) => {
                             amountOfLecturers += college._count.hasLecturers
-                            amountOfCourses += college._count.hasCourses
+                            // amountOfCourses += college._count.hasCourses
                             amountOfReviews += college._count.hasReviews
+                        })
+                    })
+
+                await prisma.lecturer.findMany({ include: { _count: {} } })
+                    .then((lecturers) => {
+                        lecturers.forEach((lecturer) => { amountOfReviews += lecturer._count.hasReviews })
+                    })
+
+                await prisma.course.findMany({ include: { _count: {} } })
+                    .then((courses) => {
+                        courses.forEach((course) => {
+                            amountOfReviews += course._count.hasReviews
                         })
                     })
 

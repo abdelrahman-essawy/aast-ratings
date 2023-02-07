@@ -11,62 +11,80 @@ datasource db {
   // If you use Neon for development environment, create a separate Neon project for Prisma shadow database
   // https://neon.tech/docs/quickstart/prisma/#step-2-using-neon-for-development-with-prisma
 
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Campus {
-  id     String @id @unique @default(cuid())
+  id     String @id @unique
   name   String @unique
   rating Float  @default(0)
 
-  hasColleges College[]
-  hasReviews  Review[]
+  hasReviews    Review[]
+  hasColleges   College[]
+  CollegeCampus CollegeCampus[]
 }
 
 model College {
-  id     String @id @unique @default(cuid())
+  id     String @id @unique
   name   String
   rating Float  @default(0)
 
-  inCampuses   Campus[]
-  hasLecturers Lecturer[]
-  hasCourses   Course[]
-  hasReviews   Review[]
+  inCampus      Campus          @relation(fields: [campusId], references: [id])
+  campusId      String
+  hasLecturers  Lecturer[]
+  hasCourses    Course[]
+  hasReviews    Review[]
+  CollegeCampus CollegeCampus[]
+
+  @@unique([name, campusId])
+}
+
+model CollegeCampus {
+  collegeId String
+  campusId  String
+  college   College @relation(fields: [collegeId], references: [id])
+  campus    Campus  @relation(fields: [campusId], references: [id])
+
+  @@id([collegeId, campusId])
 }
 
 model Lecturer {
-  id                   String @id @unique @default(cuid())
+  id                   String   @id @unique
   name                 String
-  rating               Float  @default(0)
-  personalSideRating   Int    @default(0)
-  scientificSideRating Int    @default(0)
-  recommendationRating Int    @default(0)
+  rating               Float    @default(0)
+  personalSideRating   Int      @default(0)
+  scientificSideRating Int      @default(0)
+  recommendationRating Int      @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 
   workInColleges College[]
   teachCourses   Course[]
-  hasReview      Review[]
+  hasReviews     Review[]
 
   @@index([name], name: "name")
 }
 
 model Course {
-  id         String  @id @unique @default(cuid())
+  id         String  @id @unique
   name       String  @unique
   courseCode String? @unique
   rating     Float   @default(0)
 
   taughtByLecturers   Lecturer[]
   availableInColleges College[]
-  hasReview           Review[]
+  hasReviews          Review[]
 }
 
 model Review {
-  id                   String  @id @unique @default(cuid())
-  rating               Float   @default(0)
-  personalSideRating   Int?    @default(0)
-  scientificSideRating Int?    @default(0)
-  recommendationRating Int?    @default(0)
+  id                   String   @id @unique @default(cuid())
+  rating               Float    @default(0)
+  personalSideRating   Int?     @default(0)
+  scientificSideRating Int?     @default(0)
+  recommendationRating Int?     @default(0)
   comment              String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 
   campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
   collegesReviews  College?  @relation(fields: [collegeId], references: [id])

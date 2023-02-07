@@ -39,8 +39,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 const defaultCampuses = [
                     { name: 'El Alamein' },
                     { name: 'Sharjah' },
-                    { name: 'Abu Qir' },
-                    { name: 'Miami' },
+                    { name: 'Aexandria' },
                     { name: 'Heliopolis' },
                     { name: 'Dokki' },
                     { name: 'Smart Village' },
@@ -49,24 +48,23 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                     { name: 'Latakia' },
                 ]
 
-                const { name, root, campuses } = req.body
+                const { name, root } = req.query
 
                 if (root === 'toor') {
                     const newCampuses = await prisma.campus.createMany({
-                        data: [
-
-                            ...campuses
-
-                        ]
+                        data: defaultCampuses as any,
+                        skipDuplicates: true
                     })
                     res.status(200).json(newCampuses)
                 }
 
 
+
                 const newCampus = await prisma.campus.create(
                     {
                         data: {
-                            name
+                            id: `${name.toString().toLowerCase().replace(' ', '-')}`,
+                            name: name as string,
                         }
                     }
 
@@ -81,12 +79,12 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'PUT':
             // Update a campus
             try {
-                const { id, name, collegeId } = req.body
+                const { id, name } = req.query
                 const updatedCampus = await prisma.campus.update(
                     {
-                        where: { id },
+                        where: { id: id as string },
                         data: {
-                            name: name,
+                            name: name as string,
                         }
                     }
 
@@ -100,11 +98,12 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
             break
         case 'DELETE':
             try {
-                const id = req.query.id;
-                const root = req.query.root;
+                const { id, root } = req.query;
 
                 if (root === 'toor') {
-                    await prisma.campus.deleteMany();
+                    await prisma.campus.deleteMany({
+                        where: { id: { not: 'toor' } }
+                    });
                     res.json({ message: 'All campuses deleted' });
                 }
 

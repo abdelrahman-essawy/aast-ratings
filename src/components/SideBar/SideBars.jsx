@@ -5,8 +5,12 @@ import useApi from '../../hooks/useApi'
 import Menu from './Menu'
 
 const SideBars = () => {
-    const searchParams = useSearchParams().toString()
+    const [collegeSearchParam] = useState(useSearchParams().get('collegeId'))
+    const [courseSearchParam] = useState(useSearchParams().get('courseId'))
     const pathname = usePathname();
+
+
+
 
     const Campuses = (forEndpoint = 'campuses') => {
         const { data, create, get, remove, update, isLoading, error } = useApi(forEndpoint)
@@ -31,8 +35,8 @@ const SideBars = () => {
         )
     }
     const Colleges = (forEndpoint = `colleges`) => {
-
-        const { data, create, get, remove, update, isLoading, error } = useApi(forEndpoint + `?${searchParams}`)
+        const campusSearchParam = useSearchParams().get('campusId')
+        const { data, create, get, remove, update, isLoading, error } = useApi(forEndpoint + `?campusId=${campusSearchParam}`)
         return (
             <section className={'flex h-[calc(100vh_-_117px)] w-full'}>
                 <div className={`overflow-auto border-r border-zinc-700 h-full w-full`}>
@@ -46,7 +50,7 @@ const SideBars = () => {
                             isLoading={isLoading}
                             forEndPoint={forEndpoint}
                             paramsForUrl={'collegeId'}
-                            searchParams={searchParams}
+                            searchParams={campusSearchParam}
                         />
                     }
                 </div>

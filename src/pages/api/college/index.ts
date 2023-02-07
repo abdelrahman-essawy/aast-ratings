@@ -14,14 +14,13 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (campusId) {
                     const colleges = await prisma.college.findMany({
                         where: {
-                            inCampuses: {
-                                some: {
-                                    id: campusId as string
-                                }
+                            campusId: {
+                                equals: campusId as string
                             }
-                        }, orderBy: {
-                            name: 'asc'
                         },
+                        // orderBy: {
+                        //     name: 'asc'
+                        // },
 
                         // include: {
                         //     inCampuses: true,
@@ -44,63 +43,58 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'POST':
 
-            const defaultColleges = [
-                {
-                    name: 'College of Medicine',
-                    inCampuses: {
-                        connect: {
-                            id: "cldf6ed5q002jeq486vyw5h2e"
-                        }
-                    }
-                },
-                {
-                    name: 'College of Science',
-                    inCampuses: {
-                        connect: {
-                            id: "cldf6ed5q002jeq486vyw5h2e"
-                        }
-                    }
-                },
-                {
-                    name: 'College of Arts and Sciences',
-                    inCampuses: {
-                        connect: {
-                            id: "cldf6ed5q002jeq486vyw5h2e"
-                        }
-                    }
-                },
-            ]
+            // const defaultColleges = [
+            //     {
+            //         name: 'College of Medicine',
+            //         inCampuses: {
+            //             connect: {
+            //                 id: "cldf6ed5q002jeq486vyw5h2e"
+            //             }
+            //         }
+            //     },
+            //     {
+            //         name: 'College of Science',
+            //         inCampuses: {
+            //             connect: {
+            //                 id: "cldf6ed5q002jeq486vyw5h2e"
+            //             }
+            //         }
+            //     },
+            //     {
+            //         name: 'College of Arts and Sciences',
+            //         inCampuses: {
+            //             connect: {
+            //                 id: "cldf6ed5q002jeq486vyw5h2e"
+            //             }
+            //         }
+            //     },
+            // ]
 
 
-            const { root, colleges } = req.body
-            if (root === 'toor') {
-                const newCampus = await prisma.college.createMany({
-                    data: colleges ? colleges : defaultColleges,
-                })
-                res.status(200).json(newCampus)
-            }
+            // const { root, colleges } = req.body
+            // if (root === 'toor') {
+            //     const newCampus = await prisma.college.createMany({
+            //         data: colleges ? colleges : defaultColleges,
+            //     })
+            //     res.status(200).json(newCampus)
+            // }
 
 
             // Create a new college
             try {
-                const { name } = req.body
-                const { campusId } = req.query
+                const { name, campusId } = req.query
+                // const { campusId } = req.query
                 const newCollege = await prisma.college.create(
                     {
                         data: {
-                            name,
-                            inCampuses: {
+                            id: `${name.toString().toLowerCase().replaceAll(' ', '-')}-${campusId}` as string,
+                            name: name as string,
+                            inCampus: {
                                 connect: {
                                     id: campusId as string
                                 },
                             },
                         },
-                        include: {
-                            inCampuses: true,
-                            hasCourses: true,
-                            hasLecturers: true,
-                            hasReviews: true,
-                        }
                     }
                 )
                 res.json(newCollege)
@@ -115,14 +109,16 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'PUT':
             // Update a college
             try {
-                const { id, name, campusId } = req.body
+                const { id, name, campusId, rating } = req.query
                 const updatedCollege = await prisma.college.update(
                     {
                         where: {
-                            id
+                            id: id as string
                         },
                         data: {
-                            name
+                            name: name as string,
+                            campusId: campusId as string,
+                            rating: rating as unknown,
                         }
                     }
                 )
@@ -136,12 +132,12 @@ const collegesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'DELETE':
             try {
-                const { root, id } = req.body
+                const { root, id } = req.query
                 if (root === 'toor') {
                     await prisma.college.deleteMany()
                     res.json({ message: 'All colleges deleted' })
                 }
-                await prisma.college.delete({ where: { id } })
+                await prisma.college.delete({ where: { id: id as string } })
                 res.status(200).json({ message: 'College deleted' })
 
             }
