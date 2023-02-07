@@ -5,12 +5,12 @@ import CampusesSideBar from '../../components/SideBar/Campuses'
 import SkeletonMenu from '../../components/SideBar/SkeletonMenu'
 
 
-const fetcher = async (endPoint = 'http://localhost:3000/api/getAll') => await fetch(endPoint, {
+const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/getAll') => await fetch(endPoint, {
     next: {
         revalidate: 1
     }
 }).then(res => res.json())
-const create = async (newCampusName, endPoint = 'http://localhost:3000/api/campus?name=') =>
+const create = async (newCampusName, endPoint = 'https://aast-ratings.vercel.app/api/campus?name=') =>
     await fetch(endPoint + newCampusName, {
         method: 'POST',
         headers: {
