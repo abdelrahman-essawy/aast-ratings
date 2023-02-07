@@ -241,7 +241,6 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 console.log(error)
             }
 
-
             break
 
         case 'PUT':
