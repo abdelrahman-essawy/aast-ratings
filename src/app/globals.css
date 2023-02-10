@@ -70,3 +70,15 @@ html {
 
 .swiper-slide-shadow {
 }
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body,
+#fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}

@@ -1,4 +1,4 @@
-const getStats = async () => await fetch('http://localhost:3000/api/getStats',
+const getStats = async () => await fetch('https://aast-ratings.vercel.app//api/getStats',
     { next: { revalidate: 10 } }).then(res => res.json())
 
 export default getStats

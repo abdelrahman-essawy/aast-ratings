@@ -21,6 +21,7 @@ model Campus {
 
   hasReviews    Review[]
   hasColleges   College[]
+  hasLecturers  Lecturer[]
   CollegeCampus CollegeCampus[]
 }
 
@@ -49,20 +50,24 @@ model CollegeCampus {
 }
 
 model Lecturer {
-  id                   String   @id @unique
+  id                   String @id @unique
   name                 String
-  rating               Float    @default(0)
-  personalSideRating   Int      @default(0)
-  scientificSideRating Int      @default(0)
-  recommendationRating Int      @default(0)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  rating               Float  @default(0)
+  personalSideRating   Int    @default(0)
+  scientificSideRating Int    @default(0)
+  recommendationRating Int    @default(0)
+  role                 String
+  amountOfReviews      Int    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   workInColleges College[]
+  workInCampus   Campus?   @relation(fields: [campusId], references: [id])
   teachCourses   Course[]
   hasReviews     Review[]
+  campusId       String?
 
-  @@index([name], name: "name")
 }
 
 model Course {

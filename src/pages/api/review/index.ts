@@ -108,7 +108,10 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             rating: Math.round(avgRatings._avg.rating),
                             personalSideRating: Math.round(avgRatings._avg.personalSideRating),
                             scientificSideRating: Math.round(avgRatings._avg.scientificSideRating),
-                            recommendationRating: Math.round(avgRatings._avg.recommendationRating)
+                            recommendationRating: Math.round(avgRatings._avg.recommendationRating),
+                            amountOfReviews: {
+                                increment: 1
+                            }
                         }
                     })
 

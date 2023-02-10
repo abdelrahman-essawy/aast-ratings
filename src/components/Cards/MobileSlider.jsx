@@ -25,13 +25,23 @@ export const MobileSlider = ({ lecturers }) => {
                 lecturers
                     .sort((a, b) => b.ratings - a.ratings)
                     .slice(0, 3)
-                    .map(({ name, desc, icon, country, courses, ratings, reviews }, index) =>
+                    .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) =>
 
-                    <SwiperSlide
-                        key={index}>
-                        <CardTemplete name={name} desc={desc} icon={icon} ratings={ratings} reviews={reviews} country={country} courses={courses} />
-                    </SwiperSlide>
-                )
+                        <SwiperSlide
+                            key={index}>
+                            <CardTemplete
+                                key={id}
+                                id={id}
+                                name={name}
+                                rating={rating}
+                                role={role}
+                                workInColleges={workInColleges}
+                                teachCourses={teachCourses}
+                                amountOfReviews={amountOfReviews}
+                                icon={icon}
+                            />
+                        </SwiperSlide>
+                    )
             }
 
         </Swiper>

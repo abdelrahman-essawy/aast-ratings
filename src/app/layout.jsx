@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar/page'
 import { Footer } from '../components/Footer/page'
 import { Suspense } from 'react'
 import Loading from './loading'
+import ReviewModal from '../components/Modal/reviewModal'
 // import RulesModal from '../components/Modal/RulesModal'
 
 export default function RootLayout({ children }) {
@@ -16,19 +17,18 @@ export default function RootLayout({ children }) {
       <head />
 
 
-      <body className='flex flex-col justify-between items-center overflow-x-hidden min-h-screen bg-base-200'>
+      <body className='flex flex-col justify-between items-center min-h-screen bg-base-200'>
         {/* <RulesModal /> */}
         <Navbar />
 
-        <main className='flex-1 w-full h-full'>
+        <main className='flex-1 w-full'>
           <Suspense fallback={<Loading />}>
             {children}
           </Suspense>
         </main>
-        
-        <footer className='w-full'>
-          <Footer />
-        </footer>
+
+        <Footer />
+
       </body>
     </html>
 
