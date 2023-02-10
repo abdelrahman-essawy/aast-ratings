@@ -12,7 +12,6 @@ export default function Home() {
       <div className='w-full m-auto py-auto'>
         <Cards />
       </div>
-      {/* <label htmlFor="my-modal-6" className="btn">open modal</label> */}
 
     </>
   )

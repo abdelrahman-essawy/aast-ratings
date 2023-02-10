@@ -1,9 +1,10 @@
 import React, { use } from 'react'
+import ReviewModal from '../Modal/reviewModal'
 import { CardTemplete } from './CardTemplete'
 import { DesktopSlider } from './DesktopSlider'
 import { MobileSlider } from './MobileSlider'
 
-const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer') => await fetch(endPoint, {
+const fetcher = async (endPoint = 'http://localhost:3000/api/lecturer/topRated') => await fetch(endPoint, {
     next: {
         revalidate: 60
     }
@@ -51,7 +52,7 @@ export const Cards = () => {
             <div className='hidden sm:block'>
                 <DesktopSlider lecturers={lecturers} />
             </div>
-            <div className='sm:hidden flex justify-center items-center'>
+            <div className='sm:hidden flex justify-center items-center px-4'>
                 <MobileSlider lecturers={lecturers} />
             </div>
 

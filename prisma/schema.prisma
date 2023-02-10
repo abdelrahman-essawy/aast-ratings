@@ -21,6 +21,7 @@ model Campus {
 
   hasReviews    Review[]
   hasColleges   College[]
+  hasLecturers  Lecturer[]
   CollegeCampus CollegeCampus[]
 }
 
@@ -62,10 +63,11 @@ model Lecturer {
   updatedAt DateTime @updatedAt
 
   workInColleges College[]
+  workInCampus   Campus?   @relation(fields: [campusId], references: [id])
   teachCourses   Course[]
   hasReviews     Review[]
+  campusId       String?
 
-  @@index([name], name: "name")
 }
 
 model Course {

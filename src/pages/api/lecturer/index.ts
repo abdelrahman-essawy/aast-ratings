@@ -15,12 +15,8 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                     where: {
                         id: id as string
                     },
-                    select: {
-                        id: true,
-                        name: true,
-                        role: true,
-                        rating: true,
-                        amountOfReviews: true,
+
+                    include: {
                         teachCourses: {
                             select: {
                                 id: true,
@@ -33,7 +29,23 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 name: true,
                             },
                         },
-
+                        workInCampus: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
+                        hasReviews: {
+                            select: {
+                                id: true,
+                                rating: true,
+                                comment: true,
+                                personalSideRating: true,
+                                scientificSideRating: true,
+                                recommendationRating: true,
+                                createdAt: true,
+                            }
+                        }
                     }
                 })
                 res.status(200).json(lecturer)
@@ -47,7 +59,7 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'POST':
             // Create a new lecturer
             try {
-                const { name, role, collegeId } = req.query
+                const { name, role, collegeId, campusId } = req.query
                 const lecturer = await prisma.lecturer.create({
                     data: {
                         id: `${name.toString().toLowerCase().replaceAll(' ', '-')}-${collegeId}-${Math.floor(Math.random() * 100)}` as string,
@@ -56,7 +68,11 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         ,
                         workInColleges: {
                             connect: { id: collegeId as string }
-                        }
+                        },
+                        workInCampus: {
+                            connect: { id: campusId as string }
+                        },
+
                     }
                 });
 
@@ -74,20 +90,25 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'PUT':
             // Update a lecturer
             try {
-                const { id, name, courseId, rating } = req.query
+                const { id, name, courseId, rating, campusId, collegeId } = req.query
                 const updatedLecturer = await prisma.lecturer.update({
-                    where: {
-                        id: id as string
-                    },
+                    where: { id: id as string },
                     data: {
-                        name: name as string,
+                        name: name as string || undefined,
                         // workInColleges: {
                         //     connect: { id: collegeId as string }
                         // },
-                        teachCourses: {
-                            connect: { id: courseId as string }
+                        workInCampus: {
+                            connect: { id: campusId as string || undefined }
                         },
-                        rating: rating as undefined as number
+                        teachCourses: {
+                            connect: { id: courseId as string || undefined }
+                        },
+                        workInColleges: {
+                            connect: { id: collegeId as string || undefined }
+                        },
+
+                        rating: rating as undefined as number || undefined
                     }
                 })
                 res.status(200).json(updatedLecturer)
