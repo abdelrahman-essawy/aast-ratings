@@ -1,16 +1,21 @@
 import Image from "next/image"
 import { use } from "react"
 import VerifiedIcon from "../../../SVG/VerifiedIcon"
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
 
 const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
+const timeAgo = new TimeAgo('en-US')
 
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
 
   const lecturer = use(fetcher(params.id))
 
-  const { name, hasReviews, amountOfReviews, role, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses } = lecturer ?? {}
+  const { name, hasReviews, amountOfReviews, role, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses, createdAt } = lecturer ?? {}
+  const now = new Date()
   return (
-    <div className="z-50 bg-base-200 flex flex-col h-full">
+    <div className="z-50 bg-base-200 flex flex-col h-full py-4">
 
 
       <section>
@@ -65,22 +70,22 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       </section>
 
 
-      <section className="overflow-y-scroll flex-1">
+      <section className="flex-1 bg-base-300 rounded-lg p-4">
         {
 
           hasReviews ? (
-            hasReviews.map(({ id, comment, rating, personalSideRating, scientificSideRating, recommendationRating }) => (
+            hasReviews.map(({ id, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt }, index) => (
               <div
                 key={id}
-                className="chat chat-start">
+                className={`chat ${index % 2 === 0 ? 'chat-start' : 'chat-end'}`}>
                 <div className="chat-image avatar">
-                  <div className="w-10 rounded-full bg-base-300 shadow p-2">
+                  <div className="w-10 rounded-full bg-base-100 shadow p-2">
                     <img src="https://cdn-icons-png.flaticon.com/512/1157/1157034.png" />
                   </div>
                 </div>
-                <div className="chat-header">
-                  <span>AASTian</span>
-                  <time className="text-xs opacity-50 text-end ml-2">2 hours ago</time>
+                <div className="chat-header mx-4 space-x-16">
+                  <span>Student</span>
+                  <span className="text-xs opacity-50">{timeAgo.format(Date.parse(createdAt))}</span>
                 </div>
                 <div className="chat-bubble">
                   <div className="grid grid-cols-2 gap-1">

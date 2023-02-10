@@ -11,6 +11,7 @@ import { CardTemplete } from './CardTemplete';
 export const MobileSlider = ({ lecturers }) => {
     return (
         <Swiper
+            className='!items-stretch'
             effect={"cards"}
             modules={[EffectCards, Autoplay]}
             autoplay={{
@@ -28,7 +29,7 @@ export const MobileSlider = ({ lecturers }) => {
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) =>
 
                         <SwiperSlide
-                            key={index}>
+                            key={index} className='!items-stretch'>
                             <CardTemplete
                                 key={id}
                                 id={id}
