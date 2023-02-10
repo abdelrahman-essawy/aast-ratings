@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/pages/api/lecturers", "src/pages/api/revalidate.ts"  ],
+, "src/pages/api/lecturers", "src/pages/api/revalidate.ts", "src/hooks/useApi.js"  ],
   "exclude": [
     "node_modules"
   ]

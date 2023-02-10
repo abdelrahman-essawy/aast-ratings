@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
-
-const prisma = new PrismaClient()
+import prisma from '../../../../lib/db'
 
 const getStatusAPI = async (req: NextApiRequest, res: NextApiResponse) => {
     const { method } = req
