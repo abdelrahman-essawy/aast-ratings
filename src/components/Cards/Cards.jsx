@@ -22,10 +22,7 @@ export const Cards = () => {
             campus: 'Cairo',
             ratings: 4,
             reviews: 100,
-            workInCollege: [
-                id = 1,
-                name = 'sadas'
-            ]
+
         },
         {
             name: 'Dr. Karim Elsayed',
@@ -34,10 +31,7 @@ export const Cards = () => {
             country: 'Egypt',
             ratings: 3,
             reviews: 140,
-            workInCollege: [
-                id = 1,
-                name = 'sadas'
-            ]
+
         },
         {
             name: 'Eng. Ahmed Elsayed',
@@ -46,10 +40,7 @@ export const Cards = () => {
             country: 'Egypt',
             ratings: 2,
             reviews: 120,
-            workInCollege: [
-                id = 1,
-                name = 'sadas'
-            ]
+
         },
 
     ]
