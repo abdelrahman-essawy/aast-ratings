@@ -8,7 +8,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
   const lecturer = use(fetcher(params.id))
 
-  const { name, hasReviews, amountOfReviews, role, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses } = lecturer
+  const { name, hasReviews, amountOfReviews, role, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses } = lecturer ?? {}
   return (
     <div className="z-50 bg-base-200 flex flex-col h-full">
 
