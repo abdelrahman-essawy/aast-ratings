@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-export const CardTemplete = ({ name, courses, icon, country, className, ratings, reviews }) => {
+export const CardTemplete = ({ name, courses, icon, country, className, ratings, amountOfReviews, college }) => {
     return (
         <div className={`card m-auto w-60 h-fit bg-base-100 border border-gray-700 shadow-xl sm:hover:shadow-2xl sm:hover:scale-105 transition ease-in-out duration-300 ${className}`}>
             <figure className='w-full bg-base-300 h-fit p-12'>
@@ -47,7 +47,7 @@ export const CardTemplete = ({ name, courses, icon, country, className, ratings,
                         }
 
                     </div>
-                    <div className="badge badge-md">{reviews}</div>
+                    <div className="badge badge-md">{amountOfReviews}</div>
 
                 </div>
                 {/* <label className="btn gap-2 bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300" htmlFor='my-modal-66'>

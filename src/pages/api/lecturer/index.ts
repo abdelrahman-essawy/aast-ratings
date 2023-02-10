@@ -9,24 +9,9 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
 
             try {
-                // const { lecturerId } = req.query
-                // const count = await prisma.review.aggregate({
-                //     where: {
-                //         lecturerId: {
-                //             equals: lecturerId as string
-
-                //         },
-                //     },
-                //     _avg: {
-                //         rating: true
-                //     },
-
-                // })
-
                 const lecturers = await prisma.lecturer.findMany({
                     orderBy: {
-                        name: 'asc'
-
+                        rating: 'desc'
                     },
                     include: {
                         teachCourses: true,
@@ -47,11 +32,13 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'POST':
             // Create a new lecturer
             try {
-                const { name, collegeId } = req.query
+                const { name, role, collegeId } = req.query
                 const lecturer = await prisma.lecturer.create({
                     data: {
                         id: `${name.toString().toLowerCase().replaceAll(' ', '-')}-${collegeId}-${Math.floor(Math.random() * 100)}` as string,
                         name: name as string,
+                        role: role as string
+                        ,
                         workInColleges: {
                             connect: { id: collegeId as string }
                         }
@@ -62,7 +49,8 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.json(lecturer)
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(500)
+                console.log(error)
             }
 
             break
@@ -71,27 +59,27 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'PUT':
             // Update a lecturer
             try {
-                const { id, name, courseId } = req.query
-                const updatedLecturer = await prisma.lecturer.update(
-                    {
-                        where: {
-                            id: id as string
+                const { id, name, courseId, rating } = req.query
+                const updatedLecturer = await prisma.lecturer.update({
+                    where: {
+                        id: id as string
+                    },
+                    data: {
+                        name: name as string,
+                        // workInColleges: {
+                        //     connect: { id: collegeId as string }
+                        // },
+                        teachCourses: {
+                            connect: { id: courseId as string }
                         },
-                        data: {
-                            name: name as string,
-                            // workInColleges: {
-                            //     connect: { id: collegeId as string }
-                            // },
-                            teachCourses: {
-                                connect: { id: courseId as string }
-                            }
-                        }
+                        rating: rating as undefined as number
                     }
-                )
+                })
                 res.status(200).json(updatedLecturer)
             }
             catch (error) {
-                res.status(500).json({ message: error })
+                res.status(500).json('error, check console log')
+                console.log(error)
             }
             break
 
