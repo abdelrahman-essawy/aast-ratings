@@ -21,9 +21,21 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         role: true,
                         rating: true,
                         amountOfReviews: true,
-                    },
+                        teachCourses: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
+                        workInColleges: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
+                    }, take: 3
                 })
-                res.status(200).json({ lecturers })
+                res.status(200).json(lecturers)
             }
             catch (error) {
                 res.status(500).json({ message: error })

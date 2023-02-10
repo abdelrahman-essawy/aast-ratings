@@ -6,22 +6,37 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
 
+
         case 'GET':
 
+            const { id } = req.query
             try {
-                const lecturers = await prisma.lecturer.findMany({
-                    orderBy: {
-                        rating: 'desc'
+                const lecturer = await prisma.lecturer.findUnique({
+                    where: {
+                        id: id as string
                     },
-                    include: {
-                        teachCourses: true,
-                        workInColleges: true,
-                        hasReviews: true
+                    select: {
+                        id: true,
+                        name: true,
+                        role: true,
+                        rating: true,
+                        amountOfReviews: true,
+                        teachCourses: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
+                        workInColleges: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
 
                     }
-
                 })
-                res.status(200).json(lecturers)
+                res.status(200).json(lecturer)
             }
             catch (error) {
                 res.status(500).json({ message: error })
