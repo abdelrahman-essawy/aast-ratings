@@ -4,7 +4,7 @@ import { CardTemplete } from './CardTemplete'
 import { DesktopSlider } from './DesktopSlider'
 import { MobileSlider } from './MobileSlider'
 
-const fetcher = async (endPoint = 'http://localhost:3000/api/lecturer/topRated') => await fetch(endPoint, {
+const fetcher = async (endPoint = 'https://aast-ratings.vercel.app//api/lecturer/topRated') => await fetch(endPoint, {
     next: {
         revalidate: 60
     }

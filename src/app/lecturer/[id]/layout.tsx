@@ -2,7 +2,7 @@ import Image from "next/image";
 import { use } from "react";
 
 
-const fetcher = (id: string) => fetch(`http://localhost:3000/api/lecturer/?id=${id}`).then((res) => res.json())
+const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
 
 export default function DashboardLayout({
     children, params,

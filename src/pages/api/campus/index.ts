@@ -69,7 +69,7 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
                 )
                 res.status(200).json(newCampus)
-                await res.revalidate('http://localhost:3000/api/getAll');
+                await res.revalidate('https://aast-ratings.vercel.app//api/getAll');
             }
             catch (error) {
                 res.status(502).json({ message: error })
