@@ -15,10 +15,10 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
   const { name, hasReviews, amountOfReviews, role, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses, createdAt } = lecturer ?? {}
   const now = new Date()
   return (
-    <div className="z-50 bg-base-200 flex flex-col h-full py-4">
+    <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2">
 
 
-      <section>
+      <section className="">
         <div className="flex justify-center items-center py-2">
           <div className="flex flex-col justify-center items-center">
             <div className="w-32 h-32 relative bg-[#191d24] rounded-full p-4 flex justify-center items-center">
@@ -70,7 +70,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       </section>
 
 
-      <section className="flex-1 bg-base-300 rounded-lg p-4">
+      <section className=" bg-base-300 rounded-lg sm:p-4 p-2 overflow-y-scroll max-h-80 flex-1">
         {
 
           hasReviews ? (
@@ -83,19 +83,20 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
                     <img src="https://cdn-icons-png.flaticon.com/512/1157/1157034.png" />
                   </div>
                 </div>
-                <div className="chat-header mx-4 space-x-16">
-                  <span>Student</span>
-                  <span className="text-xs opacity-50">{timeAgo.format(Date.parse(createdAt))}</span>
+                <div className="chat-header mx-2 mb-1">
+                  {/* <span>Student</span> */}
+                  <span className="text-xs opacity-50 ">{timeAgo.format(Date.parse(createdAt))}</span>
                 </div>
-                <div className="chat-bubble">
+                <div className="chat-bubble p-4">
                   <div className="grid grid-cols-2 gap-1">
                     <span className="text-xs opacity-50">Rating: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}</span></span>
                     <span className="text-xs opacity-50">Personality: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{personalSideRating}</span></span>
                     <span className="text-xs opacity-50">Scientifically: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{scientificSideRating}</span></span>
                     <span className="text-xs opacity-50">Recommended: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{recommendationRating}</span></span>
                   </div>
+                  <div className="divider !my-1" />
 
-                  <div className="mt-2">
+                  <div className="mt-2 ml-2">
 
                     {comment}
                   </div>
@@ -113,6 +114,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
           )
         }
       </section>
+      <button className="btn btn-block mt-2 bg-neutral-900">review</button>
 
     </div>
 
