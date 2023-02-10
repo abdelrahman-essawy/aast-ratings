@@ -4,46 +4,57 @@ import { CardTemplete } from './CardTemplete'
 import { DesktopSlider } from './DesktopSlider'
 import { MobileSlider } from './MobileSlider'
 
-const fetcher = async (endPoint = 'https://aast-ratings.vercel.app//api/lecturer/topRated') => await fetch(endPoint, {
-    next: {
-        revalidate: 60
-    }
-}).then(res => res.json())
+// const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer/topRated') => await fetch(endPoint, {
+//     next: {
+//         revalidate: 60
+//     }
+// }).then(res => res.json())
 
 
 export const Cards = () => {
-    // const lecturers = [
-    //     {
-    //         name: 'Eng. Salma Yasser',
-    //         courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
-    //         icon: '',
-    //         country: 'Egypt',
-    //         city: 'Cairo',
-    //         campus: 'Cairo',
-    //         ratings: 4,
-    //         reviews: 100
-    //     },
-    //     {
-    //         name: 'Dr. Karim Elsayed',
-    //         courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
-    //         icon: '',
-    //         country: 'Egypt',
-    //         ratings: 3,
-    //         reviews: 140
-    //     },
-    //     {
-    //         name: 'Eng. Ahmed Elsayed',
-    //         courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
-    //         icon: '',
-    //         country: 'Egypt',
-    //         ratings: 2,
-    //         reviews: 120
-    //     },
+    const lecturers = [
+        {
+            name: 'Eng. Salma Yasser',
+            courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
+            icon: '',
+            country: 'Egypt',
+            city: 'Cairo',
+            campus: 'Cairo',
+            ratings: 4,
+            reviews: 100,
+            workInCollege: [
+                id = 1,
+                name = 'sadas'
+            ]
+        },
+        {
+            name: 'Dr. Karim Elsayed',
+            courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
+            icon: '',
+            country: 'Egypt',
+            ratings: 3,
+            reviews: 140,
+            workInCollege: [
+                id = 1,
+                name = 'sadas'
+            ]
+        },
+        {
+            name: 'Eng. Ahmed Elsayed',
+            courses: ['Digital Logic', 'Calculas 2', 'Marketing', 'IS Theory'],
+            icon: '',
+            country: 'Egypt',
+            ratings: 2,
+            reviews: 120,
+            workInCollege: [
+                id = 1,
+                name = 'sadas'
+            ]
+        },
 
-    // ]
+    ]
 
-    const lecturers = use(fetcher())
-    console.log(lecturers)
+    // const lecturers = use(fetcher())
 
     return (
         <div className='h-fit py-12 pt-8'>

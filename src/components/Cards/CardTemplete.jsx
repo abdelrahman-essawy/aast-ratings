@@ -13,7 +13,7 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                         icon ?
                             <Image fill src={icon} alt="Shoes" />
                             :
-                            <div className='text-4xl'>{name.split(" ").map((n) => n[0])}</div>
+                            <div className='text-4xl'>{name?.split(" ").map((n) => n[0])}</div>
                     }
                 </figure>
                 <div className="card-body p-4 gap-2">
