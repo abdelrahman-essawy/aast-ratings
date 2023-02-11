@@ -35,7 +35,7 @@ const Page = () => {
 
                     <Section className='w-full'>
                         <MobileSlider
-                            autoplay={false}
+                            // autoplay={false}
                             initialSlide={[...lecturers].length / 2}
                             lecturers={lecturers}
                         />
