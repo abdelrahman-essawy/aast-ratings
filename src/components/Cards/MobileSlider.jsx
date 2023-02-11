@@ -8,7 +8,12 @@ import "swiper/css/effect-cards";
 import { EffectCards, Autoplay } from "swiper";
 import { CardTemplete } from './CardTemplete';
 
-export const MobileSlider = ({ lecturers }) => {
+export const MobileSlider = ({ lecturers, autoplay = {
+    disableOnInteraction: false,
+    delay: 3000,
+},
+    initialSlide = 1
+}) => {
 
     const sortHighestRatedInMiddle = (lecturers) => {
         lecturers.sort((a, b) => a.rating - b.rating)
@@ -21,19 +26,14 @@ export const MobileSlider = ({ lecturers }) => {
             className='overflow-visible pt-2 pb-12'
             effect={"cards"}
             modules={[EffectCards, Autoplay]}
-            autoplay={{
-                disableOnInteraction: false,
-                delay: 3000,
-                
-
-            }}
+            autoplay={autoplay}
             lazy={true}
             centeredSlides={true}
-            initialSlide={1}
+            initialSlide={initialSlide}
             rewind={true}>
             {
                 sortHighestRatedInMiddle(lecturers)
-                    .slice(0, 3)
+                    //.slice(0, 3)
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) =>
 
                         <SwiperSlide

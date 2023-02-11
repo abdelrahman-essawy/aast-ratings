@@ -17,11 +17,11 @@ export default function RootLayout({ children }) {
       <head />
 
 
-      <body className='flex flex-col justify-between items-center min-h-screen bg-base-200'>
+      <body className='flex flex-col justify-between items-center min-h-screen !bg-base-200'>
         {/* <RulesModal /> */}
         <Navbar />
 
-        <main className='flex-1 w-full'>
+        <main className='flex-1 w-full bg-base-200'>
           <Suspense fallback={<Loading />}>
             {children}
           </Suspense>

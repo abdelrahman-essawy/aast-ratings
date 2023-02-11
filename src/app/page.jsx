@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
-      <Hero/>
-      <div className='w-full m-auto py-auto bg-base-200'>
-        <Cards />
-      </div>
+      <Hero />
+
+      <h2 className='text-2xl font-bold text-center mb-8 sm:mb-14 pt-8'>Top Rated Lecturers</h2>
+      <Cards />
 
     </>
   )

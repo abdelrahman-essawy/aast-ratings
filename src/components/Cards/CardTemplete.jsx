@@ -7,8 +7,8 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
     return (
         <>
 
-            <div className={`card m-auto min-w-[250px] h-fit bg-base-100 border border-gray-700 shadow-xl sm:hover:shadow-2xl sm:hover:scale-105 transition ease-in-out duration-300 ${className}`}>
-                <figure className='w-full bg-base-300 h-fit p-12'>
+            <div className={`card m-auto min-w-[250px] min-h-fit h-full bg-base-100 border border-gray-700 shadow-xl sm:hover:shadow-2xl sm:hover:scale-105 transition ease-in-out duration-300 ${className}`}>
+                <figure className='w-full bg-base-300 p-12'>
                     {
                         icon ?
                             <Image fill src={icon} alt="Shoes" />

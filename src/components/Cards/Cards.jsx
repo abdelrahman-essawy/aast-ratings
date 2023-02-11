@@ -13,8 +13,7 @@ export const Cards = () => {
     const lecturers = use(fetcher())
 
     return (
-        <div className='h-fit pt-8'>
-            <h2 className='text-2xl font-bold text-center mb-8 sm:mb-14'>Top Rated Lecturers</h2>
+        <div>
 
             <div className='hidden sm:block'>
                 <DesktopSlider lecturers={lecturers} />
