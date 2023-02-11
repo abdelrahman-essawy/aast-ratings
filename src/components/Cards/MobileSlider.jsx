@@ -22,8 +22,10 @@ export const MobileSlider = ({ lecturers }) => {
             effect={"cards"}
             modules={[EffectCards, Autoplay]}
             autoplay={{
-                delay: 2500,
                 disableOnInteraction: false,
+                delay: 3000,
+                
+
             }}
             lazy={true}
             centeredSlides={true}
