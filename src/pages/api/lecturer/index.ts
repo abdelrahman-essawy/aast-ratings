@@ -10,6 +10,38 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
 
             const { id } = req.query
+
+            if (!id) {
+                try {
+                    const lecturers = await prisma.lecturer.findMany({
+                        include: {
+                            workInCampus: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                }
+                            },
+                            workInColleges: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                }
+                            },
+                            teachCourses: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                }
+                            },
+                        }
+                    })
+                    res.status(200).json(lecturers)
+                }
+                catch (error) {
+                    res.status(500).json({ message: error })
+                }
+                return
+            }
             try {
                 const lecturer = await prisma.lecturer.findUnique({
                     where: {
