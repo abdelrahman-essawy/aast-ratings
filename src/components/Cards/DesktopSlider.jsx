@@ -14,20 +14,6 @@ import ReviewModal from '../Modal/reviewModal';
 
 export const DesktopSlider = ({ lecturers }) => {
 
-    // {
-    //     id: 'salma-yasser-computer-science-alexandria-85',
-    //         name: 'Salma Yasser',
-    //             rating: 0,
-    //                 personalSideRating: 0,
-    //                     scientificSideRating: 0,
-    //                         recommendationRating: 0,
-    //                             createdAt: '2023-02-10T08:50:47.151Z',
-    //                                 updatedAt: '2023-02-10T08:50:47.151Z',
-    //                                     teachCourses: [],
-    //                                         workInColleges: [[Object]],
-    //                                             hasReviews: []
-    // }
-
     return (
 
         <div className='grid grid-cols-3 gap-16 justify-center items-center m-auto max-w-screen-lg'

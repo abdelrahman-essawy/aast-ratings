@@ -9,9 +9,16 @@ import { EffectCards, Autoplay } from "swiper";
 import { CardTemplete } from './CardTemplete';
 
 export const MobileSlider = ({ lecturers }) => {
+
+    const sortHighestRatedInMiddle = (lecturers) => {
+        lecturers.sort((a, b) => a.rating - b.rating)
+        const left = lecturers.slice(0, lecturers.length / 2)
+        const right = lecturers.slice(lecturers.length / 2, lecturers.length).reverse()
+        return left.concat(right)
+    }
     return (
         <Swiper
-            className='overflow-visible px-14 pt-2 pb-12'
+            className='overflow-visible pt-2 pb-12'
             effect={"cards"}
             modules={[EffectCards, Autoplay]}
             autoplay={{
@@ -20,16 +27,15 @@ export const MobileSlider = ({ lecturers }) => {
             }}
             lazy={true}
             centeredSlides={true}
-            rewind={true}
-        >
+            initialSlide={1}
+            rewind={true}>
             {
-                lecturers
-                    .sort((a, b) => b.ratings - a.ratings)
+                sortHighestRatedInMiddle(lecturers)
                     .slice(0, 3)
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) =>
 
                         <SwiperSlide
-                            key={index} className=''>
+                            key={index} className='px-14'>
                             <CardTemplete
                                 key={id}
                                 id={id}
