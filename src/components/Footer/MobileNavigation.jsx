@@ -42,10 +42,11 @@ const MobileNavigation = ({ }) => {
 
     return (
         <footer className="btm-nav border-t border-t-gray-600 sm:hidden w-screen">
-            {navigation.map(({ name, href, icon }, index) => <Link key={index} href={href} className='active:bg-gray-600 transition ease-in-out'>
-                {icon()}
-                <span className="btm-nav-label text-sm">{name}</span>
-            </Link>)
+            {navigation.map(({ name, href, icon }, index) =>
+                <Link key={index} href={href} className='active:bg-gray-600 transition ease-in-out'>
+                    {icon()}
+                    <span className="btm-nav-label text-sm">{name}</span>
+                </Link>)
             }
         </footer>
     )

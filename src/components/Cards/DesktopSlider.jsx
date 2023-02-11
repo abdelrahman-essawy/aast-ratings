@@ -37,19 +37,18 @@ export const DesktopSlider = ({ lecturers }) => {
                     .slice(0, 3)
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) => {
 
-                        return <>
-                            <CardTemplete
-                                key={id}
-                                id={id}
-                                name={name}
-                                rating={rating}
-                                role={role}
-                                workInColleges={workInColleges}
-                                teachCourses={teachCourses}
-                                amountOfReviews={amountOfReviews}
-                                icon={icon}
-                                className={`${index === 0 ? 'scale-110 sm:hover:scale-[115%]' : ''} ${index === 1 ? 'order-first' : 'order-last'}`} />
-                        </>
+                        return <CardTemplete
+                            key={id}
+                            id={id}
+                            name={name}
+                            rating={rating}
+                            role={role}
+                            workInColleges={workInColleges}
+                            teachCourses={teachCourses}
+                            amountOfReviews={amountOfReviews}
+                            icon={icon}
+                            className={`${index === 0 ? 'scale-110 sm:hover:scale-[115%]' : ''} ${index === 1 ? 'order-first' : 'order-last'}`} />
+
 
 
                     })

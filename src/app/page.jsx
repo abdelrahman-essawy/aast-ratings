@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Hero/>
-      <div className='w-full m-auto py-auto'>
+      <div className='w-full m-auto py-auto bg-base-200'>
         <Cards />
       </div>
 
