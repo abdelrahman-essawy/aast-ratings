@@ -26,12 +26,13 @@ import { Stepper } from './Stepper'
 //     return handleApiRequest(url)
 // }
 
-export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId }: {
+export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId, setIsAllEntered }: {
     name: string,
     data: [{ name: String, id: String }],
     setCampusId: React.Dispatch<any>,
     setCollegeId: React.Dispatch<any>,
-    setCourseId: React.Dispatch<any>
+    setCourseId: React.Dispatch<any>,
+    setIsAllEntered: React.Dispatch<any>
 
 }) => {
 
@@ -83,6 +84,7 @@ export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId }: {
                                     break;
                                 case 'Course':
                                     setCourseId(value)
+                                    setIsAllEntered(true)
                                     break;
                                 default:
                                     break;
@@ -90,26 +92,29 @@ export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId }: {
                             // options[index + 1].show = true
                         }
                     }>
-                        <SelectTrigger className='h-12'>
-                            <SelectValue placeholder={name} />
-                        </SelectTrigger>
-                        <SelectContent className='bg-base-200 w-full'>
+                        <div className={`${data === undefined && 'cursor-not-allowed'}`}>
+                            <SelectTrigger className={`h-12 transition-all duration-300 ease-in-out ${data === undefined && ' bg-gray-700 pointer-events-none'}`}>
+                                <SelectValue placeholder={name} />
+                            </SelectTrigger>
+                            <SelectContent className='bg-base-200 w-full'>
 
-                            {
-                                data?.map(({ name, id }: { name: String, id: String }, index) => {
-                                    return (
-                                        <SelectItem value={id as string} key={index} className='py-2'>{name}</SelectItem>
-                                    )
-                                })
+                                {
+                                    data?.map(({ name, id }: { name: String, id: String }, index) => {
+                                        return (
+                                            <SelectItem value={id as string} key={index} className='py-2'>{name}</SelectItem>
+                                        )
+                                    })
 
-                            }
-                        </SelectContent>
+                                }
+                            </SelectContent>
+                        </div>
+
 
                     </Select>
                 </h1>
             </div>
 
 
-        </div>
+        </div >
     )
 }

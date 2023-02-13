@@ -42,6 +42,7 @@ const Start = ({ data }) => {
 
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isClicked, setIsClicked] = useState(false)
+    const [isAllEntered, setIsAllEntered] = useState(false)
     const filteredData = data.filter((item) =>
         item.name.toLowerCase().includes(searchKeyword.toLowerCase())
     );
@@ -76,11 +77,14 @@ const Start = ({ data }) => {
                     <div className='grid md:grid-cols-3 md:justify-between gap-5'>
                         <Choose name={'Campus'} data={campuses} setCampusId={setCampusId} />
                         <Choose name={'College'} data={colleges} setCollegeId={setCollegeId} />
-                        <Choose name={'Course'} data={courses} setCourseId={setCourseId} />
+                        <Choose name={'Course'} data={courses} setCourseId={setCourseId} setIsAllEntered={setIsAllEntered} />
                     </div>
                     <Stepper className='col-span-3 w-full' campusName={campusName} collegeName={collegeName} courseName={courseName} />
                     {/* <Stepper campusName={campusName} collegeName={collegeName} courseName={courseName} /> */}
-                    <button onClick={handleClick} className="btn btn-block col-span-3">Next</button>
+                    <div className={`${!isAllEntered && 'cursor-not-allowed'}`}>
+                        <button onClick={handleClick} className={`btn btn-block col-span-3 ${!isAllEntered && 'pointer-events-none'}`}>Next</button>
+                    </div>
+
 
                 </div>
 
