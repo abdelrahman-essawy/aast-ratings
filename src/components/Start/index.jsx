@@ -50,26 +50,28 @@ const Start = ({ data }) => {
         setIsClicked(true)
     }
     return (
-        <section className='flex flex-col max-w-screen-md m-auto md:mt-8 md:gap-8'>
+        <section className='flex flex-col max-w-screen-md m-auto md:mt-8 md:gap-8 py-4 md:py-0'>
 
             {/* hero */}
 
-            <div className='md:flex md:flex-row items-stretch justify-between gap-6 p-16 w-full m-auto px-4 md:p-0 bg-base-200 pb-0'>
+            <div className='md:flex md:flex-row items-stretch justify-between gap-6 p-16 w-full m-auto px-4 md:p-0 bg-base-200 pb-0 pt-4'>
                 <div className='relative md:flex-1 rounded-3xl overflow-hidden md:p-20'>
 
-                    <Image style={{
-                        objectFit: 'contain',
-                    }} fill src="/start.webp" className='hidden md:block' />
+                    <Image
+                        alt='start page logo'
+                        style={{
+                            objectFit: 'contain',
+                        }} fill src="/start.webp" className='hidden md:block' />
                 </div>
 
                 <div className='max-w-lg flex-1 md:self-baseline px-4'>
-                    <h1 className="text-5xl font-bold ">Your Education, Your <span className='bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent'>Journey.</span></h1>
-                    <p className="mt-6">See the Available Lecturers and Leave Your Honest Feedback. Make a Difference in the Education Community Today!</p>
+                    <h1 className="md:text-5xl text-4xl font-bold ">Your<br></br>Education,<br></br>Your <span className='bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent'>Journey.</span></h1>
+                    <p className="mt-6">Leave a Feedback. Make a Difference!</p>
                 </div>
             </div>
 
 
-            <div className='flex flex-col items-center justify-center gap-4 pt-8 max-w-screen-lg w-full m-auto px-6 md:p-0 bg-base-200 mt-8'>
+            <div className='flex flex-col items-center justify-center gap-4 pt-8 max-w-screen-lg w-full m-auto px-6 md:p-0 bg-base-200 md:mt-8'>
                 <div className='w-full gap-5 flex flex-col'>
                     <div className='grid md:grid-cols-3 md:justify-between gap-5'>
                         <Choose name={'Campus'} data={campuses} setCampusId={setCampusId} />
@@ -82,7 +84,6 @@ const Start = ({ data }) => {
 
                 </div>
 
-                <progress className={`progress w-full ${isClicked ? `block` : `hidden`}`}></progress>
             </div>
         </section>
 
