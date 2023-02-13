@@ -12,7 +12,8 @@ export const MobileSlider = ({ lecturers, autoplay = {
     disableOnInteraction: false,
     delay: 3000,
 },
-    initialSlide = 1
+    initialSlide = 1,
+    className
 }) => {
 
     const sortHighestRatedInMiddle = (lecturers) => {
@@ -23,7 +24,7 @@ export const MobileSlider = ({ lecturers, autoplay = {
     }
     return (
         <Swiper
-            className='overflow-visible pt-2 pb-12'
+            className={`overflow-visible pt-2 pb-12 ${className}`}
             effect={"cards"}
             modules={[EffectCards, Autoplay]}
             autoplay={autoplay}
@@ -39,6 +40,7 @@ export const MobileSlider = ({ lecturers, autoplay = {
                         <SwiperSlide
                             key={index} className='px-14'>
                             <CardTemplete
+                                index={index}
                                 key={id}
                                 id={id}
                                 name={name}

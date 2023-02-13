@@ -6,19 +6,12 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
 
+
         case 'GET':
             // Get all campuses
             try {
                 const campuses = await prisma.campus.findMany({
-                    include: {
 
-                        hasColleges: {
-                            select: { name: true }
-                        },
-                        hasReviews: {
-                            select: { rating: true, campusesReviews: true, }
-                        }
-                    },
                     orderBy: {
                         name: 'asc'
                     }
@@ -101,9 +94,8 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 const { id, root } = req.query;
 
                 if (root === 'toor') {
-                    await prisma.campus.deleteMany({
-                        where: { id: { not: 'toor' } }
-                    });
+                    await prisma.campus.deleteMany();
+
                     res.json({ message: 'All campuses deleted' });
                 }
 
@@ -112,7 +104,8 @@ const campusesApi = async (req: NextApiRequest, res: NextApiResponse) => {
                 });
                 res.status(200).json({ message: 'campus deleted' });
             } catch (error) {
-                res.status(504).json({ message: error });
+                res.status(504).json({ message: 'check console log' });
+                console.log(error)
             }
             break;
 
