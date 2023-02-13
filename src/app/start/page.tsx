@@ -7,7 +7,7 @@ import { MobileSlider } from '../../components/Cards/MobileSlider';
 import Start from '../../components/Start';
 import { Choose } from '../../components/Start/Choose';
 
-const fetcher = () => fetch(`https://aast-ratings.vercel.app/api/getAll`).then((res) => res.json())
+const fetcher = () => fetch(`https://aast-ratings.vercel.app/api/getAll`, { next: { revalidate: 60 } }).then((res) => res.json())
 
 const Page = () => {
 
