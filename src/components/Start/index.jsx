@@ -59,6 +59,7 @@ const Start = ({ data }) => {
                 <div className='relative md:flex-1 rounded-3xl overflow-hidden md:p-20'>
 
                     <Image
+                        quality={1}
                         alt='start page logo'
                         style={{
                             objectFit: 'contain',

@@ -70,9 +70,9 @@ export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId, set
         <div className='w-full'>
 
 
-            <div>
+            <div className={`${data === undefined && 'brightness-75 contrast-75'}`}>
                 {/* <h2 className='mb-4'>Choose {name}</h2> */}
-                <h1 className='text-3xl font-bold text-gray-200'>
+                <h1 className='text-3xl font-bold'>
                     <Select onValueChange={
                         (value) => {
                             switch (name) {
@@ -93,10 +93,10 @@ export const Choose = ({ name, data, setCampusId, setCollegeId, setCourseId, set
                         }
                     }>
                         <div className={`${data === undefined && 'cursor-not-allowed'}`}>
-                            <SelectTrigger className={`h-12 transition-all duration-300 ease-in-out ${data === undefined && ' bg-gray-700 pointer-events-none'}`}>
+                            <SelectTrigger className={`h-12 transition-all duration-300 ease-in-out ${data === undefined && ' bg-base-100 pointer-events-none'}`}>
                                 <SelectValue placeholder={name} />
                             </SelectTrigger>
-                            <SelectContent className='bg-base-200 w-full'>
+                            <SelectContent className='bg-base-300 w-full'>
 
                                 {
                                     data?.map(({ name, id }: { name: String, id: String }, index) => {
