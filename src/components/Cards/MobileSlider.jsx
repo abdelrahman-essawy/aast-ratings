@@ -38,7 +38,7 @@ export const MobileSlider = ({ lecturers, autoplay = {
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) =>
 
                         <SwiperSlide
-                            key={index} className='px-14'>
+                            key={index} className='px-12'>
                             <CardTemplete
                                 index={index}
                                 key={id}
