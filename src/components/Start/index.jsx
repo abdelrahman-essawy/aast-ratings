@@ -17,6 +17,7 @@ import { Choose } from './Choose';
 import { Stepper } from './Stepper';
 import Image from 'next/image';
 import { AASTLogo } from '../../SVG/AASTLogo';
+import Link from 'next/link';
 
 const Start = ({ data }) => {
 
@@ -53,9 +54,7 @@ const Start = ({ data }) => {
     }
     return (
         <section className='flex flex-col max-w-screen-md m-auto md:mt-8 md:gap-8 py-4 md:py-0'>
-
             {/* hero */}
-
             <div className='md:flex md:flex-row items-stretch justify-center gap-6 p-16 w-full m-auto px-4 md:p-0 bg-base-200 pb-0 pt-4'>
                 <div className='relative overflow-hidden'>
                     {/* 
@@ -67,7 +66,7 @@ const Start = ({ data }) => {
                         }} fill src="/start.webp" className='hidden md:block' /> */}
                     <div className='hidden md:block fill-red-900'>
 
-                        <AASTLogo width={260} className='fill-zinc-300'/>
+                        <AASTLogo width={260} className='fill-zinc-300' />
                     </div>
                 </div>
 
@@ -88,7 +87,8 @@ const Start = ({ data }) => {
                     <Stepper className='col-span-3 w-full' campusName={campusName} collegeName={collegeName} courseName={courseName} />
                     {/* <Stepper campusName={campusName} collegeName={collegeName} courseName={courseName} /> */}
                     <div className={`${!isAllEntered && 'cursor-not-allowed'}`}>
-                        <button onClick={handleClick} className={`btn btn-block col-span-3 ${!isAllEntered && 'pointer-events-none'}`}>Next</button>
+                        <Link href={`/show?courseId=${courseId}`} onClick={handleClick} className={`btn btn-block col-span-3 ${!isAllEntered && 'pointer-events-none'}`}>Next</Link>
+                        {/* collegeId=${campusId}&collegeId=${collegeId}& */}
                     </div>
 
 
