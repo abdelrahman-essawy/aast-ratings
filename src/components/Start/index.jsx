@@ -16,6 +16,7 @@ import {
 import { Choose } from './Choose';
 import { Stepper } from './Stepper';
 import Image from 'next/image';
+import { AASTLogo } from '../../SVG/AASTLogo';
 
 const Start = ({ data }) => {
 
@@ -55,18 +56,22 @@ const Start = ({ data }) => {
 
             {/* hero */}
 
-            <div className='md:flex md:flex-row items-stretch justify-between gap-6 p-16 w-full m-auto px-4 md:p-0 bg-base-200 pb-0 pt-4'>
-                <div className='relative md:flex-1 rounded-3xl overflow-hidden md:p-20'>
-
+            <div className='md:flex md:flex-row items-stretch justify-center gap-6 p-16 w-full m-auto px-4 md:p-0 bg-base-200 pb-0 pt-4'>
+                <div className='relative overflow-hidden'>
+                    {/* 
                     <Image
                         quality={1}
                         alt='start page logo'
                         style={{
                             objectFit: 'contain',
-                        }} fill src="/start.webp" className='hidden md:block' />
+                        }} fill src="/start.webp" className='hidden md:block' /> */}
+                    <div className='hidden md:block fill-red-900'>
+
+                        <AASTLogo width={260} className='fill-zinc-300'/>
+                    </div>
                 </div>
 
-                <div className='max-w-lg flex-1 md:self-baseline px-4'>
+                <div className='max-w-lg md:self-center px-4'>
                     <h1 className="md:text-5xl text-4xl font-bold ">Your<br></br>Education,<br></br>Your <span className='bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent'>Journey.</span></h1>
                     <p className="mt-6">Leave a Feedback. Make a Difference!</p>
                 </div>
