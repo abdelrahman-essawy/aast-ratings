@@ -18,7 +18,7 @@ export default function DashboardLayout({
             case 'Computer Science':
                 return <Image
                     quality={10}
-                    className="absolute top-0 left-0 w-full h-full object-cover blur-3xl brightness-75"
+                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
 
             case 'Chalmers':
@@ -26,7 +26,7 @@ export default function DashboardLayout({
 
             default:
                 return <Image
-                    className="absolute top-0 left-0 w-full h-full object-cover blur-3xl brightness-75"
+                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
         }
     }
