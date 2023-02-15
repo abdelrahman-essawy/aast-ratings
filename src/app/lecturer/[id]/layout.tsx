@@ -17,7 +17,8 @@ export default function DashboardLayout({
         switch (workInCampus?.name) {
             case 'Computer Science':
                 return <Image
-                    className="absolute top-0 left-0 w-full h-full object-cover blur bg-base-100 brightness-75"
+                    quality={10}
+                    className="absolute top-0 left-0 w-full h-full object-cover blur-3xl brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
 
             case 'Chalmers':
@@ -25,7 +26,7 @@ export default function DashboardLayout({
 
             default:
                 return <Image
-                    className="absolute top-0 left-0 w-full h-full object-cover blur bg-base-100 brightness-75"
+                    className="absolute top-0 left-0 w-full h-full object-cover blur-3xl brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
         }
     }
@@ -33,7 +34,7 @@ export default function DashboardLayout({
     return (
         <div className="h-full flex flex-col">
 
-            <div className="relative sm:h-24 h-16 overflow-y-hidden flex justify-center items-center ">
+            <div className="relative sm:h-24 h-16 overflow-y-hidden flex justify-center items-center bg-base-300 overflow-hidden">
                 <div className="flex justify-between inset-y-1/2 -translate-y-1/2 h-fit absolute z-10 w-full items-center text-center max-w-screen-lg px-4">
                     {
                         workInColleges &&
@@ -52,6 +53,7 @@ export default function DashboardLayout({
                 </div>
 
                 {UpperImagePicker()}
+
 
 
 
