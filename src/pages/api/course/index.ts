@@ -6,6 +6,20 @@ const coursesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
         case 'GET':
             try {
+                if (req.query.id) {
+                    const course = await prisma.course.findUnique({
+                        where: {
+                            id: req.query.id as string
+                        },
+                        include: {
+                            taughtByLecturers: true,
+                            availableInColleges: true,
+                            hasReviews: true,
+                        }
+                    })
+                    res.status(200).json(course)
+                    return
+                }
                 const courses = await prisma.course.findMany({
                     // orderBy: {
                     //     name: 'asc'
