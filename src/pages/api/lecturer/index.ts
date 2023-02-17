@@ -31,13 +31,9 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 select: {
                                     id: true,
                                     name: true,
-                                    hasReviews: {
-                                        select: {
-                                            rating: true,
-                                        },
-                                    },
-                                }
-                            },
+                                    rating: true,
+                                },
+                            }
                         }
                     })
                     res.status(200).json(lecturers)
@@ -58,6 +54,7 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             select: {
                                 id: true,
                                 name: true,
+                                rating: true,
                             },
                         },
                         workInColleges: {
