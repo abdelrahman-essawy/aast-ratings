@@ -29,30 +29,54 @@ export const Ratings = ({ hasReviews, amountOfReviews = hasReviews.length, ratin
 
                     {
                         [...Array(5)].map((_, i) => (
-
-                            <div
-                                key={i}
-                                className="flex items-center justify-center space-x-4">
-
-                                <span
-                                    className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
-                                    {5 - i} star
-                                </span>
+                            hasReviews?.length === 0 ?
                                 <div
-                                    className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
+                                    key={i}
+                                    className="flex items-center justify-center space-x-4">
 
+                                    <span
+                                        className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
+                                        {5 - i} star
+                                    </span>
                                     <div
-                                        className="h-5 bg-purple-700 rounded"
-                                        style={{ width: `${hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100}%` }} />
+                                        className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
+
+                                        <div
+                                            className="h-5 bg-purple-700 rounded"
+                                            style={{ width: `0%` }} />
+
+                                    </div>
+
+                                    <span
+                                        className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
+                                        0%
+                                    </span>
 
                                 </div>
+                                :
+                                <div
+                                    key={i}
+                                    className="flex items-center justify-center space-x-4">
 
-                                <span
-                                    className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
-                                    {Math.round(hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100)}%
-                                </span>
+                                    <span
+                                        className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
+                                        {5 - i} star
+                                    </span>
+                                    <div
+                                        className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
 
-                            </div>
+                                        <div
+                                            className="h-5 bg-purple-700 rounded"
+                                            style={{ width: `${hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100}%` }} />
+
+                                    </div>
+
+                                    <span
+                                        className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
+                                        {Math.round(hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100)}%
+                                    </span>
+
+                                </div>
                         ))
 
                     }
