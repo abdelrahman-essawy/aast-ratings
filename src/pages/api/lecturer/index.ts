@@ -31,6 +31,7 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 select: {
                                     id: true,
                                     name: true,
+                                    rating: true,
                                 }
                             },
                         }
