@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Ratings = ({ hasReviews, amountOfReviews = hasReviews.length, rating }: { hasReviews: any, amountOfReviews?: number, rating: number }) => {
+export const Ratings = ({ hasReviews, amountOfReviews = hasReviews?.length, rating }: { hasReviews: any, amountOfReviews?: number, rating: number }) => {
     return (
         <div className="bg-base-300 rounded-lg p-4">
             <h2 className="card-title mb-3">Ratings</h2>
@@ -67,13 +67,13 @@ export const Ratings = ({ hasReviews, amountOfReviews = hasReviews.length, ratin
 
                                         <div
                                             className="h-5 bg-purple-700 rounded"
-                                            style={{ width: `${hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100}%` }} />
+                                            style={{ width: `${hasReviews?.filter((review: any) => review.rating === 5 - i)?.length / hasReviews?.length * 100}%` }} />
 
                                     </div>
 
                                     <span
                                         className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
-                                        {Math.round(hasReviews?.filter((review: any) => review.rating === 5 - i).length / hasReviews.length * 100)}%
+                                        {Math.round(hasReviews?.filter((review: any) => review.rating === 5 - i)?.length / hasReviews?.length * 100)}%
                                     </span>
 
                                 </div>

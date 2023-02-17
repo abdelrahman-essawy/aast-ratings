@@ -43,7 +43,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
                 <div className="bg-base-300 rounded-lg p-4 hidden">
 
                     <div className="grid grid-cols-2 gap-1">
-                        <span className="text-md opacity-50">Reviews: <span className={`text-md opacity-100 ${hasReviews.length == 3 ? 'text-yellow-400' : hasReviews.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{hasReviews.length}</span></span>
+                        <span className="text-md opacity-50">Reviews: <span className={`text-md opacity-100 ${hasReviews?.length == 3 ? 'text-yellow-400' : hasReviews?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{hasReviews?.length}</span></span>
                         <span className="text-md opacity-50">Courses: <span className={`text-md opacity-100 ${taughtByLecturers?.length == 3 ? 'text-yellow-400' : taughtByLecturers?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{taughtByLecturers?.length}</span></span>
                     </div>
 

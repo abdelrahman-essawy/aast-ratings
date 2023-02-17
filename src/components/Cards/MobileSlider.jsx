@@ -18,8 +18,8 @@ export const MobileSlider = ({ lecturers, autoplay = {
 
     const sortHighestRatedInMiddle = (lecturers) => {
         lecturers.sort((a, b) => a.rating - b.rating)
-        const left = lecturers.slice(0, lecturers.length / 2)
-        const right = lecturers.slice(lecturers.length / 2, lecturers.length).reverse()
+        const left = lecturers.slice(0, lecturers?.length / 2)
+        const right = lecturers.slice(lecturers?.length / 2, lecturers?.length).reverse()
         return left.concat(right)
     }
     return (
