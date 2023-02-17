@@ -10,8 +10,10 @@ export default function Home() {
     <>
       <Hero />
 
-      <h2 className='text-2xl font-bold text-center mb-8 sm:mb-14 pt-8'>Top Rated Lecturers</h2>
-      <Cards />
+      <section className='pt-8 md:pb-16'>
+        <h2 className='text-2xl font-bold text-center mb-8 sm:mb-14'>Top Rated Lecturers</h2>
+        <Cards />
+      </section>
 
     </>
   )
