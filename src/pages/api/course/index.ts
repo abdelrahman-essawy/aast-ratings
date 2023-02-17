@@ -12,10 +12,19 @@ const coursesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             id: req.query.id as string
                         },
                         include: {
-                            taughtByLecturers: true,
                             availableInColleges: true,
                             hasReviews: true,
-                        }
+                            _count: {
+                                select: {
+                                    hasReviews: true
+                                },
+                            },
+                            taughtByLecturers: {
+                                orderBy: {
+                                    rating: 'desc'
+                                },
+                            }
+                        },
                     })
                     res.status(200).json(course)
                     return
@@ -28,6 +37,11 @@ const coursesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         taughtByLecturers: true,
                         availableInColleges: true,
                         hasReviews: true,
+                        _count: {
+                            select: {
+                                hasReviews: true
+                            },
+                        }
                     }
                 })
                 res.status(200).json(courses)
