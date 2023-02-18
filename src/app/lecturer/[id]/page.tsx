@@ -6,6 +6,9 @@ import { Ratings } from "../../../components/Lecturer/Ratings"
 import { Courses } from "../../../components/Lecturer/Courses"
 import { Contacts } from "../../../components/Lecturer/Contacts"
 import { Achievements } from "../../../components/Lecturer/Achievements"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs"
+import { MobileRatings } from "../../../components/Shared/Mobile/Ratings"
+import { MobileCourses } from "../../../components/Shared/Mobile/MobileCourses"
 
 
 
@@ -73,32 +76,51 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
       {/* Mobile */}
 
-      <section className="gap-3 grid grid-cols-3 md:hidden">
-        <div className="bg-base-300 rounded-lg p-2">
-          <h2 className="card-title mb-3 text-sm">Rating</h2>
-          <p className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500"><span className="text-4xl">{rating} </span>/5</p>
+
+
+
+      <Tabs defaultValue="Ratings" className="block md:hidden">
+
+        <TabsContent value="Contacts" className="p-0 border-none h-20 mt-auto">
+          <Contacts contacts={contacts} />
+        </TabsContent>
+
+        <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
+          <MobileRatings rating={rating} achievements={achievements} amountOfReviews={amountOfReviews} />
+        </TabsContent>
+
+        <TabsContent value="Courses" className="p-0 border-none h-20 mt-auto">
+          <MobileCourses role={role} teachCourses={teachCourses} />
+        </TabsContent>
+
+        <div className="flex justify-center items-center">
+          <TabsList className="mt-4">
+            <TabsTrigger value="Contacts">Contacts</TabsTrigger>
+            <TabsTrigger value="Ratings">Ratings</TabsTrigger>
+            <TabsTrigger value="Courses">Courses</TabsTrigger>
+          </TabsList>
         </div>
-        <div className="bg-base-300 rounded-lg">
-          asd
-        </div>
-        <div className="bg-base-300 rounded-lg">
-          asd
-        </div>
-      </section>
+
+      </Tabs>
 
       <section className="gap-3 grid-cols-3 hidden md:grid">
 
-        <div className="grid grid-rows-2 gap-3">
+        <div className="flex flex-col  items-start gap-3">
 
-          <Contacts contacts={contacts} />
+          <div className="w-full">
 
-          <Achievements achievements={achievements} />
+            <Contacts contacts={contacts} />
+          </div>
+
+          <div className="flex-1 w-full">
+
+            <Achievements achievements={achievements} />
+          </div>
+
 
         </div>
 
-
         <Ratings rating={rating} hasReviews={hasReviews} amountOfReviews={amountOfReviews} />
-
         <Courses teachCourses={teachCourses} />
 
       </section>

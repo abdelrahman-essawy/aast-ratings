@@ -26,8 +26,8 @@ export const Contacts = ({ contacts }: { contacts: any }) => {
 
 
     return (
-        <div className="bg-base-300 rounded-lg p-4">
-            <h2 className="card-title mb-3">Contacts</h2>
+        <div className="bg-base-300 rounded-lg p-3 md:p-4 h-full">
+            <h2 className="card-title md:mb-3 mb-1 text-xs md:text-xl">Contacts</h2>
 
             {
                 contacts?.length > 0 ?
@@ -45,12 +45,12 @@ export const Contacts = ({ contacts }: { contacts: any }) => {
                     </div>
                     :
                     <div>
-                        <span className='opacity-50'>
+                        <span className='opacity-50 text-sm md:text-base'>
                             No contacts,
                         </span>
                         <Link href="/" className="text-base-content ml-1 underline
                         opacity-50 
-                        hover:opacity-100 transition-all ease-in-out duration-150
+                        hover:opacity-100 transition-all ease-in-out duration-150 text-sm md:text-base
                         ">
                             add some?
                         </Link>
