@@ -50,14 +50,15 @@ model CollegeCampus {
 }
 
 model Lecturer {
-  id                   String @id @unique
+  id                   String        @id @unique
   name                 String
-  rating               Float  @default(0)
-  personalSideRating   Int    @default(0)
-  scientificSideRating Int    @default(0)
-  recommendationRating Int    @default(0)
+  rating               Float         @default(0)
+  personalSideRating   Int           @default(0)
+  scientificSideRating Int           @default(0)
+  recommendationRating Int           @default(0)
   role                 String
-  amountOfReviews      Int    @default(0)
+  amountOfReviews      Int           @default(0)
+  achievements         Achievement[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -67,7 +68,6 @@ model Lecturer {
   teachCourses   Course[]
   hasReviews     Review[]
   campusId       String?
-
 }
 
 model Course {
@@ -82,11 +82,11 @@ model Course {
 }
 
 model Review {
-  id                   String   @id @unique @default(cuid())
-  rating               Float    @default(0)
-  personalSideRating   Int?     @default(0)
-  scientificSideRating Int?     @default(0)
-  recommendationRating Int?     @default(0)
+  id                   String    @id @unique @default(cuid())
+  rating               Float     @default(0)
+  personalSideRating   Int?      @default(0)
+  scientificSideRating Int?      @default(0)
+  recommendationRating Int?      @default(0)
   comment              String?
   createdAt            DateTime? @default(now())
   updatedAt            DateTime? @updatedAt
@@ -99,4 +99,15 @@ model Review {
   collegeId        String?
   lecturerId       String?
   courseId         String?
+}
+
+model Achievement {
+  id          String    @id @unique @default(cuid())
+  name        String
+  code        Int
+  description String?
+  gotAt       DateTime  @default(now())
+  lostAt      DateTime?
+  Lecturer    Lecturer? @relation(fields: [lecturerId], references: [id])
+  lecturerId  String?
 }

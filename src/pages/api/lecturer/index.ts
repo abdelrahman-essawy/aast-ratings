@@ -82,7 +82,14 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             orderBy: {
                                 createdAt: 'desc'
                             },
-                        }
+                        },
+                        achievements: {
+                            orderBy: {
+                                gotAt: 'desc'
+                            }
+
+                        },
+
                     }
                 })
                 res.status(200).json(lecturer)

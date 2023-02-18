@@ -20,6 +20,7 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         name: true,
                         role: true,
                         rating: true,
+                        achievements: true,
                         amountOfReviews: true,
                         teachCourses: {
                             select: {
@@ -33,8 +34,24 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 name: true,
                             },
                         },
+
                     }, take: 3
                 })
+                lecturers.map(
+                    async ({ id }, i) => {
+                        await prisma.achievement.create({
+
+                            data: {
+                                name: 'Top rated lecturer',
+                                lecturerId: id,
+                                code: i + 1,
+                                description: `This lecturer is in top 3 of the best lecturers in AAST.`
+                            }
+                        }
+                        )
+                    }
+                )
+
                 res.status(200).json(lecturers)
             }
             catch (error) {
