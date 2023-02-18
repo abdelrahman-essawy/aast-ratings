@@ -68,7 +68,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
                 </TabsContent> */}
 
                 <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
-                    <MobileRatings rating={rating} achievements={achievements ?? []} amountOfReviews={hasReviews.length} />
+                    <MobileRatings rating={rating} achievements={achievements ?? []} amountOfReviews={hasReviews?.length} />
                 </TabsContent>
 
 
