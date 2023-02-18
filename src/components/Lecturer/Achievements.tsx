@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Achievements = ({ achievements }: { achievements: any }) => {
   return (
-    <div className="bg-base-300 rounded-lg w-full p-3 overflow-y-scroll max-h-52 h-full">
+    <div className="bg-base-300 rounded-lg w-full p-3 overflow-y-auto max-h-52 h-full">
 
 
       <h2 className="card-title mb-3">Achievements</h2>

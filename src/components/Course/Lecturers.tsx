@@ -3,14 +3,14 @@ import React from 'react'
 
 export const Lecturers = ({ taughtByLecturers }: { taughtByLecturers: any }) => {
     return (
-        <div className="bg-base-300 rounded-lg p-4">
-            <h2 className="card-title mb-3">Lecturers</h2>
+        <div className="bg-base-300 rounded-lg md:p-4 p-3 overflow-y-auto">
+            <h2 className="card-title md:mb-3 mb-1">Lecturers</h2>
 
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid-cols-2 gap-1 hidden md:grid">
                 <span className="text-md opacity-50">Lecturers: <span className={`text-md opacity-100 ${taughtByLecturers?.length == 3 ? 'text-yellow-400' : taughtByLecturers?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{taughtByLecturers?.length}</span></span>
             </div>
 
-            <div className="divider !my-1" />
+            <div className="divider !my-1 hidden md:block" />
 
             <div className="grid grid-cols-1 gap-1">
                 {

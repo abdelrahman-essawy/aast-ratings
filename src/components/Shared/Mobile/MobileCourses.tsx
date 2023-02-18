@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const MobileCourses = ({ teachCourses, role }: { teachCourses: any, role: string }) => {
-    return <section className="md:hidden overflow-y-scroll bg-base-300 rounded-lg p-3 h-full">
+    return <section className="md:hidden overflow-y-auto bg-base-300 rounded-lg p-3 h-full">
 
         <h2 className="card-title mb-1 text-xs">Courses</h2>
 

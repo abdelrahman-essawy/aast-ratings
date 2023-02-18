@@ -6,6 +6,9 @@ import { Achievements } from "../../../components/Lecturer/Achievements"
 import { Courses } from "../../../components/Lecturer/Courses"
 import { Ratings } from "../../../components/Lecturer/Ratings"
 import { Reviews } from "../../../components/Lecturer/Reviews"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs"
+import { MobileRatings } from "../../../components/Shared/Mobile/Ratings"
+import { MobileCourses } from "../../../components/Shared/Mobile/MobileCourses"
 
 
 const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/course/?id=${id}`).then((res) => res.json())
@@ -14,7 +17,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
     const course = use(fetcher(params.id))
 
-    const { name, hasReviews, taughtByLecturers, achievements, availableInColleges, rating } = course ?? {}
+    const { name, hasReviews, taughtByLecturers, achievements, availableInColleges, rating, amountOfReviews } = course ?? {}
     const now = new Date()
     const oneStarReviews = hasReviews?.filter((review: any) => review.rating == 1)
     const twoStarReviews = hasReviews?.filter((review: any) => review.rating == 2)
@@ -58,18 +61,30 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
             {/* Mobile */}
 
-            <section className="gap-3 grid grid-cols-3 md:hidden">
-                <div className="bg-base-300 rounded-lg p-2">
-                    <h2 className="card-title mb-3 text-sm">Rating</h2>
-                    <p className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500"><span className="text-4xl">{rating} </span>/5</p>
+            <Tabs defaultValue="Ratings" className="block md:hidden">
+                {/* 
+                <TabsContent value="Courses" className="p-0 border-none h-20 mt-auto">
+                    <MobileCourses role={role} teachCourses={teachCourses ?? []} />
+                </TabsContent> */}
+
+                <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
+                    <MobileRatings rating={rating} achievements={achievements ?? []} amountOfReviews={hasReviews.length} />
+                </TabsContent>
+
+
+
+                <TabsContent value="Lecturers" className="p-0 border-none h-20 mt-auto">
+                    <Lecturers taughtByLecturers={taughtByLecturers} />
+                </TabsContent>
+
+                <div className="flex justify-center items-center">
+                    <TabsList className="mt-4">
+                        <TabsTrigger value="Ratings">Ratings</TabsTrigger>
+                        <TabsTrigger value="Lecturers">Lecturers</TabsTrigger>
+                    </TabsList>
                 </div>
-                <div className="bg-base-300 rounded-lg">
-                    asd
-                </div>
-                <div className="bg-base-300 rounded-lg">
-                    asd
-                </div>
-            </section>
+
+            </Tabs>
 
             <section className="gap-3 grid-cols-3 hidden md:grid">
 

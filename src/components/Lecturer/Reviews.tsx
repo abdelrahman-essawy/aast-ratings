@@ -8,7 +8,7 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
     const timeAgo = new TimeAgo('en-US')
 
     return (
-        <section id='style-1' className="bg-base-300 rounded-lg sm:p-4 p-2 overflow-y-scroll max-h-80 flex-1">
+        <section id='style-1' className="bg-base-300 rounded-lg sm:p-4 p-2 overflow-y-auto max-h-80 flex-1">
             <h2 className="card-title mb-3 md:block">Reviews</h2>
 
             {
