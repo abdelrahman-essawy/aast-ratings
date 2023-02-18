@@ -38,7 +38,7 @@ export default function DashboardLayout({
                 <div className="flex justify-center inset-y-1/2 -translate-y-1/2 h-fit absolute z-10 w-full items-center text-center max-w-screen-lg px-4">
                     {
                         availableInColleges &&
-                            availableInColleges[0].name ?
+                            availableInColleges[0]?.name ?
                             <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl">{name}</p>
                             :
                             <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl">Course Name</p>
