@@ -39,6 +39,8 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 })
                 lecturers.map(
                     async ({ id }, i) => {
+                        if (lecturers[i].achievements.find(achievement => achievement.name === 'Top rated lecturer'))
+                            return
                         await prisma.achievement.create({
 
                             data: {
@@ -51,7 +53,6 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         )
                     }
                 )
-
                 res.status(200).json(lecturers)
             }
             catch (error) {
