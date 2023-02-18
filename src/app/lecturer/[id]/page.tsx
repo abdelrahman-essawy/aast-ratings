@@ -82,15 +82,15 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       <Tabs defaultValue="Ratings" className="block md:hidden">
 
         <TabsContent value="Contacts" className="p-0 border-none h-20 mt-auto">
-          <Contacts contacts={contacts} />
+          <Contacts contacts={contacts ?? []} />
         </TabsContent>
 
         <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
-          <MobileRatings rating={rating} achievements={achievements} amountOfReviews={amountOfReviews} />
+          <MobileRatings rating={rating} achievements={achievements ?? []} amountOfReviews={amountOfReviews} />
         </TabsContent>
 
         <TabsContent value="Courses" className="p-0 border-none h-20 mt-auto">
-          <MobileCourses role={role} teachCourses={teachCourses} />
+          <MobileCourses role={role} teachCourses={teachCourses ?? []} />
         </TabsContent>
 
         <div className="flex justify-center items-center">
@@ -109,25 +109,25 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
           <div className="w-full">
 
-            <Contacts contacts={contacts} />
+            <Contacts contacts={contacts ?? []} />
           </div>
 
           <div className="flex-1 w-full">
 
-            <Achievements achievements={achievements} />
+            <Achievements achievements={achievements ?? []} />
           </div>
 
 
         </div>
 
-        <Ratings rating={rating} hasReviews={hasReviews} amountOfReviews={amountOfReviews} />
-        <Courses teachCourses={teachCourses} />
+        <Ratings rating={rating} hasReviews={hasReviews ?? []} amountOfReviews={amountOfReviews} />
+        <Courses teachCourses={teachCourses ?? []} />
 
       </section>
 
       <div className="divider px-4" />
 
-      <Reviews hasReviews={hasReviews} />
+      <Reviews hasReviews={hasReviews ?? []} />
 
       <button className="btn btn-block mt-2 bg-neutral-900">review</button>
 

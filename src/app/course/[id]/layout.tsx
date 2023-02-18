@@ -17,6 +17,7 @@ export default function DashboardLayout({
         switch (availableInColleges?.name) {
             case 'Computer Science':
                 return <Image
+                    priority
                     quality={10}
                     className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
