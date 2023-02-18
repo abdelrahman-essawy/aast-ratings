@@ -20,7 +20,7 @@ export const MobileRatings = ({ rating, achievements, amountOfReviews }: { ratin
         {
             name: 'Achievements',
             html: () => {
-                if (achievements.length == 0) return <p className="text-center text-xl self-baseline mt-2 font-medium text-gray-900 dark:text-gray-500">N/A</p>
+                if (achievements?.length == 0) return <p className="text-center text-xl self-baseline mt-2 font-medium text-gray-900 dark:text-gray-500">N/A</p>
                 return <p className={`before:content-['#'] before:absolute before:left-9 before:text-2xl before:text-gray-400 text-center text-3xl text-md opacity-100 ${achievements[0].code == 3 ? 'text-[#CD7F32]' : achievements[0].code == 2 ? 'text-[#808080]' : 'text-[#FFD700]'}`}>{achievements[0].code || 'N/A'}</p>
             }
         },
