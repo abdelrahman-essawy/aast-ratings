@@ -41,7 +41,7 @@ export const FormTemplete = ({ id }: { id: string }) => {
                     'Content-Type': 'application/json'
                 },
             })
-            .then(() => revalidate(`/api/lecturer/${id}`))
+            .then(() => revalidate(`/api/lecturer?id=${id}`))
                 .then(() => setLoading(false))
                 .finally(() => {
                     document.getElementById('closeDialog')?.click()
