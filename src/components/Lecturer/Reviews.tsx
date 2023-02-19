@@ -23,7 +23,7 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
                                     <img src="https://cdn-icons-png.flaticon.com/512/1157/1157034.png" />
                                 </div>
                             </div>
-                            <div className="chat-header mx-2 mb-1">
+                            <div className="chat-header mx-2 mb-1 flex flex-row items-center gap-2">
                                 <span>{author}</span>
                                 <span className="text-xs opacity-50 ">{timeAgo.format(Date.parse(createdAt))}</span>
                             </div>
