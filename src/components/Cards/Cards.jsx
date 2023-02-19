@@ -4,7 +4,7 @@ import { MobileSlider } from './MobileSlider'
 
 const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer/topRated') => await fetch(endPoint, {
     next: {
-        revalidate: 60
+        revalidate: 0
     }
 }).then(res => res.json())
 
