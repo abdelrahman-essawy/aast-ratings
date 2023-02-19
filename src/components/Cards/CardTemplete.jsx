@@ -35,7 +35,7 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                         {
                             teachCourses?.map(({ id, name }) => {
                                 return (
-                                    <Link href={`/course/${id}`} className={`cursor-pointer btn text-xs border border-gray-700 p-2 bg-base-200 text-gray-400 rounded-lg truncate col-span-2 text-center font-sans leading-relaxed`} key={id}>{name}</Link>
+                                    <Link href={`/course/${id}`} className={`cursor-pointer hover:bg-[#111318] transition duration-150 ease-in-out !text-xs border border-gray-700 !p-2 bg-base-200 text-gray-400 rounded-lg truncate col-span-2 text-center font-sans leading-relaxed`} key={id}>{name}</Link>
                                 )
                             }
                             )
@@ -71,10 +71,10 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                 </label> */}
 
 
-                    <div className='mt-2'>
+                    <div className='mt-2 w-full'>
                         <Link
                             href={`/lecturer/${id}`}
-                            className="btn gap-2 !text-xs justify-center bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300">
+                            className="btn gap-2 w-full !text-xs justify-center bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300">
                             View
                             <svg className="h-5 w-5 fill-gray-400 " version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92 92" enableBackground="new 0 0 92 92" xmlSpace="preserve">
                                 <path id="XMLID_1239_" d="M91.3,43.8C90.6,42.8,74.4,19,46,19C17.6,19,1.4,42.8,0.7,43.8c-0.9,1.3-0.9,3.1,0,4.5
@@ -90,7 +90,7 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                         </Link>
 
 
-{/* 
+                        {/* 
                         <label
                             className="btn justify-center !text-xs gap-2 bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300"
                             htmlFor='review-modal'>

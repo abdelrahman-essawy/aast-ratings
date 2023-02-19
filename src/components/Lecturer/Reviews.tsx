@@ -14,7 +14,7 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
             {
 
                 hasReviews ? (
-                    hasReviews.map(({ id, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt }, index) => (
+                    hasReviews.map(({ id, author ,comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt }, index) => (
                         <div
                             key={id}
                             className={`chat ${index % 2 === 0 ? 'chat-start' : 'chat-end'}`}>
@@ -24,7 +24,7 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
                                 </div>
                             </div>
                             <div className="chat-header mx-2 mb-1">
-                                {/* <span>Student</span> */}
+                                <span>{author}</span>
                                 <span className="text-xs opacity-50 ">{timeAgo.format(Date.parse(createdAt))}</span>
                             </div>
                             <div className="chat-bubble p-4">
