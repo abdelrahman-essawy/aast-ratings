@@ -12,7 +12,11 @@ import { MobileCourses } from "../../../components/Shared/Mobile/MobileCourses"
 import { ReviewModal } from "../../../components/ReviewForm/ReviewModal"
 
 
-const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
+const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`, {
+  next: {
+    revalidate: 0
+  }
+}).then((res) => res.json())
 
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
 
