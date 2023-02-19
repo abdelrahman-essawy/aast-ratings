@@ -45,7 +45,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'POST':
             // Create a new review
-            const { rating, personalSideRating, scientificSideRating, recommendationRating, comment, campusId, collegeId, lecturerId, courseId } = req.query
+            const { author, rating, personalSideRating, scientificSideRating, recommendationRating, comment, campusId, collegeId, lecturerId, courseId } = req.query
 
 
             const inRange = <T extends number | Date | string>(n: T, start: T, end?: T) => {
@@ -78,6 +78,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             lecturersReviews: {
                                 connect: { id: lecturerId as string }
                             },
+                            author: author as string
                         }
                     })
                     const avgRatings = await prisma.review.aggregate({

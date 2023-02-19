@@ -33,9 +33,9 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
 
                     <div className='grid grid-cols-2 gap-2 my-2'>
                         {
-                            teachCourses?.map(({ id, name }, index) => {
+                            teachCourses?.map(({ id, name }) => {
                                 return (
-                                    <div className={`text-xs border border-gray-700 p-2 bg-base-200 text-gray-400 rounded-lg truncate col-span-2 text-center font-sans leading-relaxed`} key={id}>{name}</div>
+                                    <Link href={`/course/${id}`} className={`cursor-pointer btn text-xs border border-gray-700 p-2 bg-base-200 text-gray-400 rounded-lg truncate col-span-2 text-center font-sans leading-relaxed`} key={id}>{name}</Link>
                                 )
                             }
                             )
@@ -71,7 +71,7 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                 </label> */}
 
 
-                    <div className='mt-2 grid grid-cols-2 gap-4'>
+                    <div className='mt-2'>
                         <Link
                             href={`/lecturer/${id}`}
                             className="btn gap-2 !text-xs justify-center bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300">
@@ -90,13 +90,13 @@ export const CardTemplete = ({ name, id, icon, className, rating, workInColleges
                         </Link>
 
 
-
+{/* 
                         <label
                             className="btn justify-center !text-xs gap-2 bg-base-300 sm:hover:fill-gray-400 active:fill-gray-400 focus:hover:fill-gray-400 fill-none transition ease-in-out duration-300"
                             htmlFor='review-modal'>
                             Review
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                        </label>
+                        </label> */}
                     </div>
 
                 </div>
