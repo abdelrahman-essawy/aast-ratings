@@ -53,25 +53,47 @@ export const FormTemplete = ({ id }: { id: string }) => {
             console.log(e)
         }
 
+
     }
-
-
+    const overall = Math.round(
+        (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
+    )
     return (
         <div>
-            {
-                ratings.map(({ name, rating, setter }) => (
-                    <div key={name} className='flex flex-row justify-between'>
-                        <div className='text-sm'>{name}</div>
-                        <StarsRadio callback={setter} />
+            <label className="block opacity-70 font-medium text-white text-start" >
+                Rating
+                <span className='italic ml-2 opacity-50 font-light'>(required)</span>
+            </label>
+            <div className='divider my-1' />
+
+            <div className='flex flex-row gap-4'>
+                <div className='flex-1'>
+                    {
+                        ratings.map(({ name, rating, setter }) => (
+                            <div key={name} className='flex flex-row justify-between'>
+                                <div className='text-sm'>{name}</div>
+                                <StarsRadio callback={setter} />
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div>
+                    <div className='text-md text-center mb-1 opacity-70 font-medium text-white'>Overall</div>
+                    <div className='px-4 py-3 bg-[#191d24] rounded-lg'>
+                        <p className={`text-lg text-center ${overall == 3 ? 'text-yellow-400' : overall > 3 ? 'text-green-400' : 'text-red-400'}`}>{overall}
+                            <span className={`text-xs text-center text-gray-400`}>/5</span>
+                        </p>
+
                     </div>
-                ))
-            }
+                </div>
+            </div>
 
             <div className='divider my-1' />
 
-            <label className="block text-start" htmlFor='name'>
+            <label className="block opacity-70 font-medium text-white text-start" htmlFor='name'>
                 Nickname
-                <span className='italic ml-2 opacity-50'>(optional)</span>
+                <span className='italic ml-2 opacity-50 font-light'>(optional)</span>
             </label>
             <div className='flex flex-row items-center justify-between gap-4 mt-2'>
                 <input value={name} onChange={(e) => setName(e.target.value)} type="text" id='name' name='name' placeholder="Nickname" className="input input-bordered w-full max-w-xs flex-1  placeholder:opacity-50 placeholder:italic" />
@@ -80,9 +102,9 @@ export const FormTemplete = ({ id }: { id: string }) => {
 
             </div>
 
-            <label className="block text-start mt-4" htmlFor='name'>
+            <label className="block opacity-70 font-medium text-white text-start mt-4" htmlFor='name'>
                 Comment
-                <span className='italic ml-2 opacity-50'>(optional)</span>
+                <span className='italic ml-2 opacity-50 font-light'>(optional)</span>
             </label>
 
             <textarea
