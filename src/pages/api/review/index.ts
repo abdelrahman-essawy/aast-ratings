@@ -67,9 +67,11 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (!(inRange(Number(personalSideRating), -1, 6) && inRange(Number(scientificSideRating), -1, 6) && inRange(Number(recommendationRating), -1, 6)))
                     res.status(400).json({ message: 'all ratings must be between 1 and 5' })
                 try {
+                    console.log(author)
 
                     await prisma.review.create({
                         data: {
+                            author: author as string,
                             rating: Math.round((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3),
                             comment: comment as string,
                             personalSideRating: Number(personalSideRating),
@@ -78,7 +80,6 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             lecturersReviews: {
                                 connect: { id: lecturerId as string }
                             },
-                            author: author as string
                         }
                     })
                     const avgRatings = await prisma.review.aggregate({

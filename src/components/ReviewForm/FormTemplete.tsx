@@ -35,7 +35,7 @@ export const FormTemplete = ({ id }: { id: string }) => {
         console.log(name, comment, personalSideRating, scientificSideRating, recommendationRating)
         setLoading(true)
         try {
-            const res = await fetch(`/api/review?lecturerId=${id}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`, {
+            const res = await fetch(`/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
