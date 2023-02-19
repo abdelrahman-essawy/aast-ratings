@@ -9,7 +9,7 @@ import { Achievements } from "../../../components/Lecturer/Achievements"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs"
 import { MobileRatings } from "../../../components/Shared/Mobile/Ratings"
 import { MobileCourses } from "../../../components/Shared/Mobile/MobileCourses"
-
+import { ReviewModal } from "../../../components/ReviewForm/ReviewModal"
 
 
 const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
@@ -111,7 +111,12 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
       <Reviews hasReviews={hasReviews ?? []} />
 
-      <button className="btn btn-block mt-2 bg-neutral-900">review</button>
+
+
+
+      <ReviewModal name={name} id={params.id} />
+
+
 
     </div>
 
