@@ -83,6 +83,7 @@ model Course {
 
 model Review {
   id                   String    @id @unique @default(cuid())
+  author               String?
   rating               Float     @default(0)
   personalSideRating   Int?      @default(0)
   scientificSideRating Int?      @default(0)

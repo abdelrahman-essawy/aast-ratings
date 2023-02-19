@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { nameGenerator } from '../nameGenerator'
 import { StarsRadio } from './StarsRadio'
 import { useRouter } from 'next/navigation';
+import { revalidate } from '../revalidate';
 
 export const FormTemplete = ({ id }: { id: string }) => {
     const [name, setName] = useState(nameGenerator())
@@ -34,17 +35,20 @@ export const FormTemplete = ({ id }: { id: string }) => {
         console.log(name, comment, personalSideRating, scientificSideRating, recommendationRating)
         setLoading(true)
         try {
-            await fetch(`/api/review?lecturerId=${id}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`, {
+            const res = await fetch(`/api/review?lecturerId=${id}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
             })
                 .then(() => setLoading(false))
+                .then(() => revalidate(`/api/lecturer/${id}`))
                 .finally(() => {
                     document.getElementById('closeDialog')?.click()
                     router.refresh()
+
                 })
+
         }
         catch (e) {
             console.log(e)
