@@ -2,8 +2,9 @@ import React, { use } from 'react'
 import { SkeletonStats } from './SkeletonStats'
 
 
-const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/getStats', { next: { revalidate: 5 } }).then(res => res.json())
+const getStats = async () => await fetch('https://aast-ratings.vercel.app/api/getStats').then(res => res.json())
 
+export const revalidate = 0
 
 export const LiveStats = () => {
     const stats = use(getStats())

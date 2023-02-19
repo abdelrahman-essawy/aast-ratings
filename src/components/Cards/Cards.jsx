@@ -2,12 +2,9 @@ import React, { use } from 'react'
 import { DesktopSlider } from './DesktopSlider'
 import { MobileSlider } from './MobileSlider'
 
-const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer/topRated') => await fetch(endPoint, {
-    next: {
-        revalidate: 0
-    }
-}).then(res => res.json())
+const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer/topRated') => await fetch(endPoint).then(res => res.json())
 
+export const revalidate = 0
 
 export const Cards = () => {
     const lecturers = use(fetcher())
