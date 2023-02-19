@@ -1,5 +1,5 @@
 
-export const revalidate = ({ path }) => {
+export const revalidate = (path: string) => {
 
     (async () => {
         const res = await fetch(`/api/revalidate?path=${path}`, {

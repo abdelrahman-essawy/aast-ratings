@@ -32,7 +32,7 @@
     "src/pages/api/revalidate.ts",
     "src/hooks/useApi.js",
     "src/app/lecturer/[id]/page.tsx"
-  ],
+, "src/components/revalidate.ts"  ],
   "exclude": [
     "node_modules"
   ],

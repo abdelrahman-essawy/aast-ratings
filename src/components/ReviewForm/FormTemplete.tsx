@@ -41,8 +41,8 @@ export const FormTemplete = ({ id }: { id: string }) => {
                     'Content-Type': 'application/json'
                 },
             })
+            .then(() => revalidate(`/api/lecturer/${id}`))
                 .then(() => setLoading(false))
-                .then(() => revalidate(`/api/lecturer/${id}`))
                 .finally(() => {
                     document.getElementById('closeDialog')?.click()
                     router.refresh()
