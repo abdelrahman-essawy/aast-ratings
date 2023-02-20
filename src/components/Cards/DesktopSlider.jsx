@@ -12,7 +12,7 @@ import { Pagination } from "swiper";
 import { CardTemplete } from './CardTemplete';
 import ReviewModal from '../Modal/reviewModal';
 
-export const DesktopSlider = ({ lecturers }) => {
+export const DesktopSlider = ({ lecturers, hero }) => {
 
     return (
 
@@ -20,7 +20,6 @@ export const DesktopSlider = ({ lecturers }) => {
         >
             {
                 lecturers
-                    .slice(0, 3)
                     .map(({ name, icon, rating, amountOfReviews, role, teachCourses, workInColleges, id }, index) => {
 
                         return <CardTemplete
@@ -33,7 +32,7 @@ export const DesktopSlider = ({ lecturers }) => {
                             teachCourses={teachCourses}
                             amountOfReviews={amountOfReviews}
                             icon={icon}
-                            className={`${index === 0 ? 'scale-110 sm:hover:scale-[115%]' : ''} ${index === 1 ? 'order-first' : 'order-last'}`} />
+                            className={`${hero && index === 0 ? 'scale-110 sm:hover:scale-[115%]' : ''} ${hero && index === 1 ? 'order-first' : 'order-last'}`} />
 
 
 

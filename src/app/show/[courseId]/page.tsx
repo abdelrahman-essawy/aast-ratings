@@ -1,13 +1,15 @@
 import React, { use } from 'react'
-import { Cards } from '../../components/Cards/Cards'
+import { Cards } from '../../../components/Cards/Cards'
 
 // const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/course/?id=${id}`).then((res) => res.json())
 const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer`).then((res) => res.json())
 
 // { id, name, courseCode, rating, availableInColleges, hasReviews, taughtByLecturers, _count }
 
-const page = ({ searchParams }) => {
-    const lecturers = use(fetcher(searchParams.courseId))
+const page = (
+    { params }: { params: { courseId: string } }
+) => {
+    const lecturers = use(fetcher(params.courseId))
     console.log(lecturers)
 
     // const course = use(fetcher(searchParams.courseId))

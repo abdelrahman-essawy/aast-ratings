@@ -71,7 +71,7 @@ const Start = ({ data }) => {
                     <Stepper className='col-span-3 w-full' campusName={campusName} collegeName={collegeName} courseName={courseName} />
                     {/* <Stepper campusName={campusName} collegeName={collegeName} courseName={courseName} /> */}
                     <div className={`${!isAllEntered && 'cursor-not-allowed'}`}>
-                        <Link href={`/show?courseId=${courseId}`} onClick={handleClick} className={`btn btn-block col-span-3 ${!isAllEntered && 'pointer-events-none'}`}>Next</Link>
+                        <Link href={`/show/${courseId}`} onClick={handleClick} className={`btn btn-block col-span-3 ${!isAllEntered && 'pointer-events-none'}`}>Next</Link>
                         {/* collegeId=${campusId}&collegeId=${collegeId}& */}
                     </div>
 
