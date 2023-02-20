@@ -1,22 +1,22 @@
-import React, { use } from 'react'
-import { DesktopSlider } from './DesktopSlider'
+import React from 'react'
 import { MobileSlider } from './MobileSlider'
+import { DesktopSlider } from './DesktopSlider'
 
-const fetcher = async (endPoint = 'https://aast-ratings.vercel.app/api/lecturer/topRated') => await fetch(endPoint).then(res => res.json())
-
-export const revalidate = 0
-
-export const Cards = () => {
-    const lecturers = use(fetcher())
+export const Cards = ({ lecturers, hero }) => {
 
     return (
         <div>
 
             <div className='hidden sm:block'>
-                <DesktopSlider lecturers={lecturers} />
+                <DesktopSlider
+                    hero={hero}
+                    lecturers={lecturers}
+                />
             </div>
             <div className='sm:hidden flex justify-center'>
-                <MobileSlider lecturers={lecturers} />
+                <MobileSlider
+                    lecturers={lecturers}
+                />
             </div>
 
         </div>

@@ -1,21 +1,8 @@
 "use client"
-import React, { use, useState } from 'react'
-import { Cards } from '../Cards/Cards';
-import Search from '../Search/page';
-import Section from '../../utilities/StyledComponents/Section';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
-import { MobileSlider } from '../Cards/MobileSlider';
-import { motion } from 'framer-motion'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "../../components/ui/select"
+import React, { useState } from 'react'
+
 import { Choose } from './Choose';
 import { Stepper } from './Stepper';
-import Image from 'next/image';
 import { AASTLogo } from '../../SVG/AASTLogo';
 import Link from 'next/link';
 
@@ -27,8 +14,6 @@ const Start = ({ data }) => {
 
     const [courseId, setCourseId] = useState(null)
 
-    console.log(campusId)
-    console.log(collegeId)
 
 
     const campuses = data
@@ -39,7 +24,6 @@ const Start = ({ data }) => {
     const courseName = courses?.find((item) => item.id === courseId)?.name
 
     console.log(campusName)
-    // const lecturers = use(fetcher())
 
 
     const [searchKeyword, setSearchKeyword] = useState('')

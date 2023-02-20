@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import React, { Suspense } from 'react'
-import { Cards } from '../Cards/Cards'
 import { Button } from '../../utilities/StyledComponents/Button'
 import { AASTLogo } from '../../SVG/AASTLogo'
-import { Stats } from '../Stats'
 
 export const DesktopHero = () => {
     return (

@@ -1,9 +1,11 @@
 import React, { use } from 'react'
-import Start from '../../components/Start';
+import Start from '../../../components/Start';
 
-const fetcher = () => fetch(`https://aast-ratings.vercel.app/api/getAll`, { next: { revalidate: 60 } }).then((res) => res.json())
+const fetcher = () => fetch(`https://aast-ratings.vercel.app/api/getAll`).then((res) => res.json())
 
-const Page = () => {
+export const revalidate = 0
+
+const Page = ({params}) => {
 
     const data = use(fetcher())
 
@@ -11,6 +13,7 @@ const Page = () => {
         <>
             <Start data={data} />
             {/* <Choose data={data} /> */}
+
         </>
 
 
