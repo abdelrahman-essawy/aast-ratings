@@ -31,8 +31,10 @@
     "src/pages/api/lecturers",
     "src/pages/api/revalidate.ts",
     "src/hooks/useApi.js",
-    "src/app/lecturer/[id]/page.tsx"
-, "src/components/revalidate.ts"  ],
+    "src/app/lecturer/[id]/page.tsx",
+    "src/components/revalidate.ts",
+    "src/app/lecturer/[id]/loading.tsx"
+  ],
   "exclude": [
     "node_modules"
   ],

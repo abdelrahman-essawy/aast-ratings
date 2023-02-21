@@ -1,29 +1,92 @@
 import Image from "next/image";
-import { use } from "react";
+import { Suspense, use } from "react";
+import Loading from "./loading";
 
+// const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
 
-const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/lecturer/?id=${id}`).then((res) => res.json())
+// export const revalidate = 0
 
 export default function DashboardLayout({
     children, params,
 }: {
     children: React.ReactNode, params: { id: string }
 }) {
-    const lecturer = use(fetcher(params.id))
+    // const lecturer = use(fetcher(params.id))
 
-    const { workInCampus, workInColleges } = lecturer ?? []
+    // const { workInCampus, workInColleges } = lecturer ?? []
+
+    // const UpperImagePicker = () => {
+    //     switch (workInCampus?.name) {
+    //         case 'Computer Science':
+    //             return <Image
+    //                 priority
+    //                 quality={10}
+    //                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+    //                 src={`/computer-science.webp`} alt='' fill />
+
+    //         case 'Chalmers':
+    //             return <Image src="/images/chalmers.jpg" alt="Chalmers" layout="fill" objectFit="cover" />
+
+    //         default:
+    //             return <Image
+    //                 priority
+    //                 quality={10}
+    //                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+    //                 src={`/computer-science.webp`} alt='' fill />
+    //     }
+    // }
+
+    const getInfoFromId = ((id: string = params?.id) => {
+        const data = id.split('-')
+        console.log(data)
+
+
+        const getCollege = (id: string) => {
+        }
+
+
+        const getCampus = (id: string) => {
+            const campuses: string[] = ['alexandria', 'aswan']
+        }
+
+
+
+        switch (id) {
+            case 'computer-science':
+                return {
+                    name: 'Computer Science',
+                    image: '/computer-science.webp'
+                }
+
+            case 'chalmers':
+                return {
+                    name: 'Chalmers',
+                    image: '/images/chalmers.jpg'
+                }
+
+            default:
+                return {
+
+                }
+        }
+    })()
+
 
     const UpperImagePicker = () => {
-        switch (workInCampus?.name) {
-            case 'Computer Science':
+        switch (params?.id as any) {
+            case (params?.id).toString().includes('computer-science'):
                 return <Image
                     priority
                     quality={10}
                     className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
 
-            case 'Chalmers':
-                return <Image src="/images/chalmers.jpg" alt="Chalmers" layout="fill" objectFit="cover" />
+            case (params?.id).toString().includes('engineering'):
+                return <Image
+                    priority
+                    quality={10}
+                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+                    src={`/computer-science.webp`} alt='' fill />
 
             default:
                 return <Image
@@ -31,42 +94,16 @@ export default function DashboardLayout({
                     quality={10}
                     className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
                     src={`/computer-science.webp`} alt='' fill />
+
         }
     }
 
     return (
-        <div className="h-full flex flex-col">
-
-            <div className="relative sm:h-24 h-16 overflow-y-hidden flex justify-center items-center bg-base-300 overflow-hidden">
-                <div className="flex justify-between inset-y-1/2 -translate-y-1/2 h-fit absolute z-10 w-full items-center text-center max-w-screen-lg px-4">
-                    {
-                        workInColleges &&
-                            workInColleges[0]?.name ?
-                            <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl">{workInColleges[0]?.name ?? 'College'}</p>
-                            :
-                            <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl">College</p>
-                    }
-                    {
-                        workInCampus?.name ?
-                            <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl hidden sm:block">{workInCampus?.name ?? 'Campus'} </p>
-                            :
-                            <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-2xl sm:text-2xl hidden sm:block">Campus </p>
-
-                    }
-                </div>
-
-                {UpperImagePicker()}
-
-
-
-
-            </div>
-
-
-            <section className="z-10 bg-base-200 p-2 sm:p-0 flex-1 w-full max-w-screen-lg m-auto">
+        <main className="z-10 bg-base-200 p-2 sm:p-0 flex-1 w-full m-auto">
+            <Suspense fallback={<Loading />}>
                 {children}
-            </section>
-        </div>
+            </Suspense>
+        </main>
 
     )
 }
