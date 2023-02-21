@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { use } from 'react'
 import { MobileSlider } from './MobileSlider'
 import { DesktopSlider } from './DesktopSlider'
 
-export const Cards = ({ lecturers, hero }) => {
+
+
+export const Cards = ({ lecturers , hero, skeleton }) => {
+
+    const skeletonLecturers = [
+        {
+            name: 'Loading...',
+            rating: 0,
+            image: 'https://aast-ratings.vercel.app/images/lecturers/placeholder.png',
+            department: 'Loading...',
+            id: 0
+
+        },
+        {
+            name: 'Loading...',
+            rating: 0,
+            image: 'https://aast-ratings.vercel.app/images/lecturers/placeholder.png',
+            department: 'Loading...',
+            id: 1
+        }, {
+            name: 'Loading...',
+            rating: 0,
+            image: 'https://aast-ratings.vercel.app/images/lecturers/placeholder.png',
+            department: 'Loading...',
+            id: 0
+
+        }]
 
     return (
         <div>
@@ -10,12 +36,12 @@ export const Cards = ({ lecturers, hero }) => {
             <div className='hidden sm:block'>
                 <DesktopSlider
                     hero={hero}
-                    lecturers={lecturers}
+                    lecturers={skeleton ? skeletonLecturers : lecturers}
                 />
             </div>
             <div className='sm:hidden flex justify-center'>
                 <MobileSlider
-                    lecturers={lecturers}
+                    lecturers={skeleton ? skeletonLecturers : lecturers}
                 />
             </div>
 
