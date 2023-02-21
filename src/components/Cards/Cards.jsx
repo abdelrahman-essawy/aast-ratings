@@ -4,7 +4,7 @@ import { DesktopSlider } from './DesktopSlider'
 
 
 
-export const Cards = ({ lecturers , hero, skeleton }) => {
+export const Cards = ({ lecturers, hero, skeleton = false }) => {
 
     const skeletonLecturers = [
         {
