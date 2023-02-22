@@ -49,7 +49,7 @@ export default function ReviewCommentTemplete(
                 <span className="text-xs opacity-50 ">{timeAgo.format(Date.parse(createdAt))}</span>
             </div>
             <div className="chat-bubble p-4">
-                <div className="grid grid-cols-2 gap-1">
+                <div className="grid grid-cols-2 gap-1 w-fit">
                     <span className="text-xs opacity-50">Overall: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}</span></span>
                     <span className="text-xs opacity-50">Personality: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{personalSideRating}</span></span>
                     <span className="text-xs opacity-50">Scientifically: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{scientificSideRating}</span></span>

@@ -1,9 +1,6 @@
 import React from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
-import ReviewArrow from '../../SVG/ReviewArrow'
-import ReviewArrowFilled from '../../SVG/ReviewArrowFilled'
-import { BigHead } from '@bigheads/core'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 
 export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
@@ -12,12 +9,12 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
     const timeAgo = new TimeAgo('en-US')
 
     return (
-        <section id='style-1' className="bg-base-300 rounded-lg sm:p-4 p-2flex-1">
-            <div className=''>
-            <h2 className="card-title mb-3 md:block">Reviews</h2>
+        <section id='style-1' className="bg-base-300 rounded-lg flex-1">
+            <div className='sm:p-4 p-2 '>
+                <h2 className="card-title md:block">Reviews</h2>
 
             </div>
-            <div className=' overflow-y-auto max-h-80 '>
+            <div className='overflow-y-auto max-h-96 sm:p-4 p-2'>
                 {
 
                     hasReviews ? (
