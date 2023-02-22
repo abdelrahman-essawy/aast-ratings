@@ -10,7 +10,6 @@ const page = (
     { params }: { params: { courseId: string } }
 ) => {
     const lecturers = use(fetcher(params.courseId))
-    console.log(lecturers)
 
     // const course = use(fetcher(searchParams.courseId))
     // const lecturers = course?.taughtByLecturers

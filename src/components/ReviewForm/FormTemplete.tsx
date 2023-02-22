@@ -32,7 +32,6 @@ export const FormTemplete = ({ id }: { id: string }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(name, comment, personalSideRating, scientificSideRating, recommendationRating)
         setLoading(true)
         try {
             const res = await fetch(`/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`, {

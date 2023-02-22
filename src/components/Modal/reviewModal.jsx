@@ -11,7 +11,6 @@ const ReviewModal = ({ name, id }) => {
             seThistName('')
         };
     }, [name]);
-    console.log(name, id)
     return (
 
         <>

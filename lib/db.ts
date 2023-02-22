@@ -22,7 +22,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 prisma.$on('beforeExit', async () => {
-    console.log('beforeExit hook');
 })
 
 export default prisma;
