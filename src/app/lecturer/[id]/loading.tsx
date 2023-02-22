@@ -31,7 +31,7 @@ function Loading() {
             </div>
 
 
-            <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 max-w-screen-lg m-auto">
+            <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
 
 
                 <section className="">

@@ -14,10 +14,10 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
                 <h2 className="card-title md:block">Reviews</h2>
 
             </div>
-            <div className='overflow-y-auto max-h-96 sm:p-4 p-2'>
+            <div className='overflow-y-auto max-h-96 min-h-16 sm:px-4 px-2'>
                 {
 
-                    hasReviews ? (
+                    hasReviews[0] ? (
                         hasReviews.map(({ id, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
 
                             <ReviewCommentTemplete key={id} id={id} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} score={score} />
@@ -27,7 +27,7 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
 
                     ) : (
                         <div>
-                            <h1 className="text-xl font-bold text-center">No reviews yet.</h1>
+                            <h1 className="text-lg font-bold text-center w-full h-full opacity-50">No reviews yet.</h1>
                         </div>
                     )
                 }
