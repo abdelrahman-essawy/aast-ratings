@@ -27,7 +27,6 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     return (
         <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2">
 
-
             <section>
                 {/* <div className="flex justify-center items-center py-2">
                     <div className="flex flex-col justify-center items-center">
