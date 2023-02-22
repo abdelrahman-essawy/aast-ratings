@@ -14,7 +14,7 @@ export const ReviewModal = ({ name, id }: { name: string, id: string }) => {
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="btn btn-block mt-2 bg-[#191d24]">review</div>
+                <div className="btn btn-block my-2 mp-auto bg-[#191d24]">review</div>
             </DialogTrigger>
 
             <DialogContent className="!bg-base-300">

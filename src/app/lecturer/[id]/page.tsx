@@ -81,7 +81,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
       </div>
 
-      <div className="bg-base-200 flex flex-col h-full sm:py-4 py-2 max-w-screen-lg m-auto">
+      <div className="bg-base-200 flex flex-col h-full sm:py-4 py-2 max-w-screen-lg m-auto p-2 md:p-0">
 
 
         <section>

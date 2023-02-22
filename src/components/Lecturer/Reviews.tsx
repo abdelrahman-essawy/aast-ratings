@@ -4,7 +4,7 @@ import en from 'javascript-time-ago/locale/en'
 import ReviewArrow from '../../SVG/ReviewArrow'
 import ReviewArrowFilled from '../../SVG/ReviewArrowFilled'
 import { BigHead } from '@bigheads/core'
-import ReviewCommentTemplete from '../Shared/Mobile/ReviewCommentTemplete'
+import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 
 export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
 
@@ -18,9 +18,9 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
             {
 
                 hasReviews ? (
-                    hasReviews.map(({ id, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt }, index) => (
-                        
-                        <ReviewCommentTemplete key={id} id={id} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} />
+                    hasReviews.map(({ id, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
+
+                        <ReviewCommentTemplete key={id} id={id} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} score={score} />
 
                     )
                     )

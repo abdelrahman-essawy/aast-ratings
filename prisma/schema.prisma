@@ -91,6 +91,7 @@ model Review {
   comment              String?
   createdAt            DateTime? @default(now())
   updatedAt            DateTime? @updatedAt
+  score                Int?      @default(0)
 
   campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
   collegesReviews  College?  @relation(fields: [collegeId], references: [id])

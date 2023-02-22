@@ -36,70 +36,70 @@ export default function DashboardLayout({
     //     }
     // }
 
-    const getInfoFromId = ((id: string = params?.id) => {
-        const data = id.split('-')
-        console.log(data)
+    // const getInfoFromId = ((id: string = params?.id) => {
+    //     const data = id.split('-')
+    //     console.log(data)
 
 
-        const getCollege = (id: string) => {
-        }
+    //     const getCollege = (id: string) => {
+    //     }
 
 
-        const getCampus = (id: string) => {
-            const campuses: string[] = ['alexandria', 'aswan']
-        }
+    //     const getCampus = (id: string) => {
+    //         const campuses: string[] = ['alexandria', 'aswan']
+    //     }
 
 
 
-        switch (id) {
-            case 'computer-science':
-                return {
-                    name: 'Computer Science',
-                    image: '/computer-science.webp'
-                }
+    //     switch (id) {
+    //         case 'computer-science':
+    //             return {
+    //                 name: 'Computer Science',
+    //                 image: '/computer-science.webp'
+    //             }
 
-            case 'chalmers':
-                return {
-                    name: 'Chalmers',
-                    image: '/images/chalmers.jpg'
-                }
+    //         case 'chalmers':
+    //             return {
+    //                 name: 'Chalmers',
+    //                 image: '/images/chalmers.jpg'
+    //             }
 
-            default:
-                return {
+    //         default:
+    //             return {
 
-                }
-        }
-    })()
+    //             }
+    //     }
+    // })()
 
 
-    const UpperImagePicker = () => {
-        switch (params?.id as any) {
-            case (params?.id).toString().includes('computer-science'):
-                return <Image
-                    priority
-                    quality={10}
-                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
-                    src={`/computer-science.webp`} alt='' fill />
+    // const UpperImagePicker = () => {
+    //     switch (params?.id as any) {
+    //         case (params?.id).toString().includes('computer-science'):
+    //             return <Image
+    //                 priority
+    //                 quality={10}
+    //                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+    //                 src={`/computer-science.webp`} alt='' fill />
 
-            case (params?.id).toString().includes('engineering'):
-                return <Image
-                    priority
-                    quality={10}
-                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
-                    src={`/computer-science.webp`} alt='' fill />
+    //         case (params?.id).toString().includes('engineering'):
+    //             return <Image
+    //                 priority
+    //                 quality={10}
+    //                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+    //                 src={`/computer-science.webp`} alt='' fill />
 
-            default:
-                return <Image
-                    priority
-                    quality={10}
-                    className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
-                    src={`/computer-science.webp`} alt='' fill />
+    //         default:
+    //             return <Image
+    //                 priority
+    //                 quality={10}
+    //                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur brightness-75"
+    //                 src={`/computer-science.webp`} alt='' fill />
 
-        }
-    }
+    //     }
+    // }
 
     return (
-        <main className="z-10 bg-base-200 p-2 sm:p-0 flex-1 w-full m-auto">
+        <main className="z-10 bg-base-200 flex-1 w-full m-auto">
             <Suspense fallback={<Loading />}>
                 {children}
             </Suspense>

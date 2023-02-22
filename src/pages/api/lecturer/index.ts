@@ -79,9 +79,10 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 scientificSideRating: true,
                                 recommendationRating: true,
                                 createdAt: true,
+                                score: true,
                             },
                             orderBy: {
-                                createdAt: 'desc'
+                                score: 'desc'
                             },
                         },
                         achievements: {
