@@ -13,6 +13,7 @@
     "seed": "ts-node -P jsconfig-seed.json -r jsconfig-paths/register --transpileOnly prisma/seed.ts"
   },
   "dependencies": {
+    "@bigheads/core": "^0.3.3",
     "@next/font": "13.1.4",
     "@prisma/client": "^4.9.0",
     "@radix-ui/react-dialog": "^1.0.2",

@@ -1,12 +1,12 @@
 "use client"
 import React, { useState } from 'react'
-import { nameGenerator } from '../nameGenerator'
+import { randomNameGenerator } from '../randomNameGenerator'
 import { StarsRadio } from './StarsRadio'
 import { useRouter } from 'next/navigation';
 import { revalidate } from '../revalidate';
 
 export const FormTemplete = ({ id }: { id: string }) => {
-    const [name, setName] = useState(nameGenerator())
+    const [name, setName] = useState(randomNameGenerator())
     const [comment, setComment] = useState('')
     const [personalSideRating, setPersonalSideRating] = useState(1)
     const [scientificSideRating, setScientificSideRating] = useState(1)
@@ -98,7 +98,7 @@ export const FormTemplete = ({ id }: { id: string }) => {
             <div className='flex flex-row items-center justify-between gap-4 mt-2'>
                 <input value={name} onChange={(e) => setName(e.target.value)} type="text" id='name' name='name' placeholder="Nickname" className="input input-bordered w-full max-w-xs flex-1  placeholder:opacity-50 placeholder:italic" />
 
-                <div className="btn bg-[#191d24]" onClick={() => setName(nameGenerator())}>Generate</div>
+                <div className="btn bg-[#191d24]" onClick={() => setName(randomNameGenerator())}>Generate</div>
 
             </div>
 
