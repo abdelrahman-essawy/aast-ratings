@@ -67,13 +67,13 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
                 </TabsContent> */}
 
                 <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
-                    <MobileRatings rating={rating} achievements={achievements ?? []} amountOfReviews={hasReviews?.length} />
+                    <MobileRatings rating={rating ?? 0} achievements={achievements ?? []} amountOfReviews={hasReviews?.length??0} />
                 </TabsContent>
 
 
 
                 <TabsContent value="Lecturers" className="p-0 border-none h-20 mt-auto">
-                    <Lecturers taughtByLecturers={taughtByLecturers} />
+                    <Lecturers taughtByLecturers={taughtByLecturers ?? []} />
                 </TabsContent>
 
                 <div className="flex justify-center items-center">
@@ -89,21 +89,21 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
                 <div className="grid grid-rows-2 gap-3">
 
-                    <Colleges availableInColleges={availableInColleges} />
-                    <Achievements achievements={achievements} />
+                    <Colleges availableInColleges={availableInColleges??[]} />
+                    <Achievements achievements={achievements??[]} />
 
                 </div>
 
 
-                <Ratings rating={rating} hasReviews={hasReviews} />
+                <Ratings rating={rating} hasReviews={hasReviews??[]} />
 
-                <Lecturers taughtByLecturers={taughtByLecturers} />
+                <Lecturers taughtByLecturers={taughtByLecturers??[]} />
 
             </section>
 
             <div className="divider px-4" />
 
-            <Reviews hasReviews={hasReviews} />
+            <Reviews hasReviews={hasReviews??[]} />
 
             <button className="btn btn-block mt-2 bg-neutral-900">review</button>
 
