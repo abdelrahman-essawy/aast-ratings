@@ -2,7 +2,7 @@
 import React from 'react'
 import ReviewArrowFilled from '../../SVG/ReviewArrowFilled'
 
-const ScoreArrows = ({ score }: { score: string }) => {
+const ScoreArrows = ({ score }: { score: number }) => {
     const [scoreState, setScoreState] = React.useState(score)
     return (
         <div className='flex flex-row gap-1 items-center'>
