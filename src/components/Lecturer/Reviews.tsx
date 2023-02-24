@@ -3,10 +3,10 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 
-export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
-    TimeAgo.addDefaultLocale(en)
-    const timeAgo = new TimeAgo('en-US')
+export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
 
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">

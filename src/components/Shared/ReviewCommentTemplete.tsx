@@ -4,6 +4,7 @@ import en from 'javascript-time-ago/locale/en'
 import ReviewArrowFilled from '../../SVG/ReviewArrowFilled'
 import NoSSR from '../NoSSR'
 import { RandomAvatarGenerator } from '../RandomAvatarGenerator'
+import ScoreArrows from './ScoreArrows'
 
 
 interface ReviewCommentTempleteProps {
@@ -17,7 +18,8 @@ interface ReviewCommentTempleteProps {
     createdAt: string,
     score: number
 }
-
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
 export default function ReviewCommentTemplete(
     {
         id,
@@ -31,8 +33,7 @@ export default function ReviewCommentTemplete(
         score
     }: ReviewCommentTempleteProps
 ) {
-    TimeAgo.addDefaultLocale(en)
-    const timeAgo = new TimeAgo('en-US')
+
     return (
         <div
             key={id}
@@ -65,12 +66,7 @@ export default function ReviewCommentTemplete(
 
 
                 <div className="-ml-1 flex flex-row items-center gap-3">
-                    <div className='flex flex-row gap-1 items-center'>
-                        <ReviewArrowFilled className="w-7 h-7 fill-none stroke-gray-400 hover:fill-gray-400 transition duration-150 ease-in-out cursor-pointer md:active:scale-75 active:scale-90 p-1" />
-                        <span className="text-sm opacity-70 font-bold">{score}</span>
-
-                        <ReviewArrowFilled className="rotate-180 w-7 h-7 fill-none stroke-gray-400 hover:fill-gray-400 transition duration-150 ease-in-out cursor-pointer md:active:scale-75 active:scale-90 p-1" />
-                    </div>
+                    <ScoreArrows score={score} />
                     <div className='hover:bg-base-100 p-2 rounded-lg select-none transition duration-150 ease-in-out cursor-pointer active:scale-95'>
                         <p className='text-xs font-medium'>Report</p>
                     </div>
