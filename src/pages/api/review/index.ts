@@ -45,7 +45,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'POST':
             // Create a new review
-            const { author, rating, personalSideRating, scientificSideRating, recommendationRating, comment, campusId, collegeId, lecturerId, courseId } = req.query
+            const { avatar,author, rating, personalSideRating, scientificSideRating, recommendationRating, comment, campusId, collegeId, lecturerId, courseId } = req.query
 
 
             const inRange = <T extends number | Date | string>(n: T, start: T, end?: T) => {
@@ -71,6 +71,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     await prisma.review.create({
                         data: {
+                            avatar:avatar as string,
                             author: author as string,
                             rating: Math.round((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3),
                             comment: comment as string,
