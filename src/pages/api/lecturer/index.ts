@@ -70,18 +70,7 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             },
                         },
                         hasReviews: {
-                            select: {
-                                id: true,
-                                avatar: true,
-                                author: true,
-                                rating: true,
-                                comment: true,
-                                personalSideRating: true,
-                                scientificSideRating: true,
-                                recommendationRating: true,
-                                createdAt: true,
-                                score: true,
-                            },
+
                             orderBy: {
                                 createdAt: 'desc'
                             },
