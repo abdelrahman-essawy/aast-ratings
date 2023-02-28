@@ -51,11 +51,6 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
         }]
     }, [personalSideRating, scientificSideRating, recommendationRating]);
 
-    const overall = useMemo(() => {
-        return Math.round(
-            (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
-        )
-    }, [personalSideRating, scientificSideRating, recommendationRating])
 
     const options = useMemo(() => {
         return {
@@ -76,7 +71,7 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
                             personalSideRating,
                             scientificSideRating,
                             recommendationRating,
-                            rating: overall,
+                            rating: Math.round(lecturer.rating * lecturer.amountOfReviews + (personalSideRating + scientificSideRating + recommendationRating) / 3) / (lecturer.amountOfReviews + 1),
                             createdAt: new Date().toISOString(),
                             score: 0
                         },
@@ -96,7 +91,6 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
         personalSideRating,
         recommendationRating,
         scientificSideRating,
-        overall,
         lecturer,
         avatar
     ]);
@@ -137,6 +131,11 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
     }, [addReview, mutate, options]);
 
 
+    const overall = useMemo(() => {
+        return Math.round(
+            (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
+        )
+    }, [personalSideRating, scientificSideRating, recommendationRating])
 
     return (
         <div>
