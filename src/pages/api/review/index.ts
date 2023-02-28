@@ -1,6 +1,5 @@
 // import { PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
-import lecturersAPI from '../lecturer'
 import prisma from '../../../../lib/db'
 
 const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {

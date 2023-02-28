@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 
-export const Contacts = ({ contacts }: { contacts: any }) => {
+
+export const Contacts = ({ contacts }) => {
     const className = "cursor-pointer hover:shadow-lg hover:scale-110 transition-all duration-100 ease-in-out w-8 h-8 bg-base-100 rounded-full p-2 fill-gray-400"
     const icons = [
         {
