@@ -1,4 +1,4 @@
-import React, { Suspense, use } from 'react'
+import React from 'react'
 import Spinner from '../../utilities/Spinner'
 
 export const SkeletonStats = () => {

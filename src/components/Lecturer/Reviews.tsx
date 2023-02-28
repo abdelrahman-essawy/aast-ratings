@@ -18,9 +18,9 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
                 {
 
                     hasReviews[0] ? (
-                        hasReviews.map(({ id, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
+                        hasReviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
 
-                            <ReviewCommentTemplete key={id} id={id} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} score={score} />
+                            <ReviewCommentTemplete key={id} id={id} avatar={avatar} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} score={score} />
 
                         )
                         )

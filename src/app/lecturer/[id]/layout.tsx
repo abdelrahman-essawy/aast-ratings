@@ -100,10 +100,9 @@ export default function DashboardLayout({
 
     return (
         <main className="z-10 bg-base-200 flex-1 w-full m-auto">
-            <Suspense fallback={<Loading />}>
                 {/* <Loading /> */}
                 {children}
-            </Suspense>
+            
         </main>
 
     )

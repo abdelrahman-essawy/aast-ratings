@@ -10,7 +10,7 @@ import {
 import { FormTemplete } from "./FormTemplete"
 
 
-export const ReviewModal = ({ name, id }: { name: string, id: string }) => {
+export const ReviewModal = ({ name, id, mutate, lecturer, setOptimisticData }: { name: string, id: string, mutate?: any, lecturer?: any, setOptimisticData?:any }) => {
     return (
         <Dialog>
             <DialogTrigger>
@@ -24,7 +24,7 @@ export const ReviewModal = ({ name, id }: { name: string, id: string }) => {
                    
                     <DialogDescription>
 
-                        <FormTemplete id={id} />
+                        <FormTemplete id={id} mutate={mutate} lecturer={lecturer} setOptimisticData={setOptimisticData} />
 
                     </DialogDescription>
 

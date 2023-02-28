@@ -1,5 +1,4 @@
-import React, { Suspense, use } from 'react'
-import Spinner from '../../utilities/Spinner'
+import React, { Suspense } from 'react'
 import { LiveStats } from './LiveStats'
 import { SkeletonStats } from './SkeletonStats'
 
