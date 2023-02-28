@@ -15,7 +15,7 @@ export function encodeSvg(reactElement) {
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
-export const FormTemplete = ({ id, lecturer, setOptimisticData, mutate }: { id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
+export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
     const ref = useRef()
 
     // const { error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${id}`, { fallbackData: { id: 'pending' } })
@@ -69,9 +69,7 @@ export const FormTemplete = ({ id, lecturer, setOptimisticData, mutate }: { id: 
                     ...lecturer.hasReviews,
 
                 ],
-                name: 'pending'
             }
-
         },
         rollbackOnError(error) {
             return error.name !== 'AbortError'
@@ -82,7 +80,6 @@ export const FormTemplete = ({ id, lecturer, setOptimisticData, mutate }: { id: 
 
 
     const addReview = async () => {
-        setOptimisticData(options.optimisticData())
         const url = `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`
         await fetch(url, {
             method: 'POST',
@@ -92,6 +89,8 @@ export const FormTemplete = ({ id, lecturer, setOptimisticData, mutate }: { id: 
             body: JSON.stringify({
                 avatar: encodeSvg(avatar),
             })
+        }).finally(() => {
+            mutate()
         })
     }
 

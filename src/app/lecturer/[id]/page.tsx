@@ -21,18 +21,16 @@ import Loading from "./loading"
 const fetcher2 = (url: URL) => fetch(url).then((res) => res.json())
 
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
-  const [optimisticData, setOptimisticData] = useState({ id: 0, name: 'optimisticData' })
+  // const [optimisticData, setOptimisticData] = useState({ id: 0, name: 'optimisticData' })
 
-  const { data: lecturer, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher2, { fallbackData: optimisticData })
-
-  console.log('optimisticData', optimisticData)
+  const { data: lecturer, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher2)
 
   // const lecturer = use(fetcher(params.id))
 
   console.log('isLoading', isLoading)
   console.log('isValidating', isValidating)
 
-  const { name, hasReviews, amountOfReviews, role, achievements, contacts, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses, createdAt, workInColleges, workInCampus } = lecturer as any
+  const { name, hasReviews, amountOfReviews, role, achievements, contacts, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses, createdAt, workInColleges, workInCampus } = lecturer ?? {} as any
 
   const UpperImagePicker = () => {
     switch (params?.id as any) {
@@ -60,7 +58,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     }
   }
   return (
-    lecturer?.id == 0 ? <Loading /> :
+    isLoading ? <Loading /> :
 
       <div className="h-full flex flex-col w-full">
 
@@ -172,7 +170,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
           <Reviews hasReviews={hasReviews ?? []} />
 
 
-          <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} setOptimisticData={setOptimisticData} />
+          <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer}/>
 
 
 
