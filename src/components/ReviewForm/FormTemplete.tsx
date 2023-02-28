@@ -66,13 +66,7 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
                     personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
                     scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
                     recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
-                    ratings:
-                    {
-                        ...lecturer.ratings,
-                        [personalSideRating]: lecturer.ratings[personalSideRating] + 1,
-                        [scientificSideRating]: lecturer.ratings[scientificSideRating] + 1,
-                        [recommendationRating]: lecturer.ratings[recommendationRating] + 1,
-                    }
+                    ratings
                     ,
                     hasReviews: [
                         {
@@ -105,7 +99,8 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
         scientificSideRating,
         overall,
         lecturer,
-        avatar
+        avatar,
+        ratings
     ]);
 
     function sleep(ms) {
