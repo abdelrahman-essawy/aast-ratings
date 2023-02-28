@@ -1,6 +1,6 @@
-import React, { useId } from 'react'
+import React, { memo, useId } from 'react'
 
-export const StarsRadio = ({ callback }: { callback: Function }) => {
+export const StarsRadio = memo(({ callback }: { callback: Function }) => {
     const id = useId()
     return (
         <div className="rating">
@@ -15,4 +15,5 @@ export const StarsRadio = ({ callback }: { callback: Function }) => {
             }
         </div>
     )
-}
+})
+StarsRadio.displayName = 'StarsRadio'
