@@ -56,7 +56,7 @@ export default function ReviewCommentTemplete(
     return (
         <div
             key={id}
-            className={`chat chat-start mb-4 gap-x-2`}>
+            className={`chat chat-start mb-4 gap-x-2 ${id === 'pending' ? 'fadeInLeft' : null}`}>
             <div className="chat-image avatar">
                 <div className="w-11">
                     {avatar ? decodeSvg(avatar, 'avatar') : 'false'}
@@ -66,7 +66,7 @@ export default function ReviewCommentTemplete(
                 <span>{author}</span>
                 <span className="text-xs opacity-50 ">{timeAgo.format(Date.parse(createdAt))}</span>
             </div>
-            <div className={`chat-bubble p-4 ${id === 'pending' ? 'bg-base-100' : null}`}>
+            <div className={`chat-bubble p-4 ${id === 'pending' ? 'bg-base-100' : null} transition ease-in-out duration-500`}>
                 <div className="grid grid-cols-2 gap-1 w-fit">
                     <span className="text-xs opacity-50">Overall: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}</span></span>
                     <span className="text-xs opacity-50">Personality: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{personalSideRating}</span></span>
@@ -91,6 +91,6 @@ export default function ReviewCommentTemplete(
 
             </div>
 
-        </div>
+        </div >
     )
 }
