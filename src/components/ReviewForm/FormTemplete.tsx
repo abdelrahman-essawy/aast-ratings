@@ -1,85 +1,111 @@
 "use client"
-import React, { useRef, useState } from 'react'
-import { randomNameGenerator } from '../randomNameGenerator'
-import { StarsRadio } from './StarsRadio'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { randomNameGenerator } from '../randomNameGenerator';
+import { StarsRadio } from './StarsRadio';
 import { useRouter } from 'next/navigation';
 import { revalidate } from '../revalidate';
-import useSWR from 'swr'
+import useSWR from 'swr';
 import { randomAvatarGenerator } from '../randomAvatarGenerator';
-
 import ReactDOMServer from 'react-dom/server';
 
 export function encodeSvg(reactElement) {
     return 'data:image/svg+xml,' + escape(ReactDOMServer.renderToStaticMarkup((reactElement)));
 }
 
-const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
-export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
-    const ref = useRef()
+const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
 
-    // const { error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${id}`, { fallbackData: { id: 'pending' } })
-    const [name, setName] = useState(randomNameGenerator())
-    const [avatar, setAvatar] = useState(randomAvatarGenerator(ref))
-    const [comment, setComment] = useState('')
-    const [personalSideRating, setPersonalSideRating] = useState(1)
-    const [scientificSideRating, setScientificSideRating] = useState(1)
-    const [recommendationRating, setRecommendationRating] = useState(1)
+    const [name, setName] = useState('');
+    const [avatar, setAvatar] = useState(null);
+    const [comment, setComment] = useState('');
+    const [personalSideRating, setPersonalSideRating] = useState(1);
+    const [scientificSideRating, setScientificSideRating] = useState(1);
+    const [recommendationRating, setRecommendationRating] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-    const [loading, setLoading] = useState(false)
+    const randomData = useCallback(() => {
+        setName(randomNameGenerator());
+        setAvatar(randomAvatarGenerator());
+    }, [])
+
+    useEffect(() => {
+        randomData();
+    }, [])
 
 
-    const ratings = [{
-        name: 'Personality',
-        rating: personalSideRating,
-        setter: setPersonalSideRating
-    }, {
-        name: 'Scientifically',
-        rating: scientificSideRating,
-        setter: setScientificSideRating
-    }, {
-        name: 'Recommendation',
-        rating: recommendationRating,
-        setter: setRecommendationRating
 
-    }]
-    const router = useRouter();
-    const options = {
-        optimisticData: () => {
-            return {
-                ...lecturer,
-                amountOfReviews: lecturer.amountOfReviews + 1,
-                personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
-                scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
-                recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
-                rating: Math.round(lecturer.rating * lecturer.amountOfReviews + (personalSideRating + scientificSideRating + recommendationRating) / 3) / (lecturer.amountOfReviews + 1),
-                hasReviews: [
-                    {
-                        id: 'pending',
-                        avatar: encodeSvg(avatar),
-                        author: name,
-                        comment,
-                        personalSideRating,
-                        scientificSideRating,
-                        recommendationRating,
-                        rating: overall,
-                        createdAt: new Date().toISOString(),
-                        score: 0
-                    },
-                    ...lecturer.hasReviews,
+    const ratings = useMemo(() => {
+        return [{
+            name: 'Personality',
+            rating: personalSideRating,
+            setter: setPersonalSideRating
+        }, {
+            name: 'Scientifically',
+            rating: scientificSideRating,
+            setter: setScientificSideRating
+        }, {
+            name: 'Recommendation',
+            rating: recommendationRating,
+            setter: setRecommendationRating
 
-                ],
-            }
-        },
-        rollbackOnError(error) {
-            return error.name !== 'AbortError'
-        },
+        }]
+    }, [personalSideRating, scientificSideRating, recommendationRating]);
 
+    const overall = useMemo(() => {
+        return Math.round(
+            (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
+        )
+    }, [personalSideRating, scientificSideRating, recommendationRating])
+
+    const options = useMemo(() => {
+        return {
+            optimisticData: () => {
+                return {
+                    ...lecturer,
+                    amountOfReviews: lecturer.amountOfReviews + 1,
+                    personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
+                    scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
+                    recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
+                    rating: Math.round(lecturer.rating * lecturer.amountOfReviews + (personalSideRating + scientificSideRating + recommendationRating) / 3) / (lecturer.amountOfReviews + 1),
+                    hasReviews: [
+                        {
+                            id: 'pending',
+                            avatar: encodeSvg(avatar),
+                            author: name,
+                            comment,
+                            personalSideRating,
+                            scientificSideRating,
+                            recommendationRating,
+                            rating: overall,
+                            createdAt: new Date().toISOString(),
+                            score: 0
+                        },
+                        ...lecturer.hasReviews,
+
+                    ],
+                }
+            },
+            rollbackOnError(error) {
+                return error.name !== 'AbortError'
+            },
+
+        };
+    }, [
+        comment,
+        name,
+        personalSideRating,
+        recommendationRating,
+        scientificSideRating,
+        overall,
+        lecturer,
+        avatar
+    ]);
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-
-
-    const addReview = async () => {
+    const addReview = useCallback(async () => {
         const url = `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`
         await fetch(url, {
             method: 'POST',
@@ -92,28 +118,26 @@ export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: an
         }).finally(() => {
             mutate()
         })
-    }
+    }, [avatar, comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const handleSubmit = useCallback(async () => {
+        setLoading(true);
         try {
             addReview()
+            await sleep(800)
             mutate(options.optimisticData())
-
-            document.getElementById('closeDialog')?.click()
         }
         catch (e) {
             console.log(e)
         }
+        finally {
+            setLoading(false);
+            document.getElementById('closeDialog')?.click()
+        }
+    }, [addReview, mutate, options]);
 
 
-    }
-    const overall = Math.round(
-        (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
-    )
 
-    console.log(ref.current)
     return (
         <div>
             <label className="block opacity-70 font-medium text-white text-start" >
@@ -154,7 +178,7 @@ export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: an
                         Avatar
                     </label>
                     <div className="chat-image avatar">
-                        <div className="w-12" onClick={() => setAvatar(randomAvatarGenerator(ref))}>
+                        <div className="w-12" onClick={() => randomData()}>
                             {avatar}
                         </div>
                     </div>
@@ -168,7 +192,7 @@ export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: an
                     <div className='flex flex-row items-center justify-between gap-4 mt-2'>
                         <input value={name} onChange={(e) => setName(e.target.value)} type="text" id='name' name='name' placeholder="Nickname" className="input input-bordered w-full max-w-xs flex-1  placeholder:opacity-50 placeholder:italic" />
 
-                        <div className="btn bg-[#191d24]" onClick={() => setName(randomNameGenerator())}>Generate</div>
+                        <div className="btn bg-[#191d24]" onClick={() => randomData()}>Generate</div>
 
                     </div>
                 </div>
@@ -193,3 +217,8 @@ export const FormTemplete = ({ id, lecturer, mutate }: { id: string, mutate?: an
         </div>
     )
 }
+)
+
+FormTemplate.displayName = 'FormTemplate'
+
+export default FormTemplate

@@ -1,9 +1,8 @@
 "use client"
 import { BigHead } from '@bigheads/core'
 
-export function randomAvatarGenerator(ref) {
+export function randomAvatarGenerator() {
     return <BigHead
-        ref={ref}
         skinTone='light'
     />
 }

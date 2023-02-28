@@ -7,10 +7,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "../../components/ui/dialog"
-import { FormTemplete } from "./FormTemplete"
+import FormTemplete from "./FormTemplete"
 
 
-export const ReviewModal = ({ name, id, mutate, lecturer }: { name: string, id: string, mutate?: any, lecturer?: any, setOptimisticData?:any }) => {
+export const ReviewModal = ({ name, id, mutate, lecturer }: { name: string, id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
     return (
         <Dialog>
             <DialogTrigger>
@@ -21,7 +21,7 @@ export const ReviewModal = ({ name, id, mutate, lecturer }: { name: string, id: 
                 <DialogHeader>
 
                     <DialogTitle className='!mb-4'>Review {name}</DialogTitle>
-                   
+
                     <DialogDescription>
 
                         <FormTemplete id={id} mutate={mutate} lecturer={lecturer} />

@@ -30,6 +30,8 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
   console.log('isLoading', isLoading)
   console.log('isValidating', isValidating)
 
+  console.log('lecturer', lecturer)
+
   const { name, hasReviews, amountOfReviews, role, achievements, contacts, img, rating, personalSideRating, scientificSideRating, recommendationRating, teachCourses, createdAt, workInColleges, workInCampus } = lecturer ?? {} as any
 
   const UpperImagePicker = () => {
@@ -170,7 +172,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
           <Reviews hasReviews={hasReviews ?? []} />
 
 
-          <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer}/>
+          <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
 
 
 

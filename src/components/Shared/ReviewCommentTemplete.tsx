@@ -36,6 +36,8 @@ interface ReviewCommentTempleteProps {
 }
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
+
+
 export default function ReviewCommentTemplete(
     {
         id,
@@ -51,7 +53,6 @@ export default function ReviewCommentTemplete(
     }: ReviewCommentTempleteProps
 ) {
 
-    console.log(avatar ? decodeSvg(avatar, 'avatar') : 'false')
     return (
         <div
             key={id}
