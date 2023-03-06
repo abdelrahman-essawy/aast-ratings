@@ -23,8 +23,6 @@ const Start = ({ data }) => {
     const courses = colleges?.find((item) => item.id === collegeId)?.hasCourses
     const courseName = courses?.find((item) => item.id === courseId)?.name
 
-    console.log(campusName)
-
 
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isClicked, setIsClicked] = useState(false)

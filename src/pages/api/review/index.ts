@@ -97,10 +97,6 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         },
 
                     })
-                    console.log((avgRatings))
-                    console.log(Math.round(avgRatings._avg.recommendationRating))
-
-
 
                     await prisma.lecturer.update({
                         where: {
