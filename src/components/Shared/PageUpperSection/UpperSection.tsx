@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import DesktopUpperSection from './DesktopUpperSection'
 import MobileUpperSectoion from './MobileUpperSectoion'
 
-const UpperSection = (
+const UpperSection = memo((
     {
         name,
         img,
@@ -13,7 +13,7 @@ const UpperSection = (
         amountOfReviews,
         teachCourses,
         role
-    }
+    }: any
 
 ) => {
     return <>
@@ -61,6 +61,7 @@ const UpperSection = (
             role={role ?? ''}
         />
     </>
-}
+})
+UpperSection.displayName = 'UpperSection'
 
 export default UpperSection

@@ -59,7 +59,8 @@ export default function ReviewCommentTemplete(
             className={`chat chat-start mb-4 gap-x-2 ${id === 'pending' ? 'fadeInLeft' : null}`}>
             <div className="chat-image avatar">
                 <div className="w-11">
-                    {avatar ? decodeSvg(avatar, 'avatar') : randomAvatarGenerator()}
+                    {/* {avatar ? decodeSvg(avatar, 'avatar') : randomAvatarGenerator()} */}
+                    {randomAvatarGenerator()}
                 </div>
             </div>
             <div className="chat-header mx-2 mb-1 flex flex-row items-center gap-4">

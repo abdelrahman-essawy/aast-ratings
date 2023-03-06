@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
@@ -6,7 +6,7 @@ import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
-export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
+export const Reviews = memo(({ hasReviews }: { hasReviews: any }) => {
 
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">
@@ -20,10 +20,19 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
                     hasReviews[0] ? (
                         hasReviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
 
-                            <ReviewCommentTemplete key={id} id={id} avatar={avatar} author={author} comment={comment} rating={rating} personalSideRating={personalSideRating} scientificSideRating={scientificSideRating} recommendationRating={recommendationRating} createdAt={createdAt} score={score} />
-
-                        )
-                        )
+                            <ReviewCommentTemplete
+                                key={id}
+                                id={id}
+                                avatar={avatar}
+                                author={author}
+                                comment={comment}
+                                rating={rating}
+                                personalSideRating={personalSideRating}
+                                scientificSideRating={scientificSideRating}
+                                recommendationRating={recommendationRating}
+                                createdAt={createdAt}
+                                score={score} />
+                        ))
 
                     ) : (
                         <div>
@@ -35,4 +44,5 @@ export const Reviews = ({ hasReviews }: { hasReviews: any }) => {
 
         </section>
     )
-}
+})
+Reviews.displayName = 'Reviews'

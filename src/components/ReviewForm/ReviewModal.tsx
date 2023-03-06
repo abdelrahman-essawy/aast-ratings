@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -10,7 +10,7 @@ import {
 import FormTemplete from "./FormTemplete"
 
 
-export const ReviewModal = ({ name, id, mutate, lecturer }: { name: string, id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
+export const ReviewModal = memo(({ name, id, mutate, lecturer }: { name: string, id: string, mutate?: any, lecturer?: any, setOptimisticData?: any }) => {
     return (
         <Dialog>
             <DialogTrigger>
@@ -32,4 +32,5 @@ export const ReviewModal = ({ name, id, mutate, lecturer }: { name: string, id: 
             </DialogContent>
         </Dialog>
     )
-}
+})
+ReviewModal.displayName = 'ReviewModal'

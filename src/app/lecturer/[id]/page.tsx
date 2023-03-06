@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import Loading from "./loading"
 import UpperSection from "../../../components/Shared/PageUpperSection/UpperSection"
 import TopBanner from "../../../components/Shared/PageUpperSection/TopBanner"
+import { useMemo } from "react"
 
 
 // export const revalidate = 0
@@ -67,7 +68,6 @@ type lecturer = {
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
-
   const { data: lecturer, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
   const {
     name,
@@ -85,7 +85,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     createdAt,
     workInColleges,
     workInCampus
-  } = lecturer ?? {} as lecturer
+  } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
 
   return (
     isLoading ? <Loading /> :
@@ -93,28 +93,28 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       <div className="h-full flex flex-col w-full">
 
         <TopBanner
-          params={params}
-          workInCampus={workInCampus ?? ''}
-          workInColleges={workInColleges ?? []}
+          paramsId={params.id}
+          workInCampus={workInCampus}
+          workInColleges={workInColleges}
         />
 
         <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
 
           <UpperSection
-            name={name ?? ''}
-            img={img ?? ''}
-            rating={rating ?? 0}
-            amountOfReviews={amountOfReviews ?? 0}
-            achievements={achievements ?? []}
-            contacts={contacts ?? []}
-            hasReviews={hasReviews ?? []}
-            teachCourses={teachCourses ?? []}
-            role={role ?? ''}
+            name={name}
+            img={img}
+            rating={rating}
+            amountOfReviews={amountOfReviews}
+            achievements={achievements}
+            contacts={contacts}
+            hasReviews={hasReviews}
+            teachCourses={teachCourses}
+            role={role}
           />
 
           <div className="divider px-4" />
 
-          <Reviews hasReviews={hasReviews ?? []} />
+          <Reviews hasReviews={hasReviews} />
           <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
 
         </div>

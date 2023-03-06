@@ -1,12 +1,12 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { memo } from 'react'
 
-const TopBanner = ({
-    params,
+const TopBanner = memo(({
+    paramsId,
     workInColleges,
     workInCampus
 
-}) => {
+}: any) => {
     return (
         <div className="relative sm:h-16 h-12 overflow-y-hidden flex justify-center items-center bg-base-300 overflow-hidden w-full">
             <div className="flex justify-between inset-y-1/2 -translate-y-1/2 h-fit absolute z-10 w-full items-center text-center max-w-screen-lg px-4">
@@ -26,25 +26,26 @@ const TopBanner = ({
                 }
             </div>
 
-            {UpperImagePicker(params)}
+            {UpperImagePicker(paramsId)}
 
         </div>
     )
-}
+})
+TopBanner.displayName = 'TopBanner'
 
 export default TopBanner
 
 
-const UpperImagePicker = (params) => {
-    switch (params?.id as any) {
-        case (params?.id).toString().includes('computer-science'):
+const UpperImagePicker = (paramsId) => {
+    switch (paramsId) {
+        case (paramsId).toString().includes('computer-science'):
             return <Image
                 priority
                 quality={10}
                 className="absolute top-0 left-0 w-full h-full object-cover md:blur-3xl blur-xl brightness-75"
                 src={`/computer-science.webp`} alt='' fill />
 
-        case (params?.id).toString().includes('engineering'):
+        case (paramsId).toString().includes('engineering'):
             return <Image
                 priority
                 quality={10}
