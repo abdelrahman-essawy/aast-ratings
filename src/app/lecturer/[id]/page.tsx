@@ -87,38 +87,39 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     workInCampus
   } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
 
+  if (isLoading) return <Loading />
+  if (error) return <h1>An error has occurred.</h1>
   return (
-    isLoading ? <Loading /> :
 
-      <div className="h-full flex flex-col w-full">
+    <div className="h-full flex flex-col w-full">
 
-        <TopBanner
-          paramsId={params.id}
-          workInCampus={workInCampus}
-          workInColleges={workInColleges}
+      <TopBanner
+        paramsId={params.id}
+        workInCampus={workInCampus}
+        workInColleges={workInColleges}
+      />
+
+      <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
+
+        <UpperSection
+          name={name}
+          img={img}
+          rating={rating}
+          amountOfReviews={amountOfReviews}
+          achievements={achievements}
+          contacts={contacts}
+          hasReviews={hasReviews}
+          teachCourses={teachCourses}
+          role={role}
         />
 
-        <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
+        <div className="divider px-4" />
 
-          <UpperSection
-            name={name}
-            img={img}
-            rating={rating}
-            amountOfReviews={amountOfReviews}
-            achievements={achievements}
-            contacts={contacts}
-            hasReviews={hasReviews}
-            teachCourses={teachCourses}
-            role={role}
-          />
+        <Reviews hasReviews={hasReviews} />
+        <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
 
-          <div className="divider px-4" />
-
-          <Reviews hasReviews={hasReviews} />
-          <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
-
-        </div>
       </div>
+    </div>
 
   )
 
