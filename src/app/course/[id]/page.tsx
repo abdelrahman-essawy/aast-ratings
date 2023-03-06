@@ -15,7 +15,7 @@ const fetcher = (id: string) => fetch(`https://aast-ratings.vercel.app/api/cours
 
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
 
-    const course = use(fetcher(params.id))
+    const course = use(fetcher(params?.id))
 
     const { name, hasReviews, taughtByLecturers, achievements, availableInColleges, rating, amountOfReviews } = course ?? {}
     const now = new Date()
