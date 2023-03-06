@@ -102,14 +102,14 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
 
         <UpperSection
-          name={name}
-          img={img}
-          rating={rating}
-          amountOfReviews={amountOfReviews}
-          achievements={achievements}
-          contacts={contacts}
-          hasReviews={hasReviews}
-          teachCourses={teachCourses}
+          name={name ?? ''}
+          img={img ?? ''}
+          rating={rating ?? 0}
+          amountOfReviews={amountOfReviews ?? 0}
+          achievements={achievements ?? []}
+          contacts={contacts ?? []}
+          hasReviews={hasReviews ?? []}
+          teachCourses={teachCourses ?? []}
           role={role}
         />
 
