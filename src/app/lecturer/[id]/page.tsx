@@ -94,7 +94,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     <div className="h-full flex flex-col w-full">
 
       <TopBanner
-        paramsId={params?.id}
+        paramsId={params.id}
         workInCampus={workInCampus}
         workInColleges={workInColleges}
       />
@@ -102,21 +102,21 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
       <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
 
         <UpperSection
-          name={name ?? ''}
-          img={img ?? ''}
-          rating={rating ?? 0}
-          amountOfReviews={amountOfReviews ?? 0}
-          achievements={achievements ?? []}
-          contacts={contacts ?? []}
-          hasReviews={hasReviews ?? []}
-          teachCourses={teachCourses ?? []}
+          name={name}
+          img={img}
+          rating={rating}
+          amountOfReviews={amountOfReviews}
+          achievements={achievements}
+          contacts={contacts}
+          hasReviews={hasReviews}
+          teachCourses={teachCourses}
           role={role}
         />
 
         <div className="divider px-4" />
 
         <Reviews hasReviews={hasReviews} />
-        <ReviewModal name={name} id={params?.id} mutate={mutate} lecturer={lecturer} />
+        <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
 
       </div>
     </div>
