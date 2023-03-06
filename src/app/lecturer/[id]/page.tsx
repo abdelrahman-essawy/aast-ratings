@@ -94,7 +94,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     <div className="h-full flex flex-col w-full">
 
       <TopBanner
-        paramsId={params.id}
+        paramsId={params?.id}
         workInCampus={workInCampus}
         workInColleges={workInColleges}
       />
@@ -116,7 +116,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
         <div className="divider px-4" />
 
         <Reviews hasReviews={hasReviews} />
-        <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
+        <ReviewModal name={name} id={params?.id} mutate={mutate} lecturer={lecturer} />
 
       </div>
     </div>
