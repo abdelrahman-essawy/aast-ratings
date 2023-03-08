@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
         achievements,
         availableInColleges,
         rating,
-        amountOfReviews } = useMemo(() => course ?? {}, [course])
+        amountOfReviews } = useMemo(() => course, [course])
 
     return (
         <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2">
@@ -68,17 +68,17 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
             <Tabs defaultValue="Ratings" className="block md:hidden">
                 {/* 
                 <TabsContent value="Courses" className="p-0 border-none h-20 mt-auto">
-                    <MobileCourses role={role} teachCourses={teachCourses ?? []} />
+                    <MobileCourses role={role} teachCourses={teachCourses} />
                 </TabsContent> */}
 
                 <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
-                    <MobileRatings rating={rating ?? 0} achievements={achievements ?? []} amountOfReviews={hasReviews?.length ?? 0} />
+                    <MobileRatings rating={rating} achievements={achievements} amountOfReviews={hasReviews?.length} />
                 </TabsContent>
 
 
 
                 <TabsContent value="Lecturers" className="p-0 border-none h-20 mt-auto">
-                    <Lecturers taughtByLecturers={taughtByLecturers ?? []} />
+                    <Lecturers taughtByLecturers={taughtByLecturers} />
                 </TabsContent>
 
                 <div className="flex justify-center items-center">
@@ -94,21 +94,21 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
                 <div className="grid grid-rows-2 gap-3">
 
-                    <Colleges availableInColleges={availableInColleges ?? []} />
-                    <Achievements achievements={achievements ?? []} />
+                    <Colleges availableInColleges={availableInColleges} />
+                    <Achievements achievements={achievements} />
 
                 </div>
 
 
-                <Ratings rating={rating} hasReviews={hasReviews ?? []} />
+                <Ratings rating={rating} hasReviews={hasReviews} />
 
-                <Lecturers taughtByLecturers={taughtByLecturers ?? []} />
+                <Lecturers taughtByLecturers={taughtByLecturers} />
 
             </section>
 
             <div className="divider px-4" />
 
-            <Reviews hasReviews={hasReviews ?? []} />
+            <Reviews hasReviews={hasReviews} />
             <ReviewModal name={name} id={params.id} mutate={mutate} course={course} />
 
 
