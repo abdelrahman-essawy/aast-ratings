@@ -63,6 +63,8 @@ const UpperSection = memo((
             amountOfReviews={amountOfReviews}
             teachCourses={teachCourses}
             role={role}
+            taughtByLecturers={taughtByLecturers}
+            availableInColleges={availableInColleges}
         />
     </>
 })

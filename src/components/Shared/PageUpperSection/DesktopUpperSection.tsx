@@ -23,7 +23,6 @@ const DesktopUpperSection = (
         availableInColleges
     }
 ) => {
-    console.log(contacts)
     return (
         <section className="gap-3 grid-cols-3 hidden md:grid">
 
@@ -31,9 +30,7 @@ const DesktopUpperSection = (
 
                 {
                     contacts &&
-                    <div className="w-full">
-                        <Contacts contacts={contacts} />
-                    </div>
+                    <Contacts contacts={contacts} />
                 }
                 {
                     availableInColleges &&
@@ -51,11 +48,10 @@ const DesktopUpperSection = (
             {
                 teachCourses &&
                 <Courses teachCourses={teachCourses} />
-
             }
+
             {
                 taughtByLecturers &&
-
                 <Lecturers taughtByLecturers={taughtByLecturers} />
             }
         </section>

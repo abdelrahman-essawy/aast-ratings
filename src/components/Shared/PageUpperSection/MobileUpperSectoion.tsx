@@ -1,25 +1,41 @@
-import React from 'react'
+import React, { memo } from 'react'
+import { Colleges } from '../../Course/Colleges'
+import { Lecturers } from '../../Course/Lecturers'
 import { Contacts } from '../../Lecturer/Contacts'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs'
 import { MobileCourses } from '../Mobile/MobileCourses'
 import { MobileRatings } from '../Mobile/Ratings'
 
-const MobileUpperSectoion = (
+const MobileUpperSectoion = memo((
     {
         contacts,
         achievements,
         rating,
         amountOfReviews,
         teachCourses,
-        role
-    }
+        role,
+        taughtByLecturers,
+        availableInColleges
+    }: any
 ) => {
+    console.log(amountOfReviews)
     return (
         <Tabs defaultValue="Ratings" className="block md:hidden">
 
-            <TabsContent value="Contacts" className="p-0 border-none h-20 mt-auto">
-                <Contacts contacts={contacts} />
-            </TabsContent>
+            {contacts &&
+                <TabsContent value="Contacts" className="p-0 border-none h-20 mt-auto">
+                    <Contacts contacts={contacts} />
+                </TabsContent>}
+
+            {taughtByLecturers &&
+                <TabsContent value="Lecturers" className="p-0 border-none h-20 mt-auto">
+                    <Lecturers taughtByLecturers={taughtByLecturers} />
+                </TabsContent>}
+
+            {availableInColleges &&
+                <TabsContent value="Colleges" className="p-0 border-none h-20 mt-auto">
+                    <Colleges availableInColleges={availableInColleges} />
+                </TabsContent>}
 
             <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
                 <MobileRatings rating={rating} achievements={achievements} amountOfReviews={amountOfReviews} />
@@ -31,14 +47,16 @@ const MobileUpperSectoion = (
 
             <div className="flex justify-center items-center">
                 <TabsList className="mt-4">
-                    <TabsTrigger value="Contacts">Contacts</TabsTrigger>
+                    {availableInColleges && <TabsTrigger value="Colleges">Colleges</TabsTrigger>}
+                    {contacts && <TabsTrigger value="Contacts">Contacts</TabsTrigger>}
                     <TabsTrigger value="Ratings">Ratings</TabsTrigger>
-                    <TabsTrigger value="Courses">Courses</TabsTrigger>
+                    {teachCourses && <TabsTrigger value="Courses">Courses</TabsTrigger>}
+                    {taughtByLecturers && <TabsTrigger value="Lecturers">Lecturers</TabsTrigger>}
                 </TabsList>
             </div>
 
         </Tabs>
     )
-}
-
+})
+MobileUpperSectoion.displayName = 'MobileUpperSectoion'
 export default MobileUpperSectoion

@@ -30,10 +30,10 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
         achievements,
         availableInColleges,
         rating,
-        amountOfReviews } = useMemo(() => course ?? {}, [course])
+        _count
+    } = useMemo(() => course ?? {}, [course])
 
     if (isLoading) return <Loading />
-
     return (
         <div className="h-full flex flex-col w-full">
 
@@ -49,14 +49,14 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
                 <UpperSection
                     name={name}
                     rating={rating}
-                    amountOfReviews={amountOfReviews}
+                    amountOfReviews={_count.hasReviews}
                     hasReviews={hasReviews}
                     taughtByLecturers={taughtByLecturers}
                     availableInColleges={availableInColleges}
                     achievements={achievements}
                 />
 
-                <div className="divider px-4" />
+                <div className="divider px-4 my-1 md:my-3" />
 
                 <Reviews hasReviews={hasReviews} />
                 <ReviewModal name={name} id={params.id} mutate={mutate} course={course} />

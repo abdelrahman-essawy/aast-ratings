@@ -17,7 +17,7 @@ export const ReviewModal = memo(({ name, id, mutate, lecturer, course }: { name:
                 <div className="btn btn-block my-2 mp-auto bg-[#191d24]">review</div>
             </DialogTrigger>
 
-            <DialogContent className="!bg-base-300">
+            <DialogContent className="!bg-base-300 px-4">
                 <DialogHeader>
 
                     <DialogTitle className='!mb-4'>Review {name}</DialogTitle>
@@ -31,6 +31,7 @@ export const ReviewModal = memo(({ name, id, mutate, lecturer, course }: { name:
                 </DialogHeader>
             </DialogContent>
         </Dialog>
+
     )
 })
 ReviewModal.displayName = 'ReviewModal'

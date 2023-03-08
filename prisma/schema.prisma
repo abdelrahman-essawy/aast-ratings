@@ -83,17 +83,20 @@ model Course {
 }
 
 model Review {
-  id                   String    @id @unique @default(cuid())
-  avatar               String?
-  author               String?
-  rating               Float     @default(0)
-  personalSideRating   Int?      @default(0)
-  scientificSideRating Int?      @default(0)
-  recommendationRating Int?      @default(0)
-  comment              String?
-  createdAt            DateTime? @default(now())
-  updatedAt            DateTime? @updatedAt
-  score                Int?      @default(0)
+  id                    String    @id @unique @default(cuid())
+  avatar                String?
+  author                String?
+  rating                Float     @default(0)
+  personalSideRating    Int?      @default(0)
+  scientificSideRating  Int?      @default(0)
+  recommendationRating  Int?      @default(0)
+  courseContent         Int?      @default(0)
+  materialQuality       Int?      @default(0)
+  realworldPracticality Int?      @default(0)
+  comment               String?
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @updatedAt
+  score                 Int?      @default(0)
 
   campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
   collegesReviews  College?  @relation(fields: [collegeId], references: [id])

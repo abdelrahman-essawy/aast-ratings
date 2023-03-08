@@ -41,8 +41,8 @@ const coursesAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             select: {
                                 hasReviews: true
                             },
-                        }
-                    }
+                        },
+                    },
                 })
                 res.status(200).json(courses)
             } catch (error) {

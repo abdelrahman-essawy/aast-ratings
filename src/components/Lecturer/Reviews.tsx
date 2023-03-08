@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
@@ -7,6 +7,20 @@ TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
 export const Reviews = memo(({ hasReviews }: { hasReviews: any }) => {
+    // const {
+    //     id,
+    //     name,
+    //     rating,
+    //     comment,
+    //     personalSideRating,
+    //     scientificSideRating,
+    //     recommendationRating,
+    //     courseContent,
+    //     materialQuality,
+    //     realworldPracticality,
+    //     createdAt,
+    //     score
+    // } = useMemo(() => hasReviews ?? [], [hasReviews])
 
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">
@@ -18,7 +32,24 @@ export const Reviews = memo(({ hasReviews }: { hasReviews: any }) => {
                 {
 
                     hasReviews[0] ? (
-                        hasReviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
+                        hasReviews.map((
+                            {
+                                id,
+                                name,
+                                rating,
+                                comment,
+                                avatar,
+                                author,
+                                personalSideRating,
+                                scientificSideRating,
+                                recommendationRating,
+                                courseContent,
+                                materialQuality,
+                                realworldPracticality,
+                                createdAt,
+                                score
+                            }
+                        ) => (
 
                             <ReviewCommentTemplete
                                 key={id}
@@ -30,6 +61,9 @@ export const Reviews = memo(({ hasReviews }: { hasReviews: any }) => {
                                 personalSideRating={personalSideRating}
                                 scientificSideRating={scientificSideRating}
                                 recommendationRating={recommendationRating}
+                                courseContent={courseContent}
+                                materialQuality={materialQuality}
+                                realworldPracticality={realworldPracticality}
                                 createdAt={createdAt}
                                 score={score} />
                         ))

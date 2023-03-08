@@ -21,6 +21,10 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
     const [personalSideRating, setPersonalSideRating] = useState(1);
     const [scientificSideRating, setScientificSideRating] = useState(1);
     const [recommendationRating, setRecommendationRating] = useState(1);
+    const [courseContent, setCourseContent] = useState(1);
+    const [materialQuality, setMaterialQuality] = useState(1);
+    const [realworldPracticality, setrealworldPracticality] = useState(1);
+
     const [loading, setLoading] = useState(false);
 
     const randomData = useCallback(() => {
@@ -32,86 +36,99 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
         randomData();
     }, [randomData])
 
-    const ratings = useMemo(() => {
-        return [{
-            name: 'Personality',
-            rating: personalSideRating,
-            setter: setPersonalSideRating
-        }, {
-            name: 'Scientifically',
-            rating: scientificSideRating,
-            setter: setScientificSideRating
-        }, {
-            name: 'Recommendation',
-            rating: recommendationRating,
-            setter: setRecommendationRating
+    const ratings = useMemo(
+        () => {
+            return getOptions(lecturer, personalSideRating, setPersonalSideRating, scientificSideRating, setScientificSideRating, recommendationRating, setRecommendationRating, course, courseContent, setCourseContent, materialQuality, setMaterialQuality, realworldPracticality, setrealworldPracticality);
+        },
+        [course, courseContent, lecturer, materialQuality, personalSideRating, realworldPracticality, recommendationRating, scientificSideRating],
+    )
 
-        }]
-    }, [personalSideRating, scientificSideRating, recommendationRating]);
 
     const overall = useMemo(() => {
-        return Math.round(
-            (Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3
-        )
-    }, [personalSideRating, scientificSideRating, recommendationRating])
+        if (lecturer) {
+            return Math.round(((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3) * 10) / 10;
+        }
+        if (course) {
+            return Math.round(((Number(courseContent) + Number(materialQuality) + Number(realworldPracticality)) / 3) * 10) / 10;
+        }
+    }, [lecturer, course, personalSideRating, scientificSideRating, recommendationRating, courseContent, materialQuality, realworldPracticality]);
 
     const options = useMemo(() => {
         return {
             optimisticData: () => {
-                return {
-                    ...lecturer,
-                    amountOfReviews: lecturer.amountOfReviews + 1,
-                    personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
-                    scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
-                    recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
-                    ratings
-                    ,
-                    hasReviews: [
-                        {
-                            id: 'pending',
-                            avatar: encodeSvg(avatar),
-                            author: name,
-                            comment,
-                            personalSideRating,
-                            scientificSideRating,
-                            recommendationRating,
-                            rating: overall,
-                            createdAt: new Date().toISOString(),
-                            score: 0
-                        },
-                        ...lecturer.hasReviews,
+                if (lecturer) {
+                    return {
+                        ...lecturer,
+                        amountOfReviews: lecturer.amountOfReviews + 1,
+                        personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
+                        scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
+                        recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
+                        ratings,
+                        hasReviews: [
+                            {
+                                id: 'pending',
+                                avatar: encodeSvg(avatar),
+                                author: name,
+                                comment,
+                                personalSideRating,
+                                scientificSideRating,
+                                recommendationRating,
+                                rating: overall,
+                                createdAt: new Date().toISOString(),
+                                score: 0
+                            },
+                            ...lecturer.hasReviews,
 
-                    ],
+                        ],
+                    }
                 }
+
+
+
+                if (course) {
+                    return {
+                        ...course,
+                        amountOfReviews: course.amountOfReviews + 1,
+                        courseContent: Math.round(course.courseContent * course.amountOfReviews + courseContent) / (course.amountOfReviews + 1),
+                        materialQuality: Math.round(course.materialQuality * course.amountOfReviews + materialQuality) / (course.amountOfReviews + 1),
+                        realworldPracticality: Math.round(course.realworldPracticality * course.amountOfReviews + realworldPracticality) / (course.amountOfReviews + 1),
+                        ratings,
+                        hasReviews: [
+                            {
+                                id: 'pending',
+                                avatar: encodeSvg(avatar),
+                                author: name,
+                                comment,
+                                courseContent,
+                                materialQuality,
+                                realworldPracticality,
+                                rating: overall,
+                                createdAt: new Date().toISOString(),
+                                score: 0
+                            },
+                            ...course.hasReviews,
+                        ],
+                    }
+                }
+
+
             },
             rollbackOnError(error) {
                 return error.name !== 'AbortError'
             },
 
         };
-    }, [
-        comment,
-        name,
-        personalSideRating,
-        recommendationRating,
-        scientificSideRating,
-        overall,
-        lecturer,
-        avatar,
-        ratings
-    ]);
+    }, [lecturer, course, personalSideRating, scientificSideRating, recommendationRating, ratings, avatar, name, comment, overall, courseContent, materialQuality, realworldPracticality]);
 
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+
     const addReview = useCallback(async () => {
 
         const handleURL = () => {
             if (lecturer)
-                return `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`
+                return `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}&rating=${overall}`
 
             if (course)
-                return `/api/review?courseId=${id}&author=${name}&comment=${comment}&rating=${overall}`
+                return `/api/review?courseId=${id}&author=${name}&comment=${comment}&courseContent=${courseContent}&materialQuality=${materialQuality}&realworldPracticality=${realworldPracticality}&rating=${overall}`
 
         }
 
@@ -126,7 +143,7 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
         }).finally(() => {
             mutate()
         })
-    }, [avatar, comment, course, id, lecturer, mutate, name, overall, personalSideRating, recommendationRating, scientificSideRating])
+    }, [avatar, comment, course, courseContent, id, lecturer, materialQuality, mutate, name, overall, personalSideRating, realworldPracticality, recommendationRating, scientificSideRating])
 
     const handleSubmit = useCallback(async () => {
         setLoading(true);
@@ -147,14 +164,14 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
 
 
     return (
-        <div>
+        <>
             <label className="block opacity-70 font-medium text-white text-start" >
                 Rating
                 <span className='italic ml-2 opacity-50 font-light'>(required)</span>
             </label>
             <div className='divider my-1' />
 
-            <div className='flex flex-row gap-4'>
+            <div className='flex flex-row gap-2'>
                 <div className='flex-1'>
                     {
                         ratings.map(({ name, rating, setter }) => (
@@ -166,10 +183,11 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
                     }
                 </div>
 
-                <div>
+                <div className='min-w-fit'>
                     <div className='text-md text-center mb-1 opacity-70 font-medium text-white'>Overall</div>
-                    <div className='px-4 py-3 bg-[#191d24] rounded-lg'>
-                        <p className={`text-lg text-center ${overall == 3 ? 'text-yellow-400' : overall > 3 ? 'text-green-400' : 'text-red-400'}`}>{overall}
+                    <div className='px-4 py-3 bg-[#191d24] rounded-lg w-16'>
+                        <p className={`text-lg text-center ${overall == 3 ? 'text-yellow-400' : overall > 3 ? 'text-green-400' : 'text-red-400'}`}>
+                            {overall}
                             <span className={`text-xs text-center text-gray-400`}>/5</span>
                         </p>
 
@@ -222,7 +240,7 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
                     <div onClick={handleSubmit} className="btn btn-block mt-4 bg-[#191d24]">Submit</div>
 
             }
-        </div>
+        </>
     )
 }
 )
@@ -230,3 +248,54 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
 FormTemplate.displayName = 'FormTemplate'
 
 export default FormTemplate
+
+const getOptions = (lecturer?: any,
+    personalSideRating?: number,
+    setPersonalSideRating?: React.Dispatch<React.SetStateAction<number>>,
+    scientificSideRating?: number,
+    setScientificSideRating?: React.Dispatch<React.SetStateAction<number>>,
+    recommendationRating?: number,
+    setRecommendationRating?: React.Dispatch<React.SetStateAction<number>>,
+    course?: any, courseContent?: number,
+    setCourseContent?: React.Dispatch<React.SetStateAction<number>>,
+    materialQuality?: number,
+    setMaterialQuality?: React.Dispatch<React.SetStateAction<number>>,
+    realworldPracticality?: number,
+    setrealworldPracticality?: React.Dispatch<React.SetStateAction<number>>) => {
+    if (lecturer) {
+        return [{
+            name: 'Personality',
+            rating: personalSideRating,
+            setter: setPersonalSideRating
+        }, {
+            name: 'Scientifically',
+            rating: scientificSideRating,
+            setter: setScientificSideRating
+        }, {
+            name: 'Recommendation',
+            rating: recommendationRating,
+            setter: setRecommendationRating
+        }];
+    }
+    if (course) {
+        return [{
+            name: 'Course Content',
+            rating: courseContent,
+            setter: setCourseContent
+        }, {
+            name: 'Material Quality',
+            rating: materialQuality,
+            setter: setMaterialQuality
+        },
+        {
+            name: 'Real-world Practicality',
+            rating: realworldPracticality,
+            setter: setrealworldPracticality
+        }];
+    }
+}
+export { getOptions }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
