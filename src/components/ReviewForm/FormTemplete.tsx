@@ -13,7 +13,7 @@ export function encodeSvg(reactElement) {
 }
 
 
-const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
+const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
 
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState(null);
@@ -30,9 +30,7 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
 
     useEffect(() => {
         randomData();
-    }, [])
-
-
+    }, [randomData])
 
     const ratings = useMemo(() => {
         return [{
@@ -106,10 +104,18 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
     const addReview = useCallback(async () => {
-        const url = `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`
-        await fetch(url, {
+
+        const handleURL = () => {
+            if (lecturer)
+                return `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}`
+
+            if (course)
+                return `/api/review?courseId=${id}&author=${name}&comment=${comment}&rating=${overall}`
+
+        }
+
+        await fetch(handleURL(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +126,7 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
         }).finally(() => {
             mutate()
         })
-    }, [avatar, comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
+    }, [avatar, comment, course, id, lecturer, mutate, name, overall, personalSideRating, recommendationRating, scientificSideRating])
 
     const handleSubmit = useCallback(async () => {
         setLoading(true);
