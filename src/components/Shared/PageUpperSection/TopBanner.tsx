@@ -4,7 +4,10 @@ import React, { memo } from 'react'
 const TopBanner = memo(({
     paramsId,
     workInColleges,
-    workInCampus
+    workInCampus,
+    availableInColleges,
+    courseName
+
 
 }: any) => {
     return (
@@ -12,22 +15,21 @@ const TopBanner = memo(({
             <div className="flex justify-between inset-y-1/2 -translate-y-1/2 h-fit absolute z-10 w-full items-center text-center max-w-screen-lg px-4">
                 {
                     workInColleges &&
-                        workInColleges[0]?.name ?
-                        <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl">{workInColleges[0]?.name ?? 'College'}</p>
-                        :
-                        <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl">College</p>
+                    workInColleges[0]?.name &&
+                    <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl">{workInColleges[0]?.name ?? 'College'}</p>
                 }
                 {
-                    workInCampus?.name ?
-                        <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl hidden sm:block">{workInCampus?.name ?? 'Campus'} </p>
-                        :
-                        <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl hidden sm:block">Campus</p>
+                    workInCampus?.name &&
+                    <p className="z-10 bg-clip-text font-medium m-auto sm:m-0 text-lg sm:text-xl hidden sm:block">{workInCampus?.name ?? 'Campus'} </p>
 
                 }
+
             </div>
-
+            {
+                courseName &&
+                <p className="z-10 bg-clip-text font-bold m-auto sm:m-0 text-lg sm:text-xl">{courseName}</p>
+            }
             {UpperImagePicker(paramsId)}
-
         </div>
     )
 })

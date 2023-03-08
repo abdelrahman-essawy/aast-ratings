@@ -1,4 +1,6 @@
 import React from 'react'
+import { Colleges } from '../../Course/Colleges'
+import { Lecturers } from '../../Course/Lecturers'
 import { Achievements } from '../../Lecturer/Achievements'
 import { Contacts } from '../../Lecturer/Contacts'
 import { Courses } from '../../Lecturer/Courses'
@@ -16,29 +18,46 @@ const DesktopUpperSection = (
         rating,
         hasReviews,
         amountOfReviews,
-        teachCourses
+        teachCourses,
+        taughtByLecturers,
+        availableInColleges
     }
 ) => {
+    console.log(contacts)
     return (
         <section className="gap-3 grid-cols-3 hidden md:grid">
 
             <div className="flex flex-col items-start gap-3 max-h-[304px]">
 
-                <div className="w-full">
+                {
+                    contacts &&
+                    <div className="w-full">
+                        <Contacts contacts={contacts} />
+                    </div>
+                }
+                {
+                    availableInColleges &&
+                    <Colleges availableInColleges={availableInColleges} />
+                }
 
-                    <Contacts contacts={contacts} />
-                </div>
-
-                <div className="flex-1 w-full">
-
+                {
                     <Achievements achievements={achievements} />
-                </div>
+                }
 
             </div>
 
             <Ratings rating={rating} hasReviews={hasReviews} amountOfReviews={amountOfReviews} />
-            <Courses teachCourses={teachCourses} />
 
+            {
+                teachCourses &&
+                <Courses teachCourses={teachCourses} />
+
+            }
+            {
+                taughtByLecturers &&
+
+                <Lecturers taughtByLecturers={taughtByLecturers} />
+            }
         </section>
     )
 }

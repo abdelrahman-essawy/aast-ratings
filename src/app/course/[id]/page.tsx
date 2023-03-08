@@ -12,6 +12,9 @@ import { MobileRatings } from "../../../components/Shared/Mobile/Ratings"
 import { MobileCourses } from "../../../components/Shared/Mobile/MobileCourses"
 import useSWR from 'swr'
 import { ReviewModal } from "../../../components/ReviewForm/ReviewModal"
+import Loading from "../../lecturer/[id]/loading"
+import TopBanner from "../../../components/Shared/PageUpperSection/TopBanner"
+import UpperSection from "../../../components/Shared/PageUpperSection/UpperSection"
 
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
@@ -27,89 +30,38 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
         achievements,
         availableInColleges,
         rating,
-        amountOfReviews } = useMemo(() => course, [course])
+        amountOfReviews } = useMemo(() => course ?? {}, [course])
+
+    if (isLoading) return <Loading />
 
     return (
-        <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2">
-
-            <section>
-                {/* <div className="flex justify-center items-center py-2">
-                    <div className="flex flex-col justify-center items-center">
-
-                        <div className='flex'>
-
-                            <h2 className="card-title flex p-2">
-                                {name}
-                            </h2>
-
-                        </div>
-                    </div>
-                </div> */}
+        <div className="h-full flex flex-col w-full">
 
 
-                <div className="bg-base-300 rounded-lg p-4 hidden">
+            <TopBanner
+                paramsId={params.id}
+                availableInColleges={availableInColleges}
+                courseName={name}
+            />
 
-                    <div className="grid grid-cols-2 gap-1">
-                        <span className="text-md opacity-50">Reviews: <span className={`text-md opacity-100 ${hasReviews?.length == 3 ? 'text-yellow-400' : hasReviews?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{hasReviews?.length}</span></span>
-                        <span className="text-md opacity-50">Courses: <span className={`text-md opacity-100 ${taughtByLecturers?.length == 3 ? 'text-yellow-400' : taughtByLecturers?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{taughtByLecturers?.length}</span></span>
-                    </div>
+            <div className="z-50 bg-base-200 flex flex-col h-full sm:py-4 py-2 px-4 md:px-0 max-w-screen-lg w-full m-auto">
 
-                    <div className="divider !my-1" />
+                <UpperSection
+                    name={name}
+                    rating={rating}
+                    amountOfReviews={amountOfReviews}
+                    hasReviews={hasReviews}
+                    taughtByLecturers={taughtByLecturers}
+                    availableInColleges={availableInColleges}
+                    achievements={achievements}
+                />
 
-                    <div className="grid grid-cols-2 gap-1">
-                        <span className="text-md opacity-50">Rating: <span className={`text-md opacity-100 col-start-1 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}</span></span>
-                    </div>
-                </div>
+                <div className="divider px-4" />
 
-            </section>
+                <Reviews hasReviews={hasReviews} />
+                <ReviewModal name={name} id={params.id} mutate={mutate} course={course} />
 
-            {/* Mobile */}
-
-            <Tabs defaultValue="Ratings" className="block md:hidden">
-                {/* 
-                <TabsContent value="Courses" className="p-0 border-none h-20 mt-auto">
-                    <MobileCourses role={role} teachCourses={teachCourses} />
-                </TabsContent> */}
-
-                <TabsContent value="Ratings" className="p-0 border-none h-20 mt-auto">
-                    <MobileRatings rating={rating} achievements={achievements} amountOfReviews={hasReviews?.length} />
-                </TabsContent>
-
-
-
-                <TabsContent value="Lecturers" className="p-0 border-none h-20 mt-auto">
-                    <Lecturers taughtByLecturers={taughtByLecturers} />
-                </TabsContent>
-
-                <div className="flex justify-center items-center">
-                    <TabsList className="mt-4">
-                        <TabsTrigger value="Ratings">Ratings</TabsTrigger>
-                        <TabsTrigger value="Lecturers">Lecturers</TabsTrigger>
-                    </TabsList>
-                </div>
-
-            </Tabs>
-
-            <section className="gap-3 grid-cols-3 hidden md:grid">
-
-                <div className="grid grid-rows-2 gap-3">
-
-                    <Colleges availableInColleges={availableInColleges} />
-                    <Achievements achievements={achievements} />
-
-                </div>
-
-
-                <Ratings rating={rating} hasReviews={hasReviews} />
-
-                <Lecturers taughtByLecturers={taughtByLecturers} />
-
-            </section>
-
-            <div className="divider px-4" />
-
-            <Reviews hasReviews={hasReviews} />
-            <ReviewModal name={name} id={params.id} mutate={mutate} course={course} />
+            </div>
 
 
         </div>

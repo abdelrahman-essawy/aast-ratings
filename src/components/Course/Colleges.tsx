@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Colleges = ({ availableInColleges }: { availableInColleges: any }) => {
     return (
-        <div className="bg-base-300 rounded-lg p-4">
+        <div className="bg-base-300 rounded-lg p-4 w-full h-full">
             <h2 className="card-title mb-3">Colleges</h2>
 
             <div className="grid grid-cols-2 gap-1">

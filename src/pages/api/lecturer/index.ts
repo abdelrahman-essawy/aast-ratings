@@ -81,6 +81,11 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             }
 
                         },
+                        contacts: {
+                            orderBy: {
+                                createdAt: 'desc'
+                            }
+                        },
 
                     }
                 })
