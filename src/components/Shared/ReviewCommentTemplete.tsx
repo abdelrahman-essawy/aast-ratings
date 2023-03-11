@@ -32,7 +32,8 @@ interface ReviewCommentTempleteProps {
     scientificSideRating: number,
     recommendationRating: number,
     createdAt: string,
-    score: number
+    score: number,
+    mutate?: () => void
 }
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
@@ -49,10 +50,10 @@ export default function ReviewCommentTemplete(
         scientificSideRating,
         recommendationRating,
         createdAt,
-        score
+        score,
+        mutate
     }: ReviewCommentTempleteProps
 ) {
-
     return (
         <div
             key={id}
@@ -84,7 +85,7 @@ export default function ReviewCommentTemplete(
 
 
                 <div className="-ml-1 flex flex-row items-center gap-3">
-                    <ScoreArrows score={score} />
+                    <ScoreArrows id={id} mutate={mutate} score={score} />
                     <div className='hover:bg-base-100 p-2 rounded-lg select-none transition duration-150 ease-in-out cursor-pointer active:scale-95'>
                         <p className='text-xs font-medium'>Report</p>
                     </div>

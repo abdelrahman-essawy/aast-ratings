@@ -114,13 +114,10 @@ const FormTemplate = React.memo(({ id, lecturer, mutate }: any) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                avatar: encodeSvg(avatar),
-            })
         }).finally(() => {
             mutate()
         })
-    }, [avatar, comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
+    }, [comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
 
     const handleSubmit = useCallback(async () => {
         setLoading(true);
