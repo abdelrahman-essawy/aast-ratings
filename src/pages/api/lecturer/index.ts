@@ -69,25 +69,47 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 name: true,
                             },
                         },
-                        hasReviews: {
-
-                            orderBy: {
-                                createdAt: 'desc'
-                            },
-                        },
                         achievements: {
                             orderBy: {
                                 gotAt: 'desc'
                             }
-
                         },
+                        contacts: true,
+                    }
+                })
+                const reviews = await prisma.review.findMany({
+                    where: {
+                        lecturerId: id as string,
 
                     }
                 })
-                res.status(200).json(lecturer)
+
+                const ratings = [
+                    { star: 5, count: 0 },
+                    { star: 4, count: 0 },
+                    { star: 3, count: 0 },
+                    { star: 2, count: 0 },
+                    { star: 1, count: 0 },
+                ]
+                ratings.forEach((rating) => {
+                    reviews.forEach((review) => {
+                        if (review.rating === rating.star) {
+                            rating.count += 1
+                        }
+                    })
+                })
+
+                const result = {
+                    ...lecturer,
+                    'totalRatings': reviews.length,
+                    ratings,
+                }
+
+                res.status(200).json(result)
             }
             catch (error) {
                 res.status(500).json({ message: error })
+                console.log(error)
             }
 
             break

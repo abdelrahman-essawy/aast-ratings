@@ -9,7 +9,7 @@ const UpperSection = memo((
         contacts,
         achievements,
         rating,
-        hasReviews,
+        ratings,
         amountOfReviews,
         teachCourses,
         role
@@ -47,7 +47,7 @@ const UpperSection = memo((
         <DesktopUpperSection
             teachCourses={teachCourses ?? []}
             contacts={contacts ?? []}
-            hasReviews={hasReviews ?? []}
+            ratings={ratings ?? []}
             achievements={achievements ?? []}
             amountOfReviews={amountOfReviews ?? 0}
             rating={rating ?? 0} />
