@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Ratings = ({ hasReviews, amountOfReviews = hasReviews?.length, rating }: { hasReviews: any, amountOfReviews?: number, rating: number }) => {
+export const Ratings = ({ ratings, amountOfReviews, rating }: { ratings: any, amountOfReviews?: number, rating: number }) => {
     return (
         <div className="bg-base-300 rounded-lg p-4">
             <h2 className="card-title mb-3">Ratings</h2>
@@ -28,55 +28,33 @@ export const Ratings = ({ hasReviews, amountOfReviews = hasReviews?.length, rati
 
 
                     {
-                        [...Array(5)].map((_, i) => (
-                            hasReviews?.length === 0 ?
+                        ratings &&
+                        [...ratings].map((_, i) => (
+                            <div
+                                key={i}
+                                className="flex items-center justify-center space-x-4">
+
+                                <span
+                                    className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
+                                    {5 - i} star
+                                </span>
+
                                 <div
-                                    key={i}
-                                    className="flex items-center justify-center space-x-4">
+                                    className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
 
-                                    <span
-                                        className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
-                                        {5 - i} star
-                                    </span>
                                     <div
-                                        className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
-
-                                        <div
-                                            className="h-5 bg-purple-700 rounded"
-                                            style={{ width: `0%` }} />
-
-                                    </div>
-
-                                    <span
-                                        className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
-                                        0%
-                                    </span>
+                                        className="h-5 bg-purple-700 rounded"
+                                        style={{ width: `${ratings[i].count / amountOfReviews * 100}%` }}
+                                    />
 
                                 </div>
-                                :
-                                <div
-                                    key={i}
-                                    className="flex items-center justify-center space-x-4">
 
-                                    <span
-                                        className="text-sm font-medium text-blue-600 dark:text-blue-500 inline-block">
-                                        {5 - i} star
-                                    </span>
-                                    <div
-                                        className="h-5 flex-1 bg-gray-200 rounded dark:bg-gray-700">
+                                <span
+                                    className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
+                                    {Math.round(ratings[i].count / amountOfReviews * 100)}%
+                                </span>
 
-                                        <div
-                                            className="h-5 bg-purple-700 rounded"
-                                            style={{ width: `${hasReviews?.filter((review: any) => review.rating === 5 - i)?.length / hasReviews?.length * 100}%` }} />
-
-                                    </div>
-
-                                    <span
-                                        className="text-sm w-9 font-medium text-blue-600 dark:text-blue-500">
-                                        {Math.round(hasReviews?.filter((review: any) => review.rating === 5 - i)?.length / hasReviews?.length * 100)}%
-                                    </span>
-
-                                </div>
+                            </div>
                         ))
 
                     }

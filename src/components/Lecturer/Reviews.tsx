@@ -2,12 +2,16 @@ import React, { memo } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
+import useSWR from 'swr'
 
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
+const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
-export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?: any }) => {
+export const Reviews = memo(({ paramsId }: { paramsId: string }) => {
+    const { data: reviews, error, isLoading, mutate, isValidating } = useSWR(`/api/review?lecturerId=${paramsId}`, fetcher)
 
+    if (isLoading) return <div>Loading...</div>
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">
             <div className='sm:p-4 p-2 '>
@@ -17,8 +21,8 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?:
             <div className='overflow-y-auto max-h-96 min-h-16 sm:px-4 px-2'>
                 {
 
-                    hasReviews[0] ? (
-                        hasReviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
+                    reviews[0] ? (
+                        reviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
 
                             <ReviewCommentTemplete
                                 key={id}

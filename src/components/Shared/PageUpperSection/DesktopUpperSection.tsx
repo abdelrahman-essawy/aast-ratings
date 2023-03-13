@@ -14,7 +14,7 @@ const DesktopUpperSection = (
         contacts,
         achievements,
         rating,
-        hasReviews,
+        ratings,
         amountOfReviews,
         teachCourses
     }
@@ -36,7 +36,7 @@ const DesktopUpperSection = (
 
             </div>
 
-            <Ratings rating={rating} hasReviews={hasReviews} amountOfReviews={amountOfReviews} />
+            <Ratings rating={rating} ratings={ratings} amountOfReviews={amountOfReviews} />
             <Courses teachCourses={teachCourses} />
 
         </section>

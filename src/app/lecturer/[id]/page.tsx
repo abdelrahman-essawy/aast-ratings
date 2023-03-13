@@ -71,20 +71,16 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
   const { data: lecturer = {}, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
   const {
     name,
-    hasReviews,
     amountOfReviews,
     role,
     achievements,
     contacts,
     img,
     rating,
-    personalSideRating,
-    scientificSideRating,
-    recommendationRating,
     teachCourses,
-    createdAt,
     workInColleges,
-    workInCampus
+    workInCampus,
+    ratings
   } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
 
   if (isLoading) return <Loading />
@@ -108,14 +104,14 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
           amountOfReviews={amountOfReviews}
           achievements={achievements}
           contacts={contacts}
-          hasReviews={hasReviews}
+          ratings={ratings}
           teachCourses={teachCourses}
           role={role}
         />
 
         <div className="divider px-4" />
 
-        <Reviews hasReviews={hasReviews} mutate={mutate} />
+        <Reviews paramsId={params.id} />
         <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
 
       </div>

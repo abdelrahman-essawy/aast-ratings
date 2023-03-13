@@ -72,7 +72,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                         data: {
                             avatar: avatar as string,
                             author: author as string,
-                            rating: Math.round((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3),
+                            rating: Math.round(((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3) * 10) / 10,
                             comment: comment as string,
                             personalSideRating: Number(personalSideRating),
                             scientificSideRating: Number(scientificSideRating),
@@ -103,7 +103,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             id: lecturerId as string
                         },
                         data: {
-                            rating: Math.round(avgRatings._avg.rating),
+                            rating: Math.round((avgRatings._avg.rating) * 10) / 10,
                             personalSideRating: Math.round(avgRatings._avg.personalSideRating),
                             scientificSideRating: Math.round(avgRatings._avg.scientificSideRating),
                             recommendationRating: Math.round(avgRatings._avg.recommendationRating),
