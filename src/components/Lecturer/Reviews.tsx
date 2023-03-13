@@ -6,7 +6,7 @@ import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
-export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any }) => {
+export const Reviews = memo(({ hasReviews }: { hasReviews: any }) => {
 
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">
@@ -34,7 +34,6 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any }) => {
                                 realworldPracticality,
                                 createdAt,
                                 score,
-                                mutate
                             }
                         ) => (
 
@@ -53,7 +52,7 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any }) => {
                                 realworldPracticality={realworldPracticality}
                                 createdAt={createdAt}
                                 score={score}
-                                mutate={mutate} />
+                            />
                         ))
 
                     ) : (
