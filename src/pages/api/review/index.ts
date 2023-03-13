@@ -263,13 +263,14 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'PUT':
             try {
-                const { id, comment } = req.query
+                const { id, comment, scoreAction } = req.query
                 const updatedReview = await prisma.review.update({
                     where: {
                         id: id as string
                     },
                     data: {
                         comment: comment as string,
+                        score: Number(scoreAction) == 1 ? { increment: 1 } : { decrement: 1 }
                     }
                 })
                 res.status(200).json(updatedReview)

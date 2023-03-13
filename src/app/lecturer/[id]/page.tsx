@@ -68,7 +68,7 @@ type lecturer = {
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
-  const { data: lecturer, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
+  const { data: lecturer={}, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
   const {
     name,
     hasReviews,
