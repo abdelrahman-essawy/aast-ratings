@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
@@ -18,7 +18,24 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?:
                 {
 
                     hasReviews[0] ? (
-                        hasReviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
+                        hasReviews.map((
+                            {
+                                id,
+                                name,
+                                rating,
+                                comment,
+                                avatar,
+                                author,
+                                personalSideRating,
+                                scientificSideRating,
+                                recommendationRating,
+                                courseContent,
+                                materialQuality,
+                                realworldPracticality,
+                                createdAt,
+                                score,
+                            }
+                        ) => (
 
                             <ReviewCommentTemplete
                                 key={id}
@@ -30,6 +47,9 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?:
                                 personalSideRating={personalSideRating}
                                 scientificSideRating={scientificSideRating}
                                 recommendationRating={recommendationRating}
+                                courseContent={courseContent}
+                                materialQuality={materialQuality}
+                                realworldPracticality={realworldPracticality}
                                 createdAt={createdAt}
                                 score={score}
                                 mutate={mutate} />

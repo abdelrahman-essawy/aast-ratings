@@ -86,7 +86,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     workInColleges,
     workInCampus
   } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
-
+  
   if (isLoading) return <Loading />
   if (error) return <h1>An error has occurred.</h1>
   return (

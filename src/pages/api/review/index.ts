@@ -44,9 +44,22 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 
         case 'POST':
             // Create a new review
-            const { author, rating, personalSideRating, scientificSideRating, recommendationRating, comment, campusId, collegeId, lecturerId, courseId } = req.query
-            const { avatar } = req.body
+            const {
+                author,
+                rating,
+                personalSideRating,
+                scientificSideRating,
+                recommendationRating,
+                courseContent,
+                materialQuality,
+                realworldPracticality,
+                comment,
+                campusId,
+                collegeId,
+                lecturerId,
+                courseId } = req.query
 
+            const { avatar } = req.body
             const inRange = <T extends number | Date | string>(n: T, start: T, end?: T) => {
                 if (end && start > end) [end, start] = [start, end];
                 return end === undefined ? n >= 0 && n < start : n >= start && n < end;
@@ -66,13 +79,12 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (!(inRange(Number(personalSideRating), -1, 6) && inRange(Number(scientificSideRating), -1, 6) && inRange(Number(recommendationRating), -1, 6)))
                     res.status(400).json({ message: 'all ratings must be between 1 and 5' })
                 try {
-                    console.log(author)
 
                     await prisma.review.create({
                         data: {
                             avatar: avatar as string,
                             author: author as string,
-                            rating: Math.round((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3),
+                            rating: Number(rating),
                             comment: comment as string,
                             personalSideRating: Number(personalSideRating),
                             scientificSideRating: Number(scientificSideRating),
@@ -103,10 +115,10 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             id: lecturerId as string
                         },
                         data: {
-                            rating: Math.round(avgRatings._avg.rating),
-                            personalSideRating: Math.round(avgRatings._avg.personalSideRating),
-                            scientificSideRating: Math.round(avgRatings._avg.scientificSideRating),
-                            recommendationRating: Math.round(avgRatings._avg.recommendationRating),
+                            rating: avgRatings._avg.rating,
+                            personalSideRating: avgRatings._avg.personalSideRating,
+                            scientificSideRating: avgRatings._avg.scientificSideRating,
+                            recommendationRating: avgRatings._avg.recommendationRating,
                             amountOfReviews: {
                                 increment: 1
                             }
@@ -133,6 +145,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                     case (campusId && !collegeId && !courseId && !lecturerId):
                         await prisma.review.create({
                             data: {
+                                author: author as string,
                                 rating: Number(rating),
                                 comment: comment as string,
                                 campusesReviews: {
@@ -167,6 +180,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                     case (collegeId && !campusId && !courseId && !lecturerId):
                         await prisma.review.create({
                             data: {
+                                author: author as string,
                                 rating: Number(rating),
                                 comment: comment as string,
                                 collegesReviews: {
@@ -201,7 +215,11 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                     case (courseId && !campusId && !collegeId && !lecturerId):
                         await prisma.review.create({
                             data: {
+                                author: author as string,
                                 rating: Number(rating),
+                                courseContent: Number(courseContent),
+                                materialQuality: Number(materialQuality),
+                                realworldPracticality: Number(realworldPracticality),
                                 comment: comment as string,
                                 coursesReviews: {
                                     connect: {
@@ -226,7 +244,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 id: courseId as string
                             },
                             data: {
-                                rating: Math.round(courseAvgRatings._avg.rating)
+                                rating: Math.round(courseAvgRatings._avg.rating * 10) / 10
                             }
                         })
                         res.status(200).json({ message: `review added for course` })

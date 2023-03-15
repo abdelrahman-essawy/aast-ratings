@@ -6,6 +6,7 @@ import NoSSR from '../NoSSR'
 import ScoreArrows from './ScoreArrows'
 import { randomAvatarGenerator } from '../randomAvatarGenerator'
 import base64 from "react-native-base64";
+import { getOptions } from '../ReviewForm/FormTemplete'
 
 
 function decodeSvg(base64ImageFormat, appTitle) {
@@ -28,9 +29,12 @@ interface ReviewCommentTempleteProps {
     author: string,
     comment: string,
     rating: number,
-    personalSideRating: number,
-    scientificSideRating: number,
-    recommendationRating: number,
+    personalSideRating?: number,
+    scientificSideRating?: number,
+    recommendationRating?: number,
+    courseContent?: number,
+    materialQuality?: number,
+    realworldPracticality?: number,
     createdAt: string,
     score: number,
     mutate?: () => void
@@ -49,11 +53,39 @@ export default function ReviewCommentTemplete(
         personalSideRating,
         scientificSideRating,
         recommendationRating,
+        courseContent,
+        materialQuality,
+        realworldPracticality,
         createdAt,
         score,
         mutate
     }: ReviewCommentTempleteProps
 ) {
+    const options = [{
+        name: 'Personalaity',
+        value: personalSideRating,
+    },
+    {
+        name: 'Scientifically',
+        value: scientificSideRating,
+    },
+    {
+        name: 'Recommended',
+        value: recommendationRating,
+    },
+    {
+        name: 'Course Content',
+        value: courseContent,
+    },
+    {
+        name: 'Material Quality',
+        value: materialQuality,
+    },
+    {
+        name: 'Practicality',
+        value: realworldPracticality,
+    }]
+    console.log(realworldPracticality)
     return (
         <div
             key={id}
@@ -71,9 +103,17 @@ export default function ReviewCommentTemplete(
             <div className={`chat-bubble p-4 ${id === 'pending' ? 'bg-base-100' : null} transition ease-in-out duration-500`}>
                 <div className="grid grid-cols-2 gap-1 w-fit">
                     <span className="text-xs opacity-50">Overall: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}</span></span>
-                    <span className="text-xs opacity-50">Personality: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{personalSideRating}</span></span>
-                    <span className="text-xs opacity-50">Scientifically: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{scientificSideRating}</span></span>
-                    <span className="text-xs opacity-50">Recommended: <span className={`text-xs opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{recommendationRating}</span></span>
+                    {
+                        options.map(({ name, value }, i) => {
+                            return (
+                                value > 0 &&
+                                <span key={i} className="text-xs opacity-50">{name}: <span className={`text-xs opacity-100 ${value == 3 ? 'text-yellow-400' : value > 3 ? 'text-green-400' : 'text-red-400'}`}>{value}</span></span>
+                            )
+                        })
+
+
+                    }
+
                 </div>
 
 
@@ -85,7 +125,7 @@ export default function ReviewCommentTemplete(
 
 
                 <div className="-ml-1 flex flex-row items-center gap-3">
-                    <ScoreArrows id={id} mutate={mutate} score={score} />
+                    <ScoreArrows id={id} score={score} mutate={()=>{}} />
                     <div className='hover:bg-base-100 p-2 rounded-lg select-none transition duration-150 ease-in-out cursor-pointer active:scale-95'>
                         <p className='text-xs font-medium'>Report</p>
                     </div>

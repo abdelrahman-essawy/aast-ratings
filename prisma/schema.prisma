@@ -59,6 +59,7 @@ model Lecturer {
   role                 String
   amountOfReviews      Int           @default(0)
   achievements         Achievement[]
+  contacts             Contact[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,17 +83,20 @@ model Course {
 }
 
 model Review {
-  id                   String    @id @unique @default(cuid())
-  avatar               String?
-  author               String?
-  rating               Float     @default(0)
-  personalSideRating   Int?      @default(0)
-  scientificSideRating Int?      @default(0)
-  recommendationRating Int?      @default(0)
-  comment              String?
-  createdAt            DateTime? @default(now())
-  updatedAt            DateTime? @updatedAt
-  score                Int?      @default(0)
+  id                    String    @id @unique @default(cuid())
+  avatar                String?
+  author                String?
+  rating                Float     @default(0)
+  personalSideRating    Int?      @default(0)
+  scientificSideRating  Int?      @default(0)
+  recommendationRating  Int?      @default(0)
+  courseContent         Int?      @default(0)
+  materialQuality       Int?      @default(0)
+  realworldPracticality Int?      @default(0)
+  comment               String?
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @updatedAt
+  score                 Int?      @default(0)
 
   campusesReviews  Campus?   @relation(fields: [campusId], references: [id])
   collegesReviews  College?  @relation(fields: [collegeId], references: [id])
@@ -113,4 +117,13 @@ model Achievement {
   lostAt      DateTime?
   Lecturer    Lecturer? @relation(fields: [lecturerId], references: [id])
   lecturerId  String?
+}
+
+model Contact {
+  id         String    @id @unique @default(cuid())
+  name       String
+  value      String
+  createdAt  DateTime? @default(now())
+  Lecturer   Lecturer? @relation(fields: [lecturerId], references: [id])
+  lecturerId String?
 }

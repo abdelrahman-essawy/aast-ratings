@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const MobileRatings = ({ rating, achievements, amountOfReviews }: { rating: number, achievements: any, amountOfReviews: number }) => {
+export const MobileRatings = ({ rating, achievements=[], amountOfReviews }: { rating: number, achievements: any, amountOfReviews: number }) => {
 
     const parts = [
 
