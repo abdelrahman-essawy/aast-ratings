@@ -20,8 +20,9 @@ import UpperSection from "../../../components/Shared/PageUpperSection/UpperSecti
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
-    const { data: course, error, isLoading, mutate, isValidating } = useSWR(`/api/course?id=${params.id}`, fetcher)
 
+    const { data: course, error: courseError, isLoading: iscourseLoading, mutate: courseMutate, isValidating: courseIsValidating } = useSWR(`/api/course?id=${params.id}`, fetcher)
+    const { data: reviews, error: reviewsError, isLoading: isReviewsLoading, mutate: reviewsMutate, isValidating: reviewsIsValidating } = useSWR(`/api/review?courseId=${params.id}`, fetcher)
 
     const {
         name,
@@ -33,7 +34,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
         _count
     } = useMemo(() => course ?? {}, [course])
 
-    if (isLoading) return <Loading />
+    if (iscourseLoading) return <Loading />
     return (
         <div className="h-full flex flex-col w-full">
 
@@ -58,8 +59,12 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
 
                 <div className="divider px-4 my-1 md:my-3" />
 
-                <Reviews hasReviews={hasReviews} />
-                <ReviewModal name={name} id={params.id} mutate={mutate} course={course} />
+                <Reviews
+                    isReviewsLoading={isReviewsLoading}
+                    reviews={reviews}
+                    reviewsMutate={reviewsMutate}
+                />
+                <ReviewModal name={name} id={params.id} reviewsMutate={reviewsMutate} courseMutate={courseMutate} reviews={reviews} />
 
             </div>
 
