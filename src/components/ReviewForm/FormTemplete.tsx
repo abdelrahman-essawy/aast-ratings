@@ -140,7 +140,7 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
         }).finally(() => {
             mutate()
         })
-    }, [avatar, comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
+    }, [comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
 
     const handleSubmit = useCallback(async () => {
         setLoading(true);

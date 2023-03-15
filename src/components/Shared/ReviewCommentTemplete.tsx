@@ -36,7 +36,8 @@ interface ReviewCommentTempleteProps {
     materialQuality?: number,
     realworldPracticality?: number,
     createdAt: string,
-    score: number
+    score: number,
+    mutate?: () => void
 }
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
@@ -57,6 +58,7 @@ export default function ReviewCommentTemplete(
         realworldPracticality,
         createdAt,
         score,
+        mutate
     }: ReviewCommentTempleteProps
 ) {
     const options = [{
