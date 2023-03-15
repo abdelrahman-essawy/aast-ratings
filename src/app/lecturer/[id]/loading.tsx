@@ -146,7 +146,15 @@ function Loading() {
 
                     </div>
 
-                    <Ratings rating={0} hasReviews={[]} amountOfReviews={0} />
+                    <Ratings rating={0}
+                        ratings={[
+                            { star: 5, count: 0 },
+                            { star: 4, count: 0 },
+                            { star: 3, count: 0 },
+                            { star: 2, count: 0 },
+                            { star: 1, count: 0 },
+                        ]}
+                        amountOfReviews={0} />
 
 
 

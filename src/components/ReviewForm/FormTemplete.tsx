@@ -13,7 +13,7 @@ export function encodeSvg(reactElement) {
 }
 
 
-const FormTemplate = React.memo(({ id, lecturer, reviews, course, lecturerMutate, reviewsMutate }: any) => {
+const FormTemplate = React.memo(({ id, lecturer, reviews, course, lecturerMutate, reviewsMutate, courseMutate }: any) => {
 
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState(null);
@@ -164,6 +164,7 @@ const FormTemplate = React.memo(({ id, lecturer, reviews, course, lecturerMutate
             // Update local data with actual response
             reviewsMutate();
             lecturer && lecturerMutate();
+            course && courseMutate();
         }
     };
 

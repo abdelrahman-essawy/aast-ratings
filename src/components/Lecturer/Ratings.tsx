@@ -1,11 +1,12 @@
 import React from 'react'
 
-export const Ratings = ({ ratings, amountOfReviews, rating }: { ratings: any, amountOfReviews?: number, rating: number }) => {
+export const Ratings = ({ ratings, amountOfReviews, rating, loading }: { ratings: any, amountOfReviews?: number, rating: number, loading?: boolean }) => {
     return (
         <div className="bg-base-300 rounded-lg p-4">
             <h2 className="card-title mb-3">Ratings</h2>
 
             <div className="">
+
                 <div className="flex items-center mb-3">
                     {
                         [...Array(5)].map((_, i) => (
@@ -26,6 +27,7 @@ export const Ratings = ({ ratings, amountOfReviews, rating }: { ratings: any, am
                 <div className="grid gap-4 mt-4 w-full">
 
                     {
+
                         ratings &&
                         [...ratings].map(({ star, count }, i) => (
                             <div
