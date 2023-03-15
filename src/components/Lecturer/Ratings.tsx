@@ -26,7 +26,6 @@ export const Ratings = ({ hasReviews, amountOfReviews = hasReviews?.length, rati
                 <div className="grid gap-4 mt-4 w-full">
 
 
-
                     {
                         [...Array(5)].map((_, i) => (
                             hasReviews?.length === 0 ?
