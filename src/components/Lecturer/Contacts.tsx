@@ -27,7 +27,7 @@ export const Contacts = ({ contacts }) => {
 
 
     return (
-        <div className="bg-base-300 rounded-lg p-3 md:p-4 h-full md:h-fit w-full">
+        <div className="bg-base-300 rounded-lg p-3 md:p-4 h-full">
             <h2 className="card-title md:mb-3 mb-1 text-xs md:text-xl">Contacts</h2>
 
             {

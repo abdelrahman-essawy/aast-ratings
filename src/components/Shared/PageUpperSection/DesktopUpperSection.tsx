@@ -16,11 +16,9 @@ const DesktopUpperSection = (
         contacts,
         achievements,
         rating,
-        hasReviews,
+        ratings,
         amountOfReviews,
-        teachCourses,
-        taughtByLecturers,
-        availableInColleges
+        teachCourses
     }
 ) => {
     return (
@@ -28,32 +26,21 @@ const DesktopUpperSection = (
 
             <div className="flex flex-col items-start gap-3 max-h-[304px]">
 
-                {
-                    contacts &&
-                    <Contacts contacts={contacts} />
-                }
-                {
-                    availableInColleges &&
-                    <Colleges availableInColleges={availableInColleges} />
-                }
+                <div className="w-full">
 
-                {
+                    <Contacts contacts={contacts} />
+                </div>
+
+                <div className="flex-1 w-full">
+
                     <Achievements achievements={achievements} />
-                }
+            </div>
 
             </div>
 
-            <Ratings rating={rating} hasReviews={hasReviews} amountOfReviews={amountOfReviews} />
-
-            {
-                teachCourses &&
+            <Ratings rating={rating} ratings={ratings} amountOfReviews={amountOfReviews} />
                 <Courses teachCourses={teachCourses} />
-            }
 
-            {
-                taughtByLecturers &&
-                <Lecturers taughtByLecturers={taughtByLecturers} />
-            }
         </section>
     )
 }

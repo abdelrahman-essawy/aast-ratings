@@ -27,7 +27,11 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                     },
                     include: {
                         lecturersReviews: true
+                    },
+                    orderBy: {
+                        createdAt: 'desc'
                     }
+
                 })
 
                 res.status(200).json(reviews)
@@ -102,7 +106,7 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             rating: true,
                             personalSideRating: true,
                             scientificSideRating: true,
-                            recommendationRating: true
+                            recommendationRating: true,
                         },
 
                     })
@@ -112,13 +116,29 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                             id: lecturerId as string
                         },
                         data: {
-                            rating: avgRatings._avg.rating,
-                            personalSideRating: avgRatings._avg.personalSideRating,
-                            scientificSideRating: avgRatings._avg.scientificSideRating,
-                            recommendationRating: avgRatings._avg.recommendationRating,
+                            rating: Math.round((avgRatings._avg.rating) * 10) / 10,
+                            personalSideRating: Math.round((avgRatings._avg.personalSideRating) * 10) / 10,
+                            scientificSideRating: Math.round((avgRatings._avg.scientificSideRating) * 10) / 10,
+                            recommendationRating: Math.round((avgRatings._avg.recommendationRating) * 10) / 10,
                             amountOfReviews: {
                                 increment: 1
+                            },
+                            fiveStar: {
+                                increment: Number(rating) === 5 ? 1 : 0
+                            },
+                            fourStar: {
+                                increment: Number(rating) === 4 ? 1 : 0
+                            },
+                            threeStar: {
+                                increment: Number(rating) === 3 ? 1 : 0
+                            },
+                            twoStar: {
+                                increment: Number(rating) === 2 ? 1 : 0
+                            },
+                            oneStar: {
+                                increment: Number(rating) === 1 ? 1 : 0
                             }
+
                         }
                     })
 

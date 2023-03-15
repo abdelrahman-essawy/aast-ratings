@@ -1,12 +1,9 @@
-import React, { memo, useMemo } from 'react'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
-import ReviewCommentTemplete from './ReviewCommentTemplete'
+import React, { memo } from 'react'
+import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
 
-TimeAgo.addDefaultLocale(en)
-const timeAgo = new TimeAgo('en-US')
+export const Reviews = memo(({ isReviewsLoading, reviews, reviewsMutate }: { isReviewsLoading: boolean, reviews: [], reviewsMutate: () => void }) => {
 
-export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?: any }) => {
+    if (isReviewsLoading) return <h1 className="text-lg font-bold text-center w-full h-full opacity-50">Loading...</h1>
 
     return (
         <section id='style-1' className="bg-base-300 rounded-lg flex-1">
@@ -17,25 +14,8 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?:
             <div className='overflow-y-auto max-h-96 min-h-16 sm:px-4 px-2'>
                 {
 
-                    hasReviews[0] ? (
-                        hasReviews.map((
-                            {
-                                id,
-                                name,
-                                rating,
-                                comment,
-                                avatar,
-                                author,
-                                personalSideRating,
-                                scientificSideRating,
-                                recommendationRating,
-                                courseContent,
-                                materialQuality,
-                                realworldPracticality,
-                                createdAt,
-                                score,
-                            }
-                        ) => (
+                    reviews && reviews.length !== 0 ? (
+                        reviews.map(({ id, avatar, author, comment, rating, personalSideRating, scientificSideRating, recommendationRating, createdAt, score }) => (
 
                             <ReviewCommentTemplete
                                 key={id}
@@ -47,12 +27,9 @@ export const Reviews = memo(({ hasReviews, mutate }: { hasReviews: any, mutate?:
                                 personalSideRating={personalSideRating}
                                 scientificSideRating={scientificSideRating}
                                 recommendationRating={recommendationRating}
-                                courseContent={courseContent}
-                                materialQuality={materialQuality}
-                                realworldPracticality={realworldPracticality}
                                 createdAt={createdAt}
                                 score={score}
-                                mutate={mutate} />
+                                reviewsMutate={reviewsMutate} />
                         ))
 
                     ) : (

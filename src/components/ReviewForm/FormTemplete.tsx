@@ -13,7 +13,7 @@ export function encodeSvg(reactElement) {
 }
 
 
-const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
+const FormTemplate = React.memo(({ id, lecturer, reviews, course, lecturerMutate, reviewsMutate }: any) => {
 
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState(null);
@@ -46,119 +46,126 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
 
     const overall = useMemo(() => {
         if (lecturer) {
-            return Math.round(((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3) * 10) / 10;
+            return Math.round((Number(personalSideRating) + Number(scientificSideRating) + Number(recommendationRating)) / 3);
         }
         if (course) {
-            return Math.round(((Number(courseContent) + Number(materialQuality) + Number(realworldPracticality)) / 3) * 10) / 10;
+            return Math.round((Number(courseContent) + Number(materialQuality) + Number(realworldPracticality)) / 3);
         }
     }, [lecturer, course, personalSideRating, scientificSideRating, recommendationRating, courseContent, materialQuality, realworldPracticality]);
 
-    const options = useMemo(() => {
-        return {
-            optimisticData: () => {
-                if (lecturer) {
-                    return {
-                        ...lecturer,
-                        amountOfReviews: lecturer.amountOfReviews + 1,
-                        personalSideRating: Math.round(lecturer.personalSideRating * lecturer.amountOfReviews + personalSideRating) / (lecturer.amountOfReviews + 1),
-                        scientificSideRating: Math.round(lecturer.scientificSideRating * lecturer.amountOfReviews + scientificSideRating) / (lecturer.amountOfReviews + 1),
-                        recommendationRating: Math.round(lecturer.recommendationRating * lecturer.amountOfReviews + recommendationRating) / (lecturer.amountOfReviews + 1),
-                        ratings,
-                        hasReviews: [
-                            {
-                                id: 'pending',
-                                avatar: encodeSvg(avatar),
-                                author: name,
-                                comment,
-                                personalSideRating,
-                                scientificSideRating,
-                                recommendationRating,
-                                rating: overall,
-                                createdAt: new Date().toISOString(),
-                                score: 0
-                            },
-                            ...lecturer.hasReviews,
 
-                        ],
-                    }
-                }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const optimisticData = (dataFor: string) => {
+        if (dataFor === 'lecturer') {
+            return {
+                ...lecturer,
+                amountOfReviews: lecturer.amountOfReviews + 1,
+                ratings: lecturer.ratings.map(({ star, count }) => ({
+                    star,
+                    count: overall === star ? count + 1 : count,
+                })),
+            };
+        }
 
+        if (dataFor === 'course') {
+            return {
+                ...course,
+                amountOfReviews: course.amountOfReviews + 1,
+                courseContent:
+                    (course.courseContent * course.amountOfReviews + courseContent) /
+                    (course.amountOfReviews + 1),
+                materialQuality:
+                    (course.materialQuality * course.amountOfReviews + materialQuality) /
+                    (course.amountOfReviews + 1),
+                realworldPracticality:
+                    (course.realworldPracticality * course.amountOfReviews +
+                        realworldPracticality) /
+                    (course.amountOfReviews + 1),
+                ratings: [],
+            };
+        }
 
-
-                if (course) {
-                    return {
-                        ...course,
-                        amountOfReviews: course.amountOfReviews + 1,
-                        courseContent: Math.round(course.courseContent * course.amountOfReviews + courseContent) / (course.amountOfReviews + 1),
-                        materialQuality: Math.round(course.materialQuality * course.amountOfReviews + materialQuality) / (course.amountOfReviews + 1),
-                        realworldPracticality: Math.round(course.realworldPracticality * course.amountOfReviews + realworldPracticality) / (course.amountOfReviews + 1),
-                        ratings,
-                        hasReviews: [
-                            {
-                                id: 'pending',
-                                avatar: encodeSvg(avatar),
-                                author: name,
-                                comment,
-                                courseContent,
-                                materialQuality,
-                                realworldPracticality,
-                                rating: overall,
-                                createdAt: new Date().toISOString(),
-                                score: 0
-                            },
-                            ...course.hasReviews,
-                        ],
-                    }
-                }
+        if (dataFor === 'reviews') {
+            return [
+                {
+                    id: 'pending',
+                    avatar: encodeSvg(avatar),
+                    author: name,
+                    comment,
+                    courseContent,
+                    materialQuality,
+                    personalSideRating,
+                    realworldPracticality,
+                    recommendationRating,
+                    scientificSideRating,
+                    rating: overall,
+                    createdAt: new Date().toISOString(),
+                    score: 0,
+                },
+                ...reviews,
+            ];
+        }
+    };
 
 
-            },
-            rollbackOnError(error) {
-                return error.name !== 'AbortError'
-            },
-
-        };
-    }, [lecturer, course, personalSideRating, scientificSideRating, recommendationRating, ratings, avatar, name, comment, overall, courseContent, materialQuality, realworldPracticality]);
-
-
-    const addReview = useCallback(async () => {
-
+    const addReview = useCallback(() => {
         const handleURL = () => {
             if (lecturer)
-                return `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}&rating=${overall}`
+                return `/api/review?lecturerId=${id}&author=${name}&comment=${comment}&personalSideRating=${personalSideRating}&scientificSideRating=${scientificSideRating}&recommendationRating=${recommendationRating}&rating=${overall}`;
 
             if (course)
-                return `/api/review?courseId=${id}&author=${name}&comment=${comment}&courseContent=${courseContent}&materialQuality=${materialQuality}&realworldPracticality=${realworldPracticality}&rating=${overall}`
+                return `/api/review?courseId=${id}&author=${name}&comment=${comment}&courseContent=${courseContent}&materialQuality=${materialQuality}&realworldPracticality=${realworldPracticality}&rating=${overall}`;
+        };
 
-        }
-
-        await fetch(handleURL(), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).finally(() => {
-            mutate()
-        })
-    }, [comment, id, mutate, name, personalSideRating, recommendationRating, scientificSideRating])
-
-    const handleSubmit = useCallback(async () => {
-        setLoading(true);
         try {
-            addReview()
-            await sleep(800)
-            mutate(options.optimisticData())
+            fetch(handleURL(), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        } catch (e) {
+            console.error('Failed to add review', e);
         }
-        catch (e) {
-            console.log(e)
-        }
-        finally {
-            setLoading(false);
-            document.getElementById('closeDialog')?.click()
-        }
-    }, [addReview, mutate, options]);
+    }, [
+        comment,
+        course,
+        courseContent,
+        id,
+        lecturer,
+        materialQuality,
+        name,
+        overall,
+        personalSideRating,
+        realworldPracticality,
+        recommendationRating,
+        scientificSideRating,
+    ]);
 
+    const handleSubmit = async () => {
 
+        try {
+            setLoading(true);
+            addReview(),
+
+                await sleep(0) // Wait for 500ms before updating local data
+                    .finally(() => { setLoading(false) })
+
+            // Close dialog
+            document.getElementById('closeDialog').click();
+
+            // Update local data with optimistic response
+            reviewsMutate(optimisticData('reviews'), { optimisticData: optimisticData('reviews') });
+            lecturer && lecturerMutate(optimisticData('lecturer'), { optimisticData: optimisticData('lecturer') });
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            // Update local data with actual response
+            reviewsMutate();
+            lecturer && lecturerMutate();
+        }
+    };
 
     return (
         <>
@@ -171,7 +178,7 @@ const FormTemplate = React.memo(({ id, lecturer, course, mutate }: any) => {
             <div className='flex flex-row gap-2'>
                 <div className='flex-1'>
                     {
-                        ratings.map(({ name, rating, setter }) => (
+                        ratings && ratings.map(({ name, rating, setter }) => (
                             <div key={name} className='flex flex-row justify-between'>
                                 <div className='text-sm'>{name}</div>
                                 <StarsRadio callback={setter} />

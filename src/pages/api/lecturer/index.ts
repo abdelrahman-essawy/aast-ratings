@@ -69,30 +69,35 @@ const lecturersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                                 name: true,
                             },
                         },
-                        hasReviews: {
-
-                            orderBy: {
-                                createdAt: 'desc'
-                            },
-                        },
                         achievements: {
                             orderBy: {
                                 gotAt: 'desc'
                             }
-
                         },
-                        contacts: {
-                            orderBy: {
-                                createdAt: 'desc'
-                            }
-                        },
-
+                        contacts: true,
                     }
                 })
-                res.status(200).json(lecturer)
+
+
+                const ratings = [
+                    { star: 5, count: lecturer.fiveStar },
+                    { star: 4, count: lecturer.fourStar },
+                    { star: 3, count: lecturer.threeStar },
+                    { star: 2, count: lecturer.twoStar },
+                    { star: 1, count: lecturer.oneStar },
+                ]
+
+
+                const result = {
+                    ...lecturer,
+                    ratings,
+                }
+
+                res.status(200).json(result)
             }
             catch (error) {
                 res.status(500).json({ message: error })
+                console.log(error)
             }
 
             break

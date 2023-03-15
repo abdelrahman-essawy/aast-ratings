@@ -68,27 +68,26 @@ type lecturer = {
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 export default function Page({ params }: { params: { id: string } }): JSX.Element {
-  const { data: lecturer = {}, error, isLoading, mutate, isValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
+  const { data: lecturer, error: lecturerError, isLoading: isLecturerLoading, mutate: lecturerMutate, isValidating: lecturerIsValidating } = useSWR(`/api/lecturer?id=${params.id}`, fetcher)
+  const { data: reviews, error: reviewsError, isLoading: isReviewsLoading, mutate: reviewsMutate, isValidating: reviewsIsValidating } = useSWR(`/api/review?lecturerId=${params.id}`, fetcher)
+
   const {
     name,
-    hasReviews,
     amountOfReviews,
     role,
     achievements,
     contacts,
     img,
     rating,
-    personalSideRating,
-    scientificSideRating,
-    recommendationRating,
     teachCourses,
-    createdAt,
     workInColleges,
-    workInCampus
+    workInCampus,
+    ratings
   } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
 
-  if (isLoading) return <Loading />
-  if (error) return <h1>An error has occurred.</h1>
+  if (isLecturerLoading) return <Loading />
+  if (lecturerError) return <h1>An error has occurred.</h1>
+
   return (
 
     <div className="h-full flex flex-col w-full">
@@ -108,15 +107,26 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
           amountOfReviews={amountOfReviews}
           achievements={achievements}
           contacts={contacts}
-          hasReviews={hasReviews}
+          ratings={ratings}
           teachCourses={teachCourses}
           role={role}
         />
 
         <div className="divider px-4" />
 
-        <Reviews hasReviews={hasReviews} mutate={mutate} />
-        <ReviewModal name={name} id={params.id} mutate={mutate} lecturer={lecturer} />
+        <Reviews
+          isReviewsLoading={isReviewsLoading}
+          reviews={reviews}
+          reviewsMutate={reviewsMutate}
+        />
+        <ReviewModal
+          name={name}
+          id={params.id}
+          lecturer={lecturer}
+          reviews={reviews}
+          lecturerMutate={lecturerMutate}
+          reviewsMutate={reviewsMutate}
+        />
 
       </div>
     </div>

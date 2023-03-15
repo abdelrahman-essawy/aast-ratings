@@ -9,18 +9,16 @@ const UpperSection = memo((
         contacts,
         achievements,
         rating,
-        hasReviews,
+        ratings,
         amountOfReviews,
         teachCourses,
-        role,
-        taughtByLecturers,
-        availableInColleges
+        role
     }: any
 
 ) => {
     return <>
         <section>
-            {role && <div className="flex justify-center items-center py-2">
+            <div className="flex justify-center items-center py-2">
                 <div className="flex flex-col justify-center items-center">
                     <div className="w-32 h-32 relative bg-[#191d24] rounded-full p-4 flex justify-center items-center">
                         {
@@ -42,29 +40,25 @@ const UpperSection = memo((
               </div> */}
                     </div>
                 </div>
-            </div>}
+            </div>
 
         </section>
 
         <DesktopUpperSection
-            teachCourses={teachCourses}
-            contacts={contacts}
-            hasReviews={hasReviews}
-            achievements={achievements}
-            amountOfReviews={amountOfReviews}
-            rating={rating}
-            taughtByLecturers={taughtByLecturers}
-            availableInColleges={availableInColleges} />
+            teachCourses={teachCourses ?? []}
+            contacts={contacts ?? []}
+            ratings={ratings ?? []}
+            achievements={achievements ?? []}
+            amountOfReviews={amountOfReviews ?? 0}
+            rating={rating ?? 0} />
 
         <MobileUpperSectoion
-            contacts={contacts}
-            achievements={achievements}
-            rating={rating}
-            amountOfReviews={amountOfReviews}
-            teachCourses={teachCourses}
-            role={role}
-            taughtByLecturers={taughtByLecturers}
-            availableInColleges={availableInColleges}
+            contacts={contacts ?? []}
+            achievements={achievements ?? []}
+            rating={rating ?? 0}
+            amountOfReviews={amountOfReviews ?? 0}
+            teachCourses={teachCourses ?? []}
+            role={role ?? ''}
         />
     </>
 })

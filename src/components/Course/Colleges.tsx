@@ -3,8 +3,8 @@ import React from 'react'
 
 export const Colleges = ({ availableInColleges }: { availableInColleges: any }) => {
     return (
-        <div className="bg-base-300 rounded-lg md:p-4 p-3 overflow-y-auto w-full h-full">
-            <h2 className="card-title md:mb-3 mb-1 text-xs md:text-xl">Colleges</h2>
+        <div className="bg-base-300 rounded-lg p-4">
+            <h2 className="card-title mb-3">Colleges</h2>
 
             <div className="grid grid-cols-2 gap-1">
                 {/* <span className="text-md opacity-50">Colleges: <span className={`text-md opacity-100 ${availableInColleges?.length == 3 ? 'text-yellow-400' : availableInColleges?.length > 3 ? 'text-green-400' : 'text-red-400'}`}>{availableInColleges?.length}</span></span> */}

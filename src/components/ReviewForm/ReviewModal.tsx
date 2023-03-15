@@ -10,7 +10,7 @@ import {
 import FormTemplete from "./FormTemplete"
 
 
-export const ReviewModal = memo(({ name, id, mutate, lecturer, course }: { name: string, id: string, mutate?: any, lecturer?: any, course?: any, setOptimisticData?: any }) => {
+export const ReviewModal = memo(({ name, id, lecturer, course, reviews, lecturerMutate, reviewsMutate }: { name: string, id: string, mutate?: any, lecturer?: any, course?: any, setOptimisticData?: any, lecturerMutate: () => void, reviewsMutate: () => void, reviews: [] }) => {
     return (
         <Dialog>
             <DialogTrigger>
@@ -24,7 +24,13 @@ export const ReviewModal = memo(({ name, id, mutate, lecturer, course }: { name:
 
                     <DialogDescription>
 
-                        <FormTemplete id={id} mutate={mutate} lecturer={lecturer} course={course} />
+                        <FormTemplete
+                            id={id}
+                            lecturerMutate={lecturerMutate}
+                            reviewsMutate={reviewsMutate}
+                            lecturer={lecturer}
+                            reviews={reviews}
+                            course={course} />
 
                     </DialogDescription>
 

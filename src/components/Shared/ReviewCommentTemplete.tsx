@@ -37,7 +37,7 @@ interface ReviewCommentTempleteProps {
     realworldPracticality?: number,
     createdAt: string,
     score: number,
-    mutate?: () => void
+    reviewsMutate?: () => void
 }
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
@@ -58,7 +58,7 @@ export default function ReviewCommentTemplete(
         realworldPracticality,
         createdAt,
         score,
-        mutate
+        reviewsMutate
     }: ReviewCommentTempleteProps
 ) {
     const options = [{
@@ -118,14 +118,13 @@ export default function ReviewCommentTemplete(
 
 
                 <div className="my-3">
-
                     {comment}
                 </div>
 
 
 
                 <div className="-ml-1 flex flex-row items-center gap-3">
-                    <ScoreArrows id={id} score={score} mutate={()=>{}} />
+                    <ScoreArrows id={id} score={score} reviewsMutate={reviewsMutate} />
                     <div className='hover:bg-base-100 p-2 rounded-lg select-none transition duration-150 ease-in-out cursor-pointer active:scale-95'>
                         <p className='text-xs font-medium'>Report</p>
                     </div>

@@ -5,7 +5,7 @@ import useSWR from 'swr'
 
 const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
-const ScoreArrows = ({ score, id, mutate }: { score: number, id: string, mutate: () => void }) => {
+const ScoreArrows = ({ score, id, reviewsMutate }: { score: number, id: string, reviewsMutate: () => void }) => {
     const [scoreState, setScoreState] = useState(score)
     const [log, setLog] = useState('')
 
@@ -22,7 +22,7 @@ const ScoreArrows = ({ score, id, mutate }: { score: number, id: string, mutate:
                 //     },
                 // })
                 // if (res.status === 200) {
-                //     // mutate()
+                //     // reviewsMutate()
                 //     handleArrowStyle(scoreAction, randomId, 'success', true)
 
                 // }
@@ -39,7 +39,7 @@ const ScoreArrows = ({ score, id, mutate }: { score: number, id: string, mutate:
                 },
             })
             if (res.status === 200) {
-                // mutate()
+                // reviewsMutate()
                 handleArrowStyle(scoreAction, randomId, 'success', false)
 
             }
