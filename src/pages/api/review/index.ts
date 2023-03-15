@@ -33,13 +33,10 @@ const reviewsAPI = async (req: NextApiRequest, res: NextApiResponse) => {
                 res.status(200).json(reviews)
             } catch (error) {
                 res.status(500).json({ message: error })
+                console.log(error)
             }
 
             break
-
-
-
-
 
 
         case 'POST':
