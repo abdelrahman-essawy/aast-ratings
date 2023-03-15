@@ -1,6 +1,6 @@
 'use client'
 import VerifiedIcon from "../../../SVG/VerifiedIcon"
-import { Reviews } from "../../../components/Lecturer/Reviews"
+import { Reviews } from "../../../components/Shared/Reviews"
 import { ReviewModal } from "../../../components/ReviewForm/ReviewModal"
 import useSWR from 'swr'
 import Loading from "./loading"
@@ -86,7 +86,7 @@ export default function Page({ params }: { params: { id: string } }): JSX.Elemen
     workInColleges,
     workInCampus
   } = useMemo(() => lecturer ?? {} as lecturer, [lecturer])
-  
+
   if (isLoading) return <Loading />
   if (error) return <h1>An error has occurred.</h1>
   return (

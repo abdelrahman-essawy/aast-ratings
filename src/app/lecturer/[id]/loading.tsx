@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image"
 import { use } from "react"
 import VerifiedIcon from "../../../SVG/VerifiedIcon"
-import { Reviews } from "../../../components/Lecturer/Reviews"
+import { Reviews } from "../../../components/Shared/Reviews"
 import { Ratings } from "../../../components/Lecturer/Ratings"
 import { Courses } from "../../../components/Lecturer/Courses"
 import { Contacts } from "../../../components/Lecturer/Contacts"

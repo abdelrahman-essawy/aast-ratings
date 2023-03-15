@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
-import ReviewCommentTemplete from '../Shared/ReviewCommentTemplete'
+import ReviewCommentTemplete from './ReviewCommentTemplete'
 
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')

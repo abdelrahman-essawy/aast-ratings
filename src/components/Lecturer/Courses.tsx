@@ -17,11 +17,18 @@ export const Courses = ({ teachCourses }: { teachCourses: any }) => {
                     teachCourses?.map(({ id, name, rating }, i) => (
                         <div key={id} className="flex flex-row flex-wrap justify-between">
                             <Link href={`/course/${id}`} className="text-md opacity-50 hover:opacity-100 transition-all ease-in-out duration-150">{i + 1}.<span className='underline hover:opacity-100'>{name}</span></Link>
-                            <span className={`text-md opacity-100 ${rating == 3 ? 'text-yellow-400' : rating > 3 ? 'text-green-400' : 'text-red-400'}`}>{rating}<span className='text-gray-400 text-xs'>/5</span></span>
+                            <span className={`text-md opacity-100 ${getRatingColor(rating)}`}>{rating == 0 ? 'N/A' : rating}<span className='text-gray-400 text-xs'>/5</span></span>
                         </div>
                     ))
                 }
             </div>
         </div>
     )
+}
+
+const getRatingColor = (rating: number) => {
+    if (rating == 0) return 'text-gray-600 opacity-90 text-xs'
+    if (rating > 0 && rating < 3) return 'text-red-400'
+    if (rating >= 3 && rating < 4) return 'text-yellow-400'
+    if (rating >= 4) return 'text-green-400'
 }
